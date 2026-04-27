@@ -432,6 +432,52 @@ export default function Index() {
         </div>
       </section>
 
+      {/* АРКАН — КОЛЕСНИЦА */}
+      <section className="py-16 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,7%)" }}>
+        <OccultOverlay density={8} />
+        <div className="container mx-auto px-4 relative" style={{ zIndex: 2 }}>
+          <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-14">
+            {/* Символ аркана */}
+            <div
+              className="flex-shrink-0 glass-panel rounded-sm flex flex-col items-center justify-center gap-3 px-8 py-10"
+              style={{ borderColor: "rgba(160,170,185,0.1)", minWidth: "140px" }}
+            >
+              <span
+                className="text-6xl leading-none select-none"
+                style={{
+                  fontFamily: "serif",
+                  color: "hsl(210,15%,60%)",
+                  textShadow: "0 0 24px rgba(160,190,255,0.25), 0 0 6px rgba(160,190,255,0.15)",
+                  filter: "drop-shadow(0 0 8px rgba(160,200,255,0.2))",
+                }}
+              >
+                🜲
+              </span>
+              <p className="text-xs tracking-[0.35em] text-[hsl(210,15%,38%)] uppercase font-light text-center">
+                VII · Колесница
+              </p>
+            </div>
+            {/* Текст */}
+            <div>
+              <p className="text-xs tracking-[0.4em] text-[hsl(210,15%,40%)] uppercase font-light mb-4">
+                Аркан пути
+              </p>
+              <blockquote
+                className="text-xl md:text-2xl font-light text-white leading-relaxed mb-4"
+                style={{ fontFamily: "var(--font-cormorant)" }}
+              >
+                «Колесница не останавливается перед препятствием —
+                она <span className="text-[hsl(210,15%,60%)]">проходит сквозь него.</span>»
+              </blockquote>
+              <p className="text-[hsl(210,15%,50%)] font-light text-sm leading-relaxed">
+                Седьмой аркан — символ воли, контроля и движения вперёд вопреки хаосу.
+                Именно с этой энергией я веду каждое расследование: ни один туман лжи не останавливает поиск истины.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* БЛОК 5 — КАК РАБОТАЮ */}
       <section className="py-24 noise-texture" style={{ background: "hsl(220,10%,6%)" }}>
         <div className="container mx-auto px-4">
