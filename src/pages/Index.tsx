@@ -121,12 +121,24 @@ export default function Index() {
           <StarField blurAmount={blurAmount} />
         </div>
 
+        {/* Фото Майи с огнём — правый край */}
+        <div
+          className="absolute inset-0 hidden md:block"
+          style={{
+            backgroundImage: "url(https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/b2ac8fe6-4e44-4679-9561-ad43458669da.jpg)",
+            backgroundSize: "cover",
+            backgroundPosition: "right center",
+            opacity: 0.18,
+            filter: "grayscale(40%) contrast(1.1)",
+          }}
+        />
+
         {/* Fog overlay */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(8,10,14,0.3) 0%, rgba(8,10,14,0.75) 60%, rgba(8,10,14,0.97) 100%)",
+              "radial-gradient(ellipse 70% 80% at 30% 50%, rgba(8,10,14,0.1) 0%, rgba(8,10,14,0.85) 70%, rgba(8,10,14,0.98) 100%)",
           }}
         />
 
@@ -313,8 +325,8 @@ export default function Index() {
                   label: "Очищение",
                   title: "Программные свечи",
                   text: "Индивидуальное создание восковых программ для выжигания негатива, разрушения чужих привязанностей и очищения пространства.",
-                  img: "https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/a685067d-1621-4b41-9a59-832bedf1ea0a.jpg",
-                  imgPosition: "object-center",
+                  img: "https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/e5579b48-368d-42fd-bc46-77e78062a796.jpg",
+                  imgPosition: "object-top",
                 },
                 {
                   label: "Защита",
@@ -322,13 +334,6 @@ export default function Index() {
                   text: "Жёсткая северная магия для взлома ситуаций, постановки глухой защиты и изменения вероятностей под вашу задачу.",
                   img: "https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/b4616f2b-746d-466a-8225-00f8e52dcfe2.png",
                   imgPosition: "object-center",
-                },
-                {
-                  label: "Эксклюзив",
-                  title: "Артефакты с подселением",
-                  text: "Работа по индивидуальным заказам. Создание проводников и защитников с подселением сущностей для сложных задач.",
-                  img: "https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/54c7f87e-9f90-4050-a24c-5437d4e58a59.jpg",
-                  imgPosition: "object-bottom",
                 },
               ].map((service) => (
                 <div
@@ -365,6 +370,47 @@ export default function Index() {
                   </div>
                 </div>
               ))}
+
+              {/* Карточка Эксклюзив — 2 куклы */}
+              <div
+                className="glass-panel rounded-sm overflow-hidden transition-all duration-300 hover:border-[rgba(160,170,185,0.22)] group md:col-span-2"
+                style={{ borderColor: "rgba(160,170,185,0.08)" }}
+              >
+                <div className="flex flex-col md:flex-row">
+                  {/* Фото 1 */}
+                  <div className="relative md:w-1/2 h-64 overflow-hidden">
+                    <img
+                      src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/54c7f87e-9f90-4050-a24c-5437d4e58a59.jpg"
+                      alt="Артефакт с подселением"
+                      className="w-full h-full object-cover object-bottom transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0" style={{ background: "linear-gradient(to right, transparent 60%, rgba(8,10,14,0.5) 100%)" }} />
+                  </div>
+                  {/* Фото 2 */}
+                  <div className="relative md:w-1/2 h-64 overflow-hidden">
+                    <img
+                      src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/5114cacc-06c7-4d5c-bc2a-3b502c835fa3.jpg"
+                      alt="Кукла-стражница"
+                      className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0" style={{ background: "linear-gradient(to left, transparent 60%, rgba(8,10,14,0.5) 100%)" }} />
+                  </div>
+                  {/* Общий градиент снизу */}
+                  <div className="absolute inset-x-0 bottom-0 h-32 hidden md:block" style={{ background: "linear-gradient(to top, rgba(8,10,14,0.8) 0%, transparent 100%)" }} />
+                </div>
+                <div className="p-6">
+                  <p className="text-xs tracking-[0.35em] text-[hsl(210,15%,38%)] uppercase font-light mb-2">Эксклюзив</p>
+                  <h3
+                    className="text-xl font-light text-white mb-3 leading-tight"
+                    style={{ fontFamily: "var(--font-cormorant)" }}
+                  >
+                    Артефакты с подселением
+                  </h3>
+                  <p className="text-[hsl(210,15%,52%)] text-sm leading-relaxed font-light">
+                    Работа по индивидуальным заказам. Создание проводников и защитников с подселением сущностей для сложных задач.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
