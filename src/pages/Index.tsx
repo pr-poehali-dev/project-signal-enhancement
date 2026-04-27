@@ -303,52 +303,66 @@ export default function Index() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {[
                 {
-                  icon: "ScanSearch",
                   label: "Диагностика",
                   title: "Глубинные оккультные расклады",
                   text: "Детальный рентген вашей реальности. Бескомпромиссные предсказания, выявление лжи, измен и скрытых мотивов партнёра.",
+                  img: "https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/0845f2fa-213b-43c5-b9ff-c1d077c2b72d.png",
+                  imgPosition: "object-center",
                 },
                 {
-                  icon: "Flame",
                   label: "Очищение",
                   title: "Программные свечи",
                   text: "Индивидуальное создание восковых программ для выжигания негатива, разрушения чужих привязанностей и очищения пространства.",
+                  img: "https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/a685067d-1621-4b41-9a59-832bedf1ea0a.jpg",
+                  imgPosition: "object-center",
                 },
                 {
-                  icon: "Shield",
                   label: "Защита",
                   title: "Рунические ставы",
                   text: "Жёсткая северная магия для взлома ситуаций, постановки глухой защиты и изменения вероятностей под вашу задачу.",
+                  img: "https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/b4616f2b-746d-466a-8225-00f8e52dcfe2.png",
+                  imgPosition: "object-center",
                 },
                 {
-                  icon: "Gem",
                   label: "Эксклюзив",
                   title: "Артефакты с подселением",
                   text: "Работа по индивидуальным заказам. Создание проводников и защитников с подселением сущностей для сложных задач.",
+                  img: "https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/54c7f87e-9f90-4050-a24c-5437d4e58a59.jpg",
+                  imgPosition: "object-top",
                 },
               ].map((service) => (
                 <div
                   key={service.title}
-                  className="glass-panel rounded-sm p-7 transition-all duration-300 hover:border-[rgba(160,170,185,0.22)] group"
+                  className="glass-panel rounded-sm overflow-hidden transition-all duration-300 hover:border-[rgba(160,170,185,0.22)] group"
                   style={{ borderColor: "rgba(160,170,185,0.08)" }}
                 >
-                  <p className="text-xs tracking-[0.35em] text-[hsl(210,15%,38%)] uppercase font-light mb-3">
-                    {service.label}
-                  </p>
-                  <div className="flex items-start gap-4 mb-4">
-                    <Icon
-                      name={service.icon as "ScanSearch"}
-                      size={20}
-                      className="text-[hsl(210,15%,45%)] mt-0.5 flex-shrink-0 group-hover:text-[hsl(210,15%,60%)] transition-colors"
+                  {/* Фото */}
+                  <div className="relative h-52 overflow-hidden">
+                    <img
+                      src={service.img}
+                      alt={service.title}
+                      className={`w-full h-full object-cover ${service.imgPosition} transition-transform duration-700 group-hover:scale-105`}
                     />
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background: "linear-gradient(to bottom, rgba(8,10,14,0.1) 0%, rgba(8,10,14,0.75) 100%)",
+                      }}
+                    />
+                    <p className="absolute bottom-4 left-5 text-xs tracking-[0.35em] text-[hsl(210,15%,55%)] uppercase font-light">
+                      {service.label}
+                    </p>
+                  </div>
+                  {/* Текст */}
+                  <div className="p-6">
                     <h3
-                      className="text-lg font-light text-white leading-tight"
+                      className="text-xl font-light text-white mb-3 leading-tight"
                       style={{ fontFamily: "var(--font-cormorant)" }}
                     >
                       {service.title}
                     </h3>
+                    <p className="text-[hsl(210,15%,52%)] text-sm leading-relaxed font-light">{service.text}</p>
                   </div>
-                  <p className="text-[hsl(210,15%,52%)] text-sm leading-relaxed font-light pl-9">{service.text}</p>
                 </div>
               ))}
             </div>
