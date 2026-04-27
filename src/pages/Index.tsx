@@ -2,10 +2,129 @@ import { StarField } from "@/components/StarField"
 import { ChevronDown } from "lucide-react"
 import { ContactForm } from "@/components/ContactForm"
 import { OccultOverlay } from "@/components/OccultOverlay"
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useMemo } from "react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import Icon from "@/components/ui/icon"
+
+const ARCANA = [
+  {
+    number: "I",
+    name: "Маг",
+    subtitle: "Аркан воли",
+    symbol: "☿",
+    quote: ["«Маг не ждёт — он ", "берёт то, что его.»"],
+    text: "Первый аркан — абсолютный контроль над реальностью через знание. Я вижу инструменты на столе: руны, огонь, слово. Я знаю, какой из них сломает чужую программу.",
+  },
+  {
+    number: "II",
+    name: "Верховная Жрица",
+    subtitle: "Аркан тайны",
+    symbol: "☽",
+    quote: ["«То, что скрыто от глаз, ", "открывается взгляду изнутри.»"],
+    text: "Жрица хранит то, что нельзя увидеть напрямую. Именно здесь — моя область: считывание скрытых пластов, невидимых связей и того, о чём молчат даже близкие.",
+  },
+  {
+    number: "VII",
+    name: "Колесница",
+    subtitle: "Аркан пути",
+    symbol: "⊕",
+    quote: ["«Колесница не останавливается перед препятствием — ", "она проходит сквозь него.»"],
+    text: "Седьмой аркан — символ воли, контроля и движения вперёд вопреки хаосу. Именно с этой энергией я веду каждое расследование: ни один туман лжи не останавливает поиск истины.",
+  },
+  {
+    number: "VIII",
+    name: "Справедливость",
+    subtitle: "Аркан истины",
+    symbol: "⚖",
+    quote: ["«Весы не лгут — ", "они лишь обнажают то, что есть.»"],
+    text: "Восьмой аркан — меч, который режет иллюзии. Я не выношу приговоров. Я показываю реальное соотношение сил в ваших отношениях — и вы сами решаете, что делать с этим знанием.",
+  },
+  {
+    number: "XII",
+    name: "Повешенный",
+    subtitle: "Аркан паузы",
+    symbol: "∇",
+    quote: ["«Тот, кто видит мир перевёрнутым, ", "видит его настоящим.»"],
+    text: "Двенадцатый аркан — взгляд с изнанки. Когда всё кажется остановившимся и безвыходным — именно тогда открываются скрытые ходы. Я нахожу их.",
+  },
+  {
+    number: "XIII",
+    name: "Смерть",
+    subtitle: "Аркан трансформации",
+    symbol: "⌖",
+    quote: ["«Смерть не забирает — ", "она освобождает от лишнего.»"],
+    text: "Тринадцатый аркан пугает лишь тех, кто не понимает его сути. Смерть — это конец того, что держало вас в ловушке. Я помогаю этому завершению произойти чисто и необратимо.",
+  },
+  {
+    number: "XV",
+    name: "Дьявол",
+    subtitle: "Аркан цепей",
+    symbol: "♄",
+    quote: ["«Цепи держат лишь тех, ", "кто не видит замка.»"],
+    text: "Пятнадцатый аркан — зеркало привязанностей и зависимостей. Энергетические паразиты, токсичные узы, чужие программы в голове — я нахожу их источник и показываю замок.",
+  },
+  {
+    number: "XVIII",
+    name: "Луна",
+    subtitle: "Аркан иллюзий",
+    symbol: "☾",
+    quote: ["«Луна не освещает путь — ", "она показывает, что путей много.»"],
+    text: "Восемнадцатый аркан — царство обманов и скрытых страхов. Там, где вы видите тупик, я вижу несколько выходов. Там, где вы видите любовь — иногда вижу сценарий.",
+  },
+]
+
+function RandomArcanSection() {
+  const arcana = useMemo(() => ARCANA[Math.floor(Math.random() * ARCANA.length)], [])
+  return (
+    <section className="py-16 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,7%)" }}>
+      <OccultOverlay density={8} />
+      <div className="container mx-auto px-4 relative" style={{ zIndex: 2 }}>
+        <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-14">
+          <div
+            className="flex-shrink-0 glass-panel rounded-sm flex flex-col items-center justify-center gap-3 px-8 py-10"
+            style={{ borderColor: "rgba(160,170,185,0.1)", minWidth: "140px" }}
+          >
+            <span
+              className="text-5xl leading-none select-none"
+              style={{
+                fontFamily: "serif",
+                color: "hsl(210,15%,62%)",
+                textShadow: "0 0 28px rgba(160,190,255,0.3), 0 0 8px rgba(160,190,255,0.18)",
+                filter: "drop-shadow(0 0 10px rgba(160,200,255,0.22))",
+              }}
+            >
+              {arcana.symbol}
+            </span>
+            <div className="text-center">
+              <p className="text-white font-light text-base mb-0.5" style={{ fontFamily: "var(--font-cormorant)" }}>
+                {arcana.name}
+              </p>
+              <p className="text-xs tracking-[0.3em] text-[hsl(210,15%,35%)] uppercase font-light">
+                {arcana.number}
+              </p>
+            </div>
+          </div>
+          <div>
+            <p className="text-xs tracking-[0.4em] text-[hsl(210,15%,40%)] uppercase font-light mb-4">
+              {arcana.subtitle}
+            </p>
+            <blockquote
+              className="text-xl md:text-2xl font-light text-white leading-relaxed mb-5"
+              style={{ fontFamily: "var(--font-cormorant)" }}
+            >
+              {arcana.quote[0]}
+              <span className="text-[hsl(210,15%,60%)]">{arcana.quote[1]}</span>
+            </blockquote>
+            <p className="text-[hsl(210,15%,50%)] font-light text-sm leading-relaxed">
+              {arcana.text}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
 
 export default function Index() {
   const [isHeadingVisible, setIsHeadingVisible] = useState(false)
@@ -432,51 +551,8 @@ export default function Index() {
         </div>
       </section>
 
-      {/* АРКАН — КОЛЕСНИЦА */}
-      <section className="py-16 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,7%)" }}>
-        <OccultOverlay density={8} />
-        <div className="container mx-auto px-4 relative" style={{ zIndex: 2 }}>
-          <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-14">
-            {/* Символ аркана */}
-            <div
-              className="flex-shrink-0 glass-panel rounded-sm flex flex-col items-center justify-center gap-3 px-8 py-10"
-              style={{ borderColor: "rgba(160,170,185,0.1)", minWidth: "140px" }}
-            >
-              <span
-                className="text-6xl leading-none select-none"
-                style={{
-                  fontFamily: "serif",
-                  color: "hsl(210,15%,60%)",
-                  textShadow: "0 0 24px rgba(160,190,255,0.25), 0 0 6px rgba(160,190,255,0.15)",
-                  filter: "drop-shadow(0 0 8px rgba(160,200,255,0.2))",
-                }}
-              >
-                🜲
-              </span>
-              <p className="text-xs tracking-[0.35em] text-[hsl(210,15%,38%)] uppercase font-light text-center">
-                VII · Колесница
-              </p>
-            </div>
-            {/* Текст */}
-            <div>
-              <p className="text-xs tracking-[0.4em] text-[hsl(210,15%,40%)] uppercase font-light mb-4">
-                Аркан пути
-              </p>
-              <blockquote
-                className="text-xl md:text-2xl font-light text-white leading-relaxed mb-4"
-                style={{ fontFamily: "var(--font-cormorant)" }}
-              >
-                «Колесница не останавливается перед препятствием —
-                она <span className="text-[hsl(210,15%,60%)]">проходит сквозь него.</span>»
-              </blockquote>
-              <p className="text-[hsl(210,15%,50%)] font-light text-sm leading-relaxed">
-                Седьмой аркан — символ воли, контроля и движения вперёд вопреки хаосу.
-                Именно с этой энергией я веду каждое расследование: ни один туман лжи не останавливает поиск истины.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* АРКАН — случайный при каждом заходе */}
+      <RandomArcanSection />
 
       {/* БЛОК 5 — КАК РАБОТАЮ */}
       <section className="py-24 noise-texture" style={{ background: "hsl(220,10%,6%)" }}>
