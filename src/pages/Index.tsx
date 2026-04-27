@@ -246,7 +246,7 @@ export default function Index() {
                 >
                   Я — Майя.
                   <br />
-                  <span className="text-[hsl(210,15%,60%)]">11 лет практики.</span>
+                  <span className="text-[hsl(210,15%,60%)]">Одиннадцать лет практики.</span>
                 </h2>
                 <div className="space-y-4 max-w-xl">
                   <p className="text-[hsl(210,15%,58%)] font-light text-sm leading-relaxed">
