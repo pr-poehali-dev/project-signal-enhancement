@@ -240,15 +240,26 @@ export default function Index() {
               isAboutVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10",
             )}
           >
-            <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
-              <div className="w-48 h-48 md:w-56 md:h-56 flex-shrink-0 rounded-sm overflow-hidden" style={{ border: "1px solid rgba(160,170,185,0.12)" }}>
-                <img
-                  src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/935e2cbe-511f-44e5-ae79-46e0d2853120.jpg"
-                  alt="Майя"
-                  className="w-full h-full object-cover object-top"
-                />
+            <div className="flex flex-col md:flex-row items-start gap-10 md:gap-16">
+              {/* Левая колонка — фото Майи + кукла */}
+              <div className="flex flex-col gap-4 flex-shrink-0 items-center md:items-start">
+                <div className="w-48 h-56 md:w-56 md:h-64 rounded-sm overflow-hidden" style={{ border: "1px solid rgba(160,170,185,0.12)" }}>
+                  <img
+                    src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/935e2cbe-511f-44e5-ae79-46e0d2853120.jpg"
+                    alt="Майя"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <div className="w-48 md:w-56 rounded-sm overflow-hidden" style={{ border: "1px solid rgba(160,170,185,0.08)", height: "140px" }}>
+                  <img
+                    src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/5114cacc-06c7-4d5c-bc2a-3b502c835fa3.jpg"
+                    alt="Кукла-стражница"
+                    className="w-full h-full object-cover"
+                    style={{ objectPosition: "center 20%" }}
+                  />
+                </div>
               </div>
-              <div className="space-y-5 text-center md:text-left">
+              <div className="space-y-5 text-center md:text-left md:pt-2">
                 <p className="text-xs tracking-[0.4em] text-[hsl(210,15%,45%)] uppercase font-light">
                   Следователь по оккультным делам
                 </p>
@@ -312,105 +323,75 @@ export default function Index() {
               isServicesVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10",
             )}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {/* Верхний ряд — 2 широкие карточки */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
               {[
                 {
                   label: "Диагностика",
                   title: "Глубинные оккультные расклады",
                   text: "Детальный рентген вашей реальности. Бескомпромиссные предсказания, выявление лжи, измен и скрытых мотивов партнёра.",
                   img: "https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/0845f2fa-213b-43c5-b9ff-c1d077c2b72d.png",
-                  imgPosition: "object-center",
+                  imgStyle: { objectPosition: "center 30%" },
                 },
                 {
                   label: "Очищение",
                   title: "Программные свечи",
                   text: "Индивидуальное создание восковых программ для выжигания негатива, разрушения чужих привязанностей и очищения пространства.",
                   img: "https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/e5579b48-368d-42fd-bc46-77e78062a796.jpg",
-                  imgPosition: "object-top",
+                  imgStyle: { objectPosition: "center 20%" },
                 },
+              ].map((s) => (
+                <div key={s.title} className="glass-panel rounded-sm overflow-hidden group transition-all duration-300 hover:border-[rgba(160,170,185,0.22)]" style={{ borderColor: "rgba(160,170,185,0.08)" }}>
+                  <div className="relative h-56 overflow-hidden">
+                    <img src={s.img} alt={s.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" style={s.imgStyle} />
+                    <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(8,10,14,0.05) 0%, rgba(8,10,14,0.72) 100%)" }} />
+                    <p className="absolute bottom-4 left-5 text-xs tracking-[0.35em] text-[hsl(210,15%,55%)] uppercase font-light">{s.label}</p>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-light text-white mb-3 leading-tight" style={{ fontFamily: "var(--font-cormorant)" }}>{s.title}</h3>
+                    <p className="text-[hsl(210,15%,52%)] text-sm leading-relaxed font-light">{s.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Нижний ряд — 3 равные карточки */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {[
                 {
                   label: "Защита",
                   title: "Рунические ставы",
                   text: "Жёсткая северная магия для взлома ситуаций, постановки глухой защиты и изменения вероятностей под вашу задачу.",
                   img: "https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/b4616f2b-746d-466a-8225-00f8e52dcfe2.png",
-                  imgPosition: "object-center",
+                  imgStyle: { objectPosition: "center 40%" },
                 },
-              ].map((service) => (
-                <div
-                  key={service.title}
-                  className="glass-panel rounded-sm overflow-hidden transition-all duration-300 hover:border-[rgba(160,170,185,0.22)] group"
-                  style={{ borderColor: "rgba(160,170,185,0.08)" }}
-                >
-                  {/* Фото */}
-                  <div className="relative h-52 overflow-hidden">
-                    <img
-                      src={service.img}
-                      alt={service.title}
-                      className={`w-full h-full object-cover ${service.imgPosition} transition-transform duration-700 group-hover:scale-105`}
-                    />
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        background: "linear-gradient(to bottom, rgba(8,10,14,0.1) 0%, rgba(8,10,14,0.75) 100%)",
-                      }}
-                    />
-                    <p className="absolute bottom-4 left-5 text-xs tracking-[0.35em] text-[hsl(210,15%,55%)] uppercase font-light">
-                      {service.label}
-                    </p>
+                {
+                  label: "Эксклюзив",
+                  title: "Артефакты с подселением",
+                  text: "Создание проводников и защитников с подселением сущностей. Работа по индивидуальным заказам.",
+                  img: "https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/54c7f87e-9f90-4050-a24c-5437d4e58a59.jpg",
+                  imgStyle: { objectPosition: "center 60%" },
+                },
+                {
+                  label: "Свечные программы",
+                  title: "Ритуал на природе",
+                  text: "Живые обряды вне стен — у воды, огня, под открытым небом. Усиление в несколько раз против кабинетной работы.",
+                  img: "https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/a685067d-1621-4b41-9a59-832bedf1ea0a.jpg",
+                  imgStyle: { objectPosition: "center 35%" },
+                },
+              ].map((s) => (
+                <div key={s.title} className="glass-panel rounded-sm overflow-hidden group transition-all duration-300 hover:border-[rgba(160,170,185,0.22)]" style={{ borderColor: "rgba(160,170,185,0.08)" }}>
+                  <div className="relative h-48 overflow-hidden">
+                    <img src={s.img} alt={s.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" style={s.imgStyle} />
+                    <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(8,10,14,0.05) 0%, rgba(8,10,14,0.72) 100%)" }} />
+                    <p className="absolute bottom-4 left-5 text-xs tracking-[0.35em] text-[hsl(210,15%,55%)] uppercase font-light">{s.label}</p>
                   </div>
-                  {/* Текст */}
                   <div className="p-6">
-                    <h3
-                      className="text-xl font-light text-white mb-3 leading-tight"
-                      style={{ fontFamily: "var(--font-cormorant)" }}
-                    >
-                      {service.title}
-                    </h3>
-                    <p className="text-[hsl(210,15%,52%)] text-sm leading-relaxed font-light">{service.text}</p>
+                    <h3 className="text-xl font-light text-white mb-3 leading-tight" style={{ fontFamily: "var(--font-cormorant)" }}>{s.title}</h3>
+                    <p className="text-[hsl(210,15%,52%)] text-sm leading-relaxed font-light">{s.text}</p>
                   </div>
                 </div>
               ))}
-
-              {/* Карточка Эксклюзив — 2 куклы */}
-              <div
-                className="glass-panel rounded-sm overflow-hidden transition-all duration-300 hover:border-[rgba(160,170,185,0.22)] group md:col-span-2"
-                style={{ borderColor: "rgba(160,170,185,0.08)" }}
-              >
-                <div className="flex flex-col md:flex-row">
-                  {/* Фото 1 */}
-                  <div className="relative md:w-1/2 h-64 overflow-hidden">
-                    <img
-                      src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/54c7f87e-9f90-4050-a24c-5437d4e58a59.jpg"
-                      alt="Артефакт с подселением"
-                      className="w-full h-full object-cover object-bottom transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0" style={{ background: "linear-gradient(to right, transparent 60%, rgba(8,10,14,0.5) 100%)" }} />
-                  </div>
-                  {/* Фото 2 */}
-                  <div className="relative md:w-1/2 h-64 overflow-hidden">
-                    <img
-                      src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/5114cacc-06c7-4d5c-bc2a-3b502c835fa3.jpg"
-                      alt="Кукла-стражница"
-                      className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0" style={{ background: "linear-gradient(to left, transparent 60%, rgba(8,10,14,0.5) 100%)" }} />
-                  </div>
-                  {/* Общий градиент снизу */}
-                  <div className="absolute inset-x-0 bottom-0 h-32 hidden md:block" style={{ background: "linear-gradient(to top, rgba(8,10,14,0.8) 0%, transparent 100%)" }} />
-                </div>
-                <div className="p-6">
-                  <p className="text-xs tracking-[0.35em] text-[hsl(210,15%,38%)] uppercase font-light mb-2">Эксклюзив</p>
-                  <h3
-                    className="text-xl font-light text-white mb-3 leading-tight"
-                    style={{ fontFamily: "var(--font-cormorant)" }}
-                  >
-                    Артефакты с подселением
-                  </h3>
-                  <p className="text-[hsl(210,15%,52%)] text-sm leading-relaxed font-light">
-                    Работа по индивидуальным заказам. Создание проводников и защитников с подселением сущностей для сложных задач.
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
