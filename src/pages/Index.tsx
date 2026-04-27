@@ -229,12 +229,12 @@ export default function Index() {
             )}
           >
             <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
-              {/* Avatar placeholder */}
-              <div
-                className="w-48 h-48 md:w-56 md:h-56 flex-shrink-0 rounded-sm glass-panel flex items-center justify-center"
-                style={{ border: "1px solid rgba(160,170,185,0.12)" }}
-              >
-                <Icon name="Eye" size={48} className="text-[hsl(210,15%,35%)]" />
+              <div className="w-48 h-48 md:w-56 md:h-56 flex-shrink-0 rounded-sm overflow-hidden" style={{ border: "1px solid rgba(160,170,185,0.12)" }}>
+                <img
+                  src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/935e2cbe-511f-44e5-ae79-46e0d2853120.jpg"
+                  alt="Майя"
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
               <div className="space-y-5 text-center md:text-left">
                 <p className="text-xs tracking-[0.4em] text-[hsl(210,15%,45%)] uppercase font-light">
