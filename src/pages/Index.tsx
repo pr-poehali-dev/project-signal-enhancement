@@ -75,28 +75,85 @@ const ARCANA = [
 ]
 
 function RandomArcanSection() {
+  const [visible, setVisible] = useState(false)
+  const [symbolVisible, setSymbolVisible] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
   const arcana = useMemo(() => ARCANA[Math.floor(Math.random() * ARCANA.length)], [])
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Сначала появляется секция
+          setTimeout(() => setVisible(true), 80)
+          // Потом с задержкой — символ с эффектом проявления
+          setTimeout(() => setSymbolVisible(true), 400)
+          obs.disconnect()
+        }
+      },
+      { threshold: 0.15 },
+    )
+    if (sectionRef.current) obs.observe(sectionRef.current)
+    return () => obs.disconnect()
+  }, [])
+
   return (
-    <section className="py-16 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,7%)" }}>
+    <section
+      ref={sectionRef}
+      className="py-16 noise-texture relative overflow-hidden"
+      style={{ background: "hsl(220,10%,7%)" }}
+    >
       <OccultOverlay density={8} />
       <div className="container mx-auto px-4 relative" style={{ zIndex: 2 }}>
-        <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-14">
+        <div
+          className="max-w-3xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-14"
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(24px)",
+            transition: "opacity 0.9s ease, transform 0.9s ease",
+          }}
+        >
+          {/* Карточка аркана */}
           <div
-            className="flex-shrink-0 glass-panel rounded-sm flex flex-col items-center justify-center gap-3 px-8 py-10"
+            className="flex-shrink-0 glass-panel rounded-sm flex flex-col items-center justify-center gap-3 px-8 py-10 relative overflow-hidden"
             style={{ borderColor: "rgba(160,170,185,0.1)", minWidth: "140px" }}
           >
+            {/* Вспышка при появлении символа */}
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: "radial-gradient(ellipse at center, rgba(160,200,255,0.12) 0%, transparent 70%)",
+                opacity: symbolVisible ? 0 : 1,
+                transition: "opacity 1.2s ease",
+                pointerEvents: "none",
+              }}
+            />
             <span
               className="text-5xl leading-none select-none"
               style={{
                 fontFamily: "serif",
                 color: "hsl(210,15%,62%)",
-                textShadow: "0 0 28px rgba(160,190,255,0.3), 0 0 8px rgba(160,190,255,0.18)",
-                filter: "drop-shadow(0 0 10px rgba(160,200,255,0.22))",
+                textShadow: symbolVisible
+                  ? "0 0 28px rgba(160,190,255,0.3), 0 0 8px rgba(160,190,255,0.18)"
+                  : "0 0 60px rgba(160,190,255,0.8), 0 0 20px rgba(200,220,255,0.6)",
+                filter: symbolVisible
+                  ? "drop-shadow(0 0 10px rgba(160,200,255,0.22))"
+                  : "drop-shadow(0 0 24px rgba(160,200,255,0.7)) brightness(1.8)",
+                opacity: symbolVisible ? 1 : 0,
+                transform: symbolVisible ? "scale(1)" : "scale(0.6)",
+                transition: "opacity 0.7s ease, transform 0.7s cubic-bezier(0.34,1.56,0.64,1), text-shadow 1s ease, filter 1s ease",
               }}
             >
               {arcana.symbol}
             </span>
-            <div className="text-center">
+            <div
+              className="text-center"
+              style={{
+                opacity: symbolVisible ? 1 : 0,
+                transition: "opacity 0.6s ease 0.3s",
+              }}
+            >
               <p className="text-white font-light text-base mb-0.5" style={{ fontFamily: "var(--font-cormorant)" }}>
                 {arcana.name}
               </p>
@@ -105,7 +162,15 @@ function RandomArcanSection() {
               </p>
             </div>
           </div>
-          <div>
+
+          {/* Текст */}
+          <div
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateX(0)" : "translateX(16px)",
+              transition: "opacity 1s ease 0.25s, transform 1s ease 0.25s",
+            }}
+          >
             <p className="text-xs tracking-[0.4em] text-[hsl(210,15%,40%)] uppercase font-light mb-4">
               {arcana.subtitle}
             </p>
