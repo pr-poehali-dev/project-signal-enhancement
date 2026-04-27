@@ -1,6 +1,7 @@
 import { StarField } from "@/components/StarField"
 import { ChevronDown } from "lucide-react"
 import { ContactForm } from "@/components/ContactForm"
+import { OccultOverlay } from "@/components/OccultOverlay"
 import { useState, useEffect, useRef } from "react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -108,13 +109,13 @@ export default function Index() {
       <section className="relative w-full overflow-hidden noise-texture" style={heroStyle}>
         <div className="absolute top-6 right-6 z-10 flex items-center gap-3">
           <a
-            href="https://t.me/tarolog666"
+            href="https://max.ru/u/f9LHodD0cOJ6ZZlQj0UscdLQ-24d096fz401XbP1kL4IvDZwlSnhba3Xum4"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:flex items-center gap-1.5 text-[hsl(210,15%,55%)] hover:text-white transition-colors text-xs font-light tracking-widest uppercase"
           >
-            <Icon name="Send" size={13} />
-            @tarolog666
+            <Icon name="ExternalLink" size={13} />
+            MAX
           </a>
           <a
             href="https://dikidi.net/926132"
@@ -203,10 +204,12 @@ export default function Index() {
             <ChevronDown className="h-6 w-6 text-[hsl(210,15%,65%)]" />
           </div>
         </div>
+        <OccultOverlay density={22} />
       </section>
 
       {/* БЛОК 2 — БОЛЬ */}
-      <section className="py-24 noise-texture" style={{ background: "hsl(220,10%,7%)" }}>
+      <section className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,7%)" }}>
+        <OccultOverlay density={12} />
         <div className="container mx-auto px-4">
           <div
             ref={painContentRef}
@@ -302,13 +305,22 @@ export default function Index() {
                     Записаться
                   </a>
                   <a
-                    href="https://t.me/tarolog666"
+                    href="https://max.ru/u/f9LHodD0cOJ6ZZlQj0UscdLQ-24d096fz401XbP1kL4IvDZwlSnhba3Xum4"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-transparent text-[hsl(210,15%,65%)] border border-[rgba(160,170,185,0.3)] hover:bg-[rgba(160,170,185,0.06)] hover:text-white hover:border-[rgba(160,170,185,0.5)] transition-all tracking-[0.2em] text-xs uppercase font-light rounded-sm"
                   >
+                    <Icon name="ExternalLink" size={13} />
+                    MAX
+                  </a>
+                  <a
+                    href="https://t.me/tarolog666"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-transparent text-[hsl(210,15%,55%)] border border-[rgba(160,170,185,0.2)] hover:bg-[rgba(160,170,185,0.06)] hover:text-white hover:border-[rgba(160,170,185,0.4)] transition-all tracking-[0.2em] text-xs uppercase font-light rounded-sm"
+                  >
                     <Icon name="Send" size={13} />
-                    Telegram
+                    TG
                   </a>
                 </div>
               </div>
@@ -318,8 +330,9 @@ export default function Index() {
       </section>
 
       {/* БЛОК 4 — УСЛУГИ */}
-      <section ref={servicesSectionRef} id="services" className="py-24 noise-texture" style={{ background: "hsl(220,10%,8%)" }}>
-        <div className="container mx-auto px-4">
+      <section ref={servicesSectionRef} id="services" className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,8%)" }}>
+        <OccultOverlay density={16} />
+        <div className="container mx-auto px-4 relative" style={{ zIndex: 2 }}>
           <h2
             ref={servicesTitleRef}
             className={cn(
@@ -539,8 +552,9 @@ export default function Index() {
       </section>
 
       {/* БЛОК 7 — ЗАПИСЬ */}
-      <section ref={contactSectionRef} id="contact" className="py-24 noise-texture" style={{ background: "hsl(220,10%,6%)" }}>
-        <div className="container mx-auto px-4">
+      <section ref={contactSectionRef} id="contact" className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,6%)" }}>
+        <OccultOverlay density={14} />
+        <div className="container mx-auto px-4 relative" style={{ zIndex: 2 }}>
           <h2
             ref={headingRef}
             className={cn(
@@ -593,6 +607,15 @@ export default function Index() {
               {/* Правая часть — контакты */}
               <div className="flex flex-col gap-3 items-center md:items-end">
                 <a
+                  href="https://max.ru/u/f9LHodD0cOJ6ZZlQj0UscdLQ-24d096fz401XbP1kL4IvDZwlSnhba3Xum4"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-[hsl(210,15%,65%)] hover:text-white transition-colors text-sm font-light"
+                >
+                  <Icon name="ExternalLink" size={14} />
+                  MAX
+                </a>
+                <a
                   href="https://t.me/tarolog666"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -607,15 +630,6 @@ export default function Index() {
                 >
                   <Icon name="Phone" size={14} />
                   +7 908 222 10 22
-                </a>
-                <a
-                  href="https://max.ru/u/f9LHodD0cOJ6ZZlQj0UscdLQ-24d096fz401XbP1kL4IvDZwlSnhba3Xum4"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-[hsl(210,15%,50%)] hover:text-white transition-colors text-sm font-light"
-                >
-                  <Icon name="ExternalLink" size={14} />
-                  MAX
                 </a>
               </div>
             </div>
