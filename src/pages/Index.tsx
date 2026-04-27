@@ -106,15 +106,24 @@ export default function Index() {
     <div className="min-h-screen bg-[hsl(220,10%,6%)] scratch-overlay">
       {/* БЛОК 1 — HERO */}
       <section className="relative w-full overflow-hidden noise-texture" style={heroStyle}>
-        <div className="absolute top-6 right-6 z-10 flex space-x-3">
-          <Button
-            onClick={scrollToContact}
-            variant="outline"
-            size="sm"
-            className="bg-transparent text-[hsl(210,15%,75%)] border-[rgba(160,170,185,0.3)] hover:bg-[rgba(160,170,185,0.08)] hover:text-white hover:border-[rgba(160,170,185,0.5)] transition-all tracking-widest text-xs uppercase font-light"
+        <div className="absolute top-6 right-6 z-10 flex items-center gap-3">
+          <a
+            href="https://t.me/tarolog666"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:flex items-center gap-1.5 text-[hsl(210,15%,55%)] hover:text-white transition-colors text-xs font-light tracking-widest uppercase"
+          >
+            <Icon name="Send" size={13} />
+            @tarolog666
+          </a>
+          <a
+            href="https://dikidi.net/926132"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-transparent text-[hsl(210,15%,75%)] border border-[rgba(160,170,185,0.3)] hover:bg-[rgba(160,170,185,0.08)] hover:text-white hover:border-[rgba(160,170,185,0.5)] transition-all tracking-widest text-xs uppercase font-light rounded-sm"
           >
             Записаться
-          </Button>
+          </a>
         </div>
 
         <div className="absolute inset-0" style={warpSpeedStyle}>
@@ -172,13 +181,14 @@ export default function Index() {
                 Жёсткая оккультная диагностика отношений. Я не вытираю слёзы — я срываю маски,
                 разоблачаю ложь и показываю истинные мотивы партнёра.
               </p>
-              <Button
-                onClick={scrollToContact}
-                variant="outline"
-                className="bg-transparent text-[hsl(210,15%,75%)] border-[rgba(160,170,185,0.4)] hover:bg-[rgba(160,170,185,0.08)] hover:text-white hover:border-[rgba(160,170,185,0.7)] transition-all tracking-[0.2em] text-xs uppercase font-light px-8 py-5"
+              <a
+                href="https://dikidi.net/926132"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-transparent text-[hsl(210,15%,75%)] border border-[rgba(160,170,185,0.4)] hover:bg-[rgba(160,170,185,0.08)] hover:text-white hover:border-[rgba(160,170,185,0.7)] transition-all tracking-[0.2em] text-xs uppercase font-light px-8 py-4 rounded-sm"
               >
-                Узнать скрытую правду
-              </Button>
+                Записаться на диагностику
+              </a>
             </div>
           </div>
 
@@ -281,14 +291,26 @@ export default function Index() {
                     чужое вмешательство в вашу жизнь. Для меня не существует тайн.
                   </p>
                 </div>
-                <Button
-                  onClick={scrollToContact}
-                  variant="outline"
-                  size="sm"
-                  className="bg-transparent text-[hsl(210,15%,65%)] border-[rgba(160,170,185,0.3)] hover:bg-[rgba(160,170,185,0.06)] hover:text-white hover:border-[rgba(160,170,185,0.5)] transition-all tracking-[0.2em] text-xs uppercase font-light mt-2"
-                >
-                  Записаться на диагностику
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-3 mt-2 justify-center md:justify-start">
+                  <a
+                    href="https://dikidi.net/926132"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-transparent text-[hsl(210,15%,65%)] border border-[rgba(160,170,185,0.3)] hover:bg-[rgba(160,170,185,0.06)] hover:text-white hover:border-[rgba(160,170,185,0.5)] transition-all tracking-[0.2em] text-xs uppercase font-light rounded-sm"
+                  >
+                    <Icon name="CalendarCheck" size={13} />
+                    Записаться
+                  </a>
+                  <a
+                    href="https://t.me/tarolog666"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-transparent text-[hsl(210,15%,65%)] border border-[rgba(160,170,185,0.3)] hover:bg-[rgba(160,170,185,0.06)] hover:text-white hover:border-[rgba(160,170,185,0.5)] transition-all tracking-[0.2em] text-xs uppercase font-light rounded-sm"
+                  >
+                    <Icon name="Send" size={13} />
+                    Telegram
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -541,6 +563,71 @@ export default function Index() {
           <ContactForm />
         </div>
       </section>
+
+      {/* ФУТЕР */}
+      <footer className="py-12 noise-texture" style={{ background: "hsl(220,10%,5%)", borderTop: "1px solid rgba(160,170,185,0.07)" }}>
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-8">
+              {/* Левая часть — имя и подпись */}
+              <div className="text-center md:text-left">
+                <p className="text-white font-light text-lg mb-1" style={{ fontFamily: "var(--font-cormorant)" }}>
+                  Майя
+                </p>
+                <p className="text-xs tracking-[0.35em] text-[hsl(210,15%,38%)] uppercase font-light">
+                  Оккультный следователь
+                </p>
+              </div>
+
+              {/* Центр — кнопка записи */}
+              <a
+                href="https://dikidi.net/926132"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-3 bg-transparent text-[hsl(210,15%,65%)] border border-[rgba(160,170,185,0.25)] hover:bg-[rgba(160,170,185,0.07)] hover:text-white hover:border-[rgba(160,170,185,0.45)] transition-all tracking-[0.2em] text-xs uppercase font-light rounded-sm"
+              >
+                <Icon name="CalendarCheck" size={14} />
+                Записаться онлайн
+              </a>
+
+              {/* Правая часть — контакты */}
+              <div className="flex flex-col gap-3 items-center md:items-end">
+                <a
+                  href="https://t.me/tarolog666"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-[hsl(210,15%,50%)] hover:text-white transition-colors text-sm font-light"
+                >
+                  <Icon name="Send" size={14} />
+                  @tarolog666
+                </a>
+                <a
+                  href="tel:+79082221022"
+                  className="flex items-center gap-2 text-[hsl(210,15%,50%)] hover:text-white transition-colors text-sm font-light"
+                >
+                  <Icon name="Phone" size={14} />
+                  +7 908 222 10 22
+                </a>
+                <a
+                  href="https://max.ru/u/f9LHodD0cOJ6ZZlQj0UscdLQ-24d096fz401XbP1kL4IvDZwlSnhba3Xum4"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-[hsl(210,15%,50%)] hover:text-white transition-colors text-sm font-light"
+                >
+                  <Icon name="ExternalLink" size={14} />
+                  MAX
+                </a>
+              </div>
+            </div>
+
+            <div className="mt-10 pt-6 text-center" style={{ borderTop: "1px solid rgba(160,170,185,0.06)" }}>
+              <p className="text-[hsl(210,15%,28%)] text-xs font-light tracking-wider">
+                © 2025 Майя · Оккультный следователь · Все права защищены
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
