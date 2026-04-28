@@ -503,19 +503,19 @@ export default function Index() {
               isAboutVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10",
             )}
           >
-            <div className="flex flex-col md:flex-row items-stretch gap-6 md:gap-10">
+            <div className="flex flex-col md:flex-row items-stretch gap-8 md:gap-12">
 
               {/* Фото Майи — слева */}
-              <div className="flex-shrink-0 w-full md:w-56 rounded-sm overflow-hidden self-stretch" style={{ minHeight: "420px", border: "1px solid rgba(160,170,185,0.12)" }}>
+              <div className="flex-shrink-0 w-full md:w-72 rounded-sm overflow-hidden self-stretch" style={{ minHeight: "460px", border: "1px solid rgba(160,170,185,0.12)" }}>
                 <img
                   src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/935e2cbe-511f-44e5-ae79-46e0d2853120.jpg"
                   alt="Майя"
                   className="w-full h-full object-cover object-top"
-                  style={{ minHeight: "420px" }}
+                  style={{ minHeight: "460px" }}
                 />
               </div>
 
-              {/* Центр — текст */}
+              {/* Текст */}
               <div className="space-y-5 text-center md:text-left md:pt-2 flex-1">
                 <p className="text-xs tracking-[0.4em] text-[hsl(210,15%,45%)] uppercase font-light">
                   Следователь по оккультным делам
@@ -552,21 +552,6 @@ export default function Index() {
                     TG
                   </SparkleButton>
                 </div>
-              </div>
-
-              {/* Кукла стражница — справа, без фона */}
-              <div className="flex-shrink-0 w-full md:w-56 self-stretch overflow-hidden" style={{ minHeight: "420px" }}>
-                <img
-                  src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/5114cacc-06c7-4d5c-bc2a-3b502c835fa3.jpg"
-                  alt="Кукла-стражница"
-                  className="w-full h-full object-cover"
-                  style={{
-                    objectPosition: "center 20%",
-                    minHeight: "420px",
-                    mixBlendMode: "screen",
-                    filter: "contrast(1.15) brightness(1.1) saturate(0.9)",
-                  }}
-                />
               </div>
 
             </div>
@@ -681,8 +666,25 @@ export default function Index() {
       <RandomArcanSection />
 
       {/* БЛОК 5 — КАК РАБОТАЮ */}
-      <section className="py-24 noise-texture" style={{ background: "hsl(220,10%,6%)" }}>
-        <div className="container mx-auto px-4">
+      <section className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,6%)" }}>
+        {/* Кукла-стражница фоном */}
+        <div
+          style={{
+            position: "absolute",
+            right: 0,
+            top: 0,
+            bottom: 0,
+            width: "45%",
+            backgroundImage: "url('https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/5114cacc-06c7-4d5c-bc2a-3b502c835fa3.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center 20%",
+            mixBlendMode: "screen",
+            filter: "contrast(1.2) brightness(1.3) saturate(0.85)",
+            opacity: 0.85,
+          }}
+        />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, hsl(220,10%,6%) 35%, transparent 65%, hsl(220,10%,6%) 100%)" }} />
+        <div className="container mx-auto px-4 relative" style={{ zIndex: 2 }}>
           <div
             ref={processSectionRef}
             className={cn(
