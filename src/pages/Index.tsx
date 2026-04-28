@@ -81,6 +81,65 @@ function RandomArcanSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const arcana = useMemo(() => ARCANA[Math.floor(Math.random() * ARCANA.length)], [])
 
+  // Блёстки на символ
+  const symbolCanvasRef = useRef<HTMLCanvasElement>(null)
+  const symbolSparklesRef = useRef<{id:number;x:number;y:number;vx:number;vy:number;size:number;opacity:number;color:string;life:number;maxLife:number}[]>([])
+  const symbolRafRef = useRef<number | null>(null)
+  const symbolActiveRef = useRef(false)
+  const symbolIdRef = useRef(0)
+  const SYMBOL_COLORS = ["rgba(180,210,255,0.95)","rgba(140,185,255,0.9)","rgba(200,225,255,0.85)","rgba(220,180,100,0.9)","rgba(255,220,140,0.85)","rgba(255,255,255,0.9)"]
+
+  const spawnSymbolSparkles = (x: number, y: number) => {
+    const count = 3 + Math.floor(Math.random() * 3)
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * Math.PI * 2
+      const speed = 0.7 + Math.random() * 1.6
+      const maxLife = 40 + Math.random() * 30
+      symbolSparklesRef.current.push({ id: symbolIdRef.current++, x, y, vx: Math.cos(angle)*speed, vy: Math.sin(angle)*speed - 0.4, size: 1.5 + Math.random()*2.5, opacity: 1, color: SYMBOL_COLORS[Math.floor(Math.random()*SYMBOL_COLORS.length)], life: 0, maxLife })
+    }
+  }
+
+  const symbolLoop = () => {
+    const canvas = symbolCanvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    symbolSparklesRef.current = symbolSparklesRef.current.filter(s => s.life < s.maxLife)
+    for (const s of symbolSparklesRef.current) {
+      s.x += s.vx; s.y += s.vy; s.vy += 0.04; s.life++; s.opacity = 1 - s.life / s.maxLife
+      ctx.save(); ctx.globalAlpha = s.opacity; ctx.fillStyle = s.color; ctx.shadowColor = s.color; ctx.shadowBlur = 6
+      ctx.beginPath()
+      const r = s.size
+      for (let i = 0; i < 4; i++) {
+        const a = (i/4)*Math.PI*2
+        const ox = s.x + Math.cos(a)*r, oy = s.y + Math.sin(a)*r
+        const ix = s.x + Math.cos(a+Math.PI/4)*(r*0.35), iy = s.y + Math.sin(a+Math.PI/4)*(r*0.35)
+        if (i===0) ctx.moveTo(ox,oy); else ctx.lineTo(ox,oy); ctx.lineTo(ix,iy)
+      }
+      ctx.closePath(); ctx.fill(); ctx.restore()
+    }
+    if (symbolSparklesRef.current.length > 0 || symbolActiveRef.current) {
+      symbolRafRef.current = requestAnimationFrame(symbolLoop)
+    } else { symbolRafRef.current = null }
+  }
+
+  const handleSymbolMouseMove = (e: React.MouseEvent) => {
+    const canvas = symbolCanvasRef.current; if (!canvas) return
+    const rect = canvas.getBoundingClientRect()
+    if (Math.random() < 0.5) spawnSymbolSparkles(e.clientX - rect.left, e.clientY - rect.top)
+  }
+
+  const handleSymbolEnter = (e: React.MouseEvent) => {
+    symbolActiveRef.current = true
+    const canvas = symbolCanvasRef.current; if (!canvas) return
+    const rect = canvas.getBoundingClientRect()
+    spawnSymbolSparkles(e.clientX - rect.left, e.clientY - rect.top)
+    if (!symbolRafRef.current) symbolRafRef.current = requestAnimationFrame(symbolLoop)
+  }
+
+  const handleSymbolLeave = () => { symbolActiveRef.current = false }
+
   useEffect(() => {
     const obs = new IntersectionObserver(
       ([entry]) => {
@@ -130,24 +189,40 @@ function RandomArcanSection() {
                 pointerEvents: "none",
               }}
             />
-            <span
-              className={`text-5xl leading-none select-none ${symbolVisible ? "animate-float" : ""}`}
-              style={{
-                fontFamily: "serif",
-                color: "hsl(42,65%,65%)",
-                textShadow: symbolVisible
-                  ? "0 0 28px rgba(200,160,80,0.4), 0 0 8px rgba(200,160,80,0.2)"
-                  : "0 0 60px rgba(200,160,80,0.9), 0 0 20px rgba(220,180,100,0.6)",
-                filter: symbolVisible
-                  ? "drop-shadow(0 0 10px rgba(200,160,80,0.3))"
-                  : "drop-shadow(0 0 24px rgba(200,160,80,0.8)) brightness(1.8)",
-                opacity: symbolVisible ? 1 : 0,
-                transform: symbolVisible ? "scale(1)" : "scale(0.6)",
-                transition: "opacity 0.7s ease, transform 0.7s cubic-bezier(0.34,1.56,0.64,1), text-shadow 1s ease, filter 1s ease",
-              }}
+            <div
+              className="relative"
+              style={{ cursor: "default" }}
+              onMouseMove={handleSymbolMouseMove}
+              onMouseEnter={handleSymbolEnter}
+              onMouseLeave={handleSymbolLeave}
             >
-              {arcana.symbol}
-            </span>
+              <canvas
+                ref={symbolCanvasRef}
+                width={120}
+                height={120}
+                className="pointer-events-none absolute"
+                style={{ top: "50%", left: "50%", transform: "translate(-50%,-50%)", zIndex: 10 }}
+              />
+              <span
+                className={`text-5xl leading-none select-none ${symbolVisible ? "animate-float" : ""}`}
+                style={{
+                  fontFamily: "serif",
+                  color: "hsl(42,65%,65%)",
+                  textShadow: symbolVisible
+                    ? "0 0 28px rgba(200,160,80,0.4), 0 0 8px rgba(200,160,80,0.2)"
+                    : "0 0 60px rgba(200,160,80,0.9), 0 0 20px rgba(220,180,100,0.6)",
+                  filter: symbolVisible
+                    ? "drop-shadow(0 0 10px rgba(200,160,80,0.3))"
+                    : "drop-shadow(0 0 24px rgba(200,160,80,0.8)) brightness(1.8)",
+                  opacity: symbolVisible ? 1 : 0,
+                  transform: symbolVisible ? "scale(1)" : "scale(0.6)",
+                  transition: "opacity 0.7s ease, transform 0.7s cubic-bezier(0.34,1.56,0.64,1), text-shadow 1s ease, filter 1s ease",
+                  display: "block",
+                }}
+              >
+                {arcana.symbol}
+              </span>
+            </div>
             <div
               className="text-center"
               style={{
@@ -716,6 +791,19 @@ export default function Index() {
 
       {/* БЛОК 7 — ЗАПИСЬ */}
       <section ref={contactSectionRef} id="contact" className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,6%)" }}>
+        {/* Фоновое изображение */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: "url('https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/d2554c52-ce29-4ff2-908b-acc0643dfba4.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: 0.12,
+            filter: "grayscale(30%) sepia(20%)",
+          }}
+        />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, hsl(220,10%,6%) 0%, transparent 25%, transparent 75%, hsl(220,10%,6%) 100%)" }} />
         <OccultOverlay density={14} />
         <div className="container mx-auto px-4 relative" style={{ zIndex: 2 }}>
           <h2
