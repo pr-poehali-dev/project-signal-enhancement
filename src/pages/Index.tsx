@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import Icon from "@/components/ui/icon"
 import SparkleButton from "@/components/SparkleButton"
-import ReviewsCarousel from "@/components/ReviewsCarousel"
+import { ReviewsCarousel } from "@/components/ReviewsCarousel"
 
 const ARCANA = [
   {
@@ -734,26 +734,38 @@ export default function Index() {
               ].map((item) => (
                 <div
                   key={item.step}
-                  className="flex gap-6 items-start rounded-sm p-7 transition-all duration-300"
+                  className="group flex gap-6 items-start rounded-sm p-7 transition-all duration-400"
                   style={{
                     background: "linear-gradient(to right, rgba(18,20,26,0.92) 0%, rgba(18,20,26,0.85) 55%, rgba(18,20,26,0.0) 100%)",
                     border: "none",
+                    backdropFilter: "blur(0px)",
+                    transition: "background 0.4s ease, backdrop-filter 0.4s ease",
+                  }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLDivElement).style.background = "linear-gradient(to right, rgba(8,10,18,0.97) 0%, rgba(8,10,18,0.93) 60%, rgba(8,10,18,0.0) 100%)"
+                    ;(e.currentTarget as HTMLDivElement).style.backdropFilter = "blur(12px)"
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLDivElement).style.background = "linear-gradient(to right, rgba(18,20,26,0.92) 0%, rgba(18,20,26,0.85) 55%, rgba(18,20,26,0.0) 100%)"
+                    ;(e.currentTarget as HTMLDivElement).style.backdropFilter = "blur(0px)"
                   }}
                 >
                   <span
-                    className="text-3xl font-light flex-shrink-0 leading-none mt-1"
+                    className="text-3xl font-light flex-shrink-0 leading-none mt-1 transition-all duration-400 group-hover:opacity-100"
                     style={{ fontFamily: "var(--font-cormorant)", color: "hsl(42,70%,55%)", opacity: 0.6 }}
                   >
                     {item.step}
                   </span>
                   <div>
                     <h3
-                      className="text-lg font-light text-white mb-2"
-                      style={{ fontFamily: "var(--font-cormorant)" }}
+                      className="text-lg font-light mb-2 transition-all duration-400 group-hover:text-white"
+                      style={{ fontFamily: "var(--font-cormorant)", color: "hsl(210,15%,80%)", textShadow: "none" }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.textShadow = "0 0 20px rgba(200,160,80,0.4)" }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.textShadow = "none" }}
                     >
                       {item.title}
                     </h3>
-                    <p className="text-[hsl(210,15%,52%)] text-sm leading-relaxed font-light">{item.text}</p>
+                    <p className="text-[hsl(210,15%,52%)] text-sm leading-relaxed font-light transition-colors duration-400 group-hover:text-[hsl(210,15%,68%)]">{item.text}</p>
                   </div>
                 </div>
               ))}
@@ -763,58 +775,7 @@ export default function Index() {
       </section>
 
       {/* БЛОК 6 — ОТЗЫВЫ */}
-      <section className="py-24 noise-texture" style={{ background: "hsl(220,10%,8%)" }}>
-        <div className="container mx-auto px-4">
-          <div
-            ref={reviewsSectionRef}
-            className={cn(
-              "max-w-4xl mx-auto transition-all duration-1000 ease-out",
-              isReviewsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10",
-            )}
-          >
-            <h2
-              className="text-3xl md:text-4xl font-light text-white text-center mb-4"
-              style={{ fontFamily: "var(--font-cormorant)" }}
-            >
-              <span className="text-shimmer">Свидетельства</span>
-            </h2>
-            <p className="text-center text-xs tracking-[0.4em] text-[hsl(210,15%,40%)] uppercase font-light mb-14">
-              Реальные истории
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {[
-                {
-                  text: "Муж изменился за неделю. Стал чужим, агрессивным, глаза стеклянные. Психологи говорили про кризис семи лет. Майя на первой аудиосессии описала женщину и нашла подклад. Мы провели отжиг программными свечами. Через месяц он рыдал, стоя на коленях, словно очнулся от комы. Жёстко, страшно — но это спасло мне жизнь.",
-                  author: "Анна",
-                  age: "34 года",
-                },
-                {
-                  text: "Я не спала месяцами, меня мучила паранойя. Майя провела расклад и раскрыла такие подробности, о которых никто не знал. Оказалось, человек годами вёл двойную жизнь и высасывал из меня ресурсы. Майя дала мне рунический став на разрыв каналов. Меня трясло три дня — потом наступила кристальная тишина и свобода. Это не гадание. Это хирургия.",
-                  author: "Елена",
-                  age: "41 год",
-                },
-              ].map((review) => (
-                <div
-                  key={review.author}
-                  className="glass-panel rounded-sm p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(200,160,80,0.2)] hover:shadow-[0_8px_32px_rgba(200,160,80,0.08)]"
-                  style={{ borderColor: "rgba(160,170,185,0.08)" }}
-                >
-                  <div>
-                    <Icon name="Quote" size={20} className="mb-5" style={{ color: "hsl(42,70%,58%)", opacity: 0.6 }} />
-                    <p className="text-[hsl(210,15%,60%)] text-sm leading-relaxed font-light italic">{review.text}</p>
-                  </div>
-                  <div className="mt-7 pt-5" style={{ borderTop: "1px solid rgba(160,170,185,0.08)" }}>
-                    <p className="text-[hsl(210,15%,55%)] text-xs tracking-widest uppercase font-light">
-                      — {review.author}, {review.age}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <ReviewsCarousel reviewsSectionRef={reviewsSectionRef} isReviewsVisible={isReviewsVisible} />
 
       {/* БЛОК 7 — ЗАПИСЬ */}
       <section ref={contactSectionRef} id="contact" className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,6%)" }}>
