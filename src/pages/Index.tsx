@@ -689,6 +689,7 @@ export default function Index() {
             alt=""
             style={{
               height: "110%",
+              transform: "translateX(20%)",
               width: "auto",
               maxWidth: "none",
               objectFit: "contain",
