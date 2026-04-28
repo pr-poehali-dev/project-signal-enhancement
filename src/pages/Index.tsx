@@ -699,22 +699,21 @@ export default function Index() {
           <div
             ref={processSectionRef}
             className={cn(
-              "transition-all duration-1000 ease-out",
+              "max-w-3xl mx-auto transition-all duration-1000 ease-out",
               isProcessVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10",
             )}
           >
             <h2
-              className="text-3xl md:text-4xl font-light text-white mb-4"
+              className="text-3xl md:text-4xl font-light text-white text-center mb-4"
               style={{ fontFamily: "var(--font-cormorant)" }}
             >
               Формат работы
             </h2>
-            <p className="text-xs tracking-[0.4em] text-[hsl(210,15%,40%)] uppercase font-light mb-14">
+            <p className="text-center text-xs tracking-[0.4em] text-[hsl(210,15%,40%)] uppercase font-light mb-14">
               Алгоритм расследования
             </p>
 
-            {/* Плашки — только левая половина, уходят в прозрачность вправо */}
-            <div className="space-y-5" style={{ maxWidth: "52%" }}>
+            <div className="space-y-5">
               {[
                 {
                   step: "01",
