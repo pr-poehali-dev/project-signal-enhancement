@@ -483,7 +483,7 @@ export default function Index() {
                 Когда отношения рушатся без видимых причин. Когда вместо любви — ледяной холод, агрессия или паранойя,
                 а доказательств нет. Когда вы чувствуете: что-то не так, но никто вам не верит.
               </p>
-              <div className="my-8 gold-line-animated" style={{ width: "60px" }} />
+              <div className="gold-line-animated" style={{ width: "60px", margin: "2rem auto" }} />
               <p className="text-[hsl(210,15%,55%)] leading-relaxed font-light text-sm md:text-base">
                 Я знаю, почему вы здесь. Вы устали от лжи и сладких сказок психологов.
                 <br className="hidden md:block" />
@@ -688,7 +688,7 @@ export default function Index() {
             src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/80678793-f404-4ad1-8285-764c2ce780c0.png"
             alt=""
             style={{
-              height: "110%",
+              height: "80%",
               transform: "translateX(20%)",
               width: "auto",
               maxWidth: "none",
