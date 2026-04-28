@@ -503,8 +503,19 @@ export default function Index() {
               isAboutVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10",
             )}
           >
-            <div className="flex flex-col md:flex-row items-start gap-10 md:gap-16">
-              {/* Левая колонка — текст */}
+            <div className="flex flex-col md:flex-row items-stretch gap-6 md:gap-10">
+
+              {/* Фото Майи — слева */}
+              <div className="flex-shrink-0 w-full md:w-56 rounded-sm overflow-hidden self-stretch" style={{ minHeight: "420px", border: "1px solid rgba(160,170,185,0.12)" }}>
+                <img
+                  src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/935e2cbe-511f-44e5-ae79-46e0d2853120.jpg"
+                  alt="Майя"
+                  className="w-full h-full object-cover object-top"
+                  style={{ minHeight: "420px" }}
+                />
+              </div>
+
+              {/* Центр — текст */}
               <div className="space-y-5 text-center md:text-left md:pt-2 flex-1">
                 <p className="text-xs tracking-[0.4em] text-[hsl(210,15%,45%)] uppercase font-light">
                   Следователь по оккультным делам
@@ -517,7 +528,7 @@ export default function Index() {
                   <br />
                   <span className="moon-text" style={{ opacity: 0.75 }}>Одиннадцать лет практики.</span>
                 </h2>
-                <div className="space-y-4 max-w-xl">
+                <div className="space-y-4">
                   <p className="text-[hsl(210,15%,58%)] font-light text-sm leading-relaxed">
                     Я работаю на стыке глубинной магии, ясновидения и психоанализа. Там, где другие видят «просто кризис»,
                     я вижу механику тонкого плана.
@@ -543,30 +554,21 @@ export default function Index() {
                 </div>
               </div>
 
-              {/* Правая колонка — фото Майи + кукла */}
-              <div className="flex flex-col gap-5 flex-shrink-0 items-center w-full md:w-72">
-                {/* Фото Майи */}
-                <div className="w-full rounded-sm overflow-hidden" style={{ height: "320px", border: "1px solid rgba(160,170,185,0.12)" }}>
-                  <img
-                    src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/935e2cbe-511f-44e5-ae79-46e0d2853120.jpg"
-                    alt="Майя"
-                    className="w-full h-full object-cover object-top"
-                  />
-                </div>
-                {/* Кукла стражница — без фона */}
-                <div className="w-full overflow-hidden" style={{ height: "320px" }}>
-                  <img
-                    src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/5114cacc-06c7-4d5c-bc2a-3b502c835fa3.jpg"
-                    alt="Кукла-стражница"
-                    className="w-full h-full object-cover"
-                    style={{
-                      objectPosition: "center 20%",
-                      mixBlendMode: "screen",
-                      filter: "contrast(1.1) brightness(1.05)",
-                    }}
-                  />
-                </div>
+              {/* Кукла стражница — справа, без фона */}
+              <div className="flex-shrink-0 w-full md:w-56 self-stretch overflow-hidden" style={{ minHeight: "420px" }}>
+                <img
+                  src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/5114cacc-06c7-4d5c-bc2a-3b502c835fa3.jpg"
+                  alt="Кукла-стражница"
+                  className="w-full h-full object-cover"
+                  style={{
+                    objectPosition: "center 20%",
+                    minHeight: "420px",
+                    mixBlendMode: "screen",
+                    filter: "contrast(1.15) brightness(1.1) saturate(0.9)",
+                  }}
+                />
               </div>
+
             </div>
           </div>
         </div>
