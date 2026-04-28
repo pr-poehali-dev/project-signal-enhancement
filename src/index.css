@@ -4,6 +4,88 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes pulse-gold {
+  0%,
+  100% {
+    box-shadow:
+      0 2px 24px rgba(200, 160, 80, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+  50% {
+    box-shadow:
+      0 4px 42px rgba(200, 160, 80, 0.55),
+      0 0 18px rgba(200, 160, 80, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  }
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes glow-border {
+  0%,
+  100% {
+    border-color: rgba(200, 160, 80, 0.15);
+  }
+  50% {
+    border-color: rgba(200, 160, 80, 0.4);
+  }
+}
+
+@keyframes flicker {
+  0%,
+  95%,
+  100% {
+    opacity: 1;
+  }
+  96% {
+    opacity: 0.85;
+  }
+  98% {
+    opacity: 0.92;
+  }
+}
+
+@keyframes reveal-line {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 60px;
+    opacity: 1;
+  }
+}
+
 @layer base {
   :root {
     --font-cormorant: "Cormorant Garamond", serif;
@@ -144,6 +226,50 @@
       0 0 120px rgba(160, 170, 185, 0.05);
   }
 
+  .animate-float {
+    animation: float-up 4s ease-in-out infinite;
+  }
+
+  .animate-flicker {
+    animation: flicker 6s ease-in-out infinite;
+  }
+
+  .animate-glow-border {
+    animation: glow-border 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-gold {
+    animation: pulse-gold 2.8s ease-in-out infinite;
+  }
+
+  .gold-line-animated {
+    display: block;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--gold)),
+      transparent
+    );
+    animation: reveal-line 1.2s ease forwards;
+    margin: 0 auto;
+  }
+
+  .text-shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(42, 65%, 62%) 0%,
+      hsl(42, 90%, 82%) 40%,
+      hsl(42, 65%, 62%) 60%,
+      hsl(38, 70%, 55%) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s linear infinite;
+  }
+
   .btn-gold {
     display: inline-flex;
     align-items: center;
@@ -166,6 +292,10 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.12);
     transition: all 0.3s ease;
     text-decoration: none;
+  }
+
+  .btn-gold-pulse {
+    animation: pulse-gold 2.8s ease-in-out infinite;
   }
 
   .btn-gold:hover {

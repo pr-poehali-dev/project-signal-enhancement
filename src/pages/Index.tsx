@@ -115,8 +115,8 @@ function RandomArcanSection() {
         >
           {/* Карточка аркана */}
           <div
-            className="flex-shrink-0 glass-panel rounded-sm flex flex-col items-center justify-center gap-3 px-8 py-10 relative overflow-hidden accent-glow"
-            style={{ borderColor: "rgba(220,185,120,0.15)", minWidth: "140px" }}
+            className="flex-shrink-0 glass-panel rounded-sm flex flex-col items-center justify-center gap-3 px-8 py-10 relative overflow-hidden accent-glow animate-glow-border"
+            style={{ minWidth: "140px" }}
           >
             {/* Вспышка при появлении символа */}
             <div
@@ -130,16 +130,16 @@ function RandomArcanSection() {
               }}
             />
             <span
-              className="text-5xl leading-none select-none"
+              className={`text-5xl leading-none select-none ${symbolVisible ? "animate-float" : ""}`}
               style={{
                 fontFamily: "serif",
-                color: "hsl(210,15%,62%)",
+                color: "hsl(42,65%,65%)",
                 textShadow: symbolVisible
-                  ? "0 0 28px rgba(160,190,255,0.3), 0 0 8px rgba(160,190,255,0.18)"
-                  : "0 0 60px rgba(160,190,255,0.8), 0 0 20px rgba(200,220,255,0.6)",
+                  ? "0 0 28px rgba(200,160,80,0.4), 0 0 8px rgba(200,160,80,0.2)"
+                  : "0 0 60px rgba(200,160,80,0.9), 0 0 20px rgba(220,180,100,0.6)",
                 filter: symbolVisible
-                  ? "drop-shadow(0 0 10px rgba(160,200,255,0.22))"
-                  : "drop-shadow(0 0 24px rgba(160,200,255,0.7)) brightness(1.8)",
+                  ? "drop-shadow(0 0 10px rgba(200,160,80,0.3))"
+                  : "drop-shadow(0 0 24px rgba(200,160,80,0.8)) brightness(1.8)",
                 opacity: symbolVisible ? 1 : 0,
                 transform: symbolVisible ? "scale(1)" : "scale(0.6)",
                 transition: "opacity 0.7s ease, transform 0.7s cubic-bezier(0.34,1.56,0.64,1), text-shadow 1s ease, filter 1s ease",
@@ -352,7 +352,7 @@ export default function Index() {
               className="glass-panel px-8 py-10 rounded-sm inline-block w-full"
               style={{ borderColor: "rgba(160,170,185,0.1)" }}
             >
-              <p className="text-xs tracking-[0.4em] text-[hsl(210,15%,50%)] uppercase mb-6 font-light">
+              <p className="text-xs tracking-[0.4em] text-[hsl(210,15%,50%)] uppercase mb-6 font-light animate-flicker">
                 Оккультный следователь · 11 лет практики
               </p>
               <h1
@@ -361,7 +361,7 @@ export default function Index() {
               >
                 Тайное
                 <br />
-                <span className="gold-text">становится явным.</span>
+                <span className="text-shimmer">становится явным.</span>
               </h1>
               <p className="text-sm md:text-base text-[hsl(210,15%,60%)] font-light max-w-xl mx-auto leading-relaxed mb-8 tracking-wide">
                 Жёсткая оккультная диагностика отношений. Я не вытираю слёзы — я срываю маски,
@@ -371,7 +371,7 @@ export default function Index() {
                 href="https://dikidi.net/926132"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-gold"
+                className="btn-gold btn-gold-pulse"
               >
                 Записаться на диагностику
               </a>
@@ -417,7 +417,7 @@ export default function Index() {
                 Когда отношения рушатся без видимых причин. Когда вместо любви — ледяной холод, агрессия или паранойя,
                 а доказательств нет. Когда вы чувствуете: что-то не так, но никто вам не верит.
               </p>
-              <div className="mt-8 mx-auto" style={{ width: "60px", height: "1px", background: "linear-gradient(90deg, transparent, hsl(42,70%,68%), transparent)" }} />
+              <div className="mt-8 gold-line-animated" style={{ width: "60px" }} />
               <p className="mt-8 text-[hsl(210,15%,55%)] leading-relaxed font-light text-sm md:text-base">
                 Я знаю, почему вы здесь. Вы устали от лжи и сладких сказок психологов.
                 <br className="hidden md:block" />
@@ -562,7 +562,7 @@ export default function Index() {
                   imgStyle: { objectPosition: "center 20%" },
                 },
               ].map((s) => (
-                <div key={s.title} className="glass-panel rounded-sm overflow-hidden group transition-all duration-300 hover:border-[rgba(160,170,185,0.22)]" style={{ borderColor: "rgba(160,170,185,0.08)" }}>
+                <div key={s.title} className="glass-panel rounded-sm overflow-hidden group transition-all duration-300 hover:border-[rgba(200,160,80,0.25)] hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(200,160,80,0.1)]" style={{ borderColor: "rgba(160,170,185,0.08)" }}>
                   <div className="relative h-56 overflow-hidden">
                     <img src={s.img} alt={s.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" style={s.imgStyle} />
                     <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(8,10,14,0.05) 0%, rgba(8,10,14,0.72) 100%)" }} />
@@ -601,7 +601,7 @@ export default function Index() {
                   imgStyle: { objectPosition: "center 35%" },
                 },
               ].map((s) => (
-                <div key={s.title} className="glass-panel rounded-sm overflow-hidden group transition-all duration-300 hover:border-[rgba(160,170,185,0.22)]" style={{ borderColor: "rgba(160,170,185,0.08)" }}>
+                <div key={s.title} className="glass-panel rounded-sm overflow-hidden group transition-all duration-300 hover:border-[rgba(200,160,80,0.25)] hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(200,160,80,0.1)]" style={{ borderColor: "rgba(160,170,185,0.08)" }}>
                   <div className="relative h-48 overflow-hidden">
                     <img src={s.img} alt={s.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" style={s.imgStyle} />
                     <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(8,10,14,0.05) 0%, rgba(8,10,14,0.72) 100%)" }} />
@@ -661,7 +661,7 @@ export default function Index() {
               ].map((item) => (
                 <div
                   key={item.step}
-                  className="glass-panel rounded-sm p-7 flex gap-6 items-start"
+                  className="glass-panel rounded-sm p-7 flex gap-6 items-start transition-all duration-300 hover:border-[rgba(200,160,80,0.2)] hover:shadow-[0_4px_24px_rgba(200,160,80,0.07)]"
                   style={{ borderColor: "rgba(160,170,185,0.08)" }}
                 >
                   <span
@@ -700,7 +700,7 @@ export default function Index() {
               className="text-3xl md:text-4xl font-light text-white text-center mb-4"
               style={{ fontFamily: "var(--font-cormorant)" }}
             >
-              <span className="gold-text">Свидетельства</span>
+              <span className="text-shimmer">Свидетельства</span>
             </h2>
             <p className="text-center text-xs tracking-[0.4em] text-[hsl(210,15%,40%)] uppercase font-light mb-14">
               Реальные истории
@@ -721,7 +721,7 @@ export default function Index() {
               ].map((review) => (
                 <div
                   key={review.author}
-                  className="glass-panel rounded-sm p-8 flex flex-col justify-between"
+                  className="glass-panel rounded-sm p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(200,160,80,0.2)] hover:shadow-[0_8px_32px_rgba(200,160,80,0.08)]"
                   style={{ borderColor: "rgba(160,170,185,0.08)" }}
                 >
                   <div>
@@ -774,7 +774,7 @@ export default function Index() {
             <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-8">
               {/* Левая часть — имя и подпись */}
               <div className="text-center md:text-left">
-                <p className="font-light text-lg mb-1 gold-text" style={{ fontFamily: "var(--font-cormorant)" }}>
+                <p className="font-light text-lg mb-1 text-shimmer" style={{ fontFamily: "var(--font-cormorant)" }}>
                   Майя
                 </p>
                 <p className="text-xs tracking-[0.35em] text-[hsl(210,15%,38%)] uppercase font-light">
