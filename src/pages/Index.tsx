@@ -537,6 +537,12 @@ export default function Index() {
                     Я сканирую пространство и вытаскиваю на свет то, что от вас скрывают: двойное дно, тайные связи,
                     чужое вмешательство в вашу жизнь. Для меня не существует тайн.
                   </p>
+                  <p className="text-[hsl(210,15%,58%)] font-light text-sm leading-relaxed">
+                    Я не раздаю пустых утешений, а использую найденную информацию как скальпель — чтобы хирургически точно устранить корень проблемы.
+                  </p>
+                  <p className="text-[hsl(210,15%,65%)] font-light text-sm leading-relaxed" style={{ borderLeft: "2px solid hsl(42,65%,55%)", paddingLeft: "12px" }}>
+                    Со мной вы возвращаете себе абсолютный контроль над своей судьбой, отношениями и бизнесом.
+                  </p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 mt-2 justify-center md:justify-start">
                   <SparkleButton href="https://dikidi.net/926132" target="_blank" rel="noopener noreferrer" className="btn-gold" style={{ padding: "10px 22px" }}>
