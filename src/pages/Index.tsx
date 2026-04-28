@@ -680,7 +680,7 @@ export default function Index() {
           inset: 0,
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "flex-end",
           zIndex: 1,
           pointerEvents: "none",
         }}>
