@@ -483,8 +483,8 @@ export default function Index() {
                 Когда отношения рушатся без видимых причин. Когда вместо любви — ледяной холод, агрессия или паранойя,
                 а доказательств нет. Когда вы чувствуете: что-то не так, но никто вам не верит.
               </p>
-              <div className="mt-8 gold-line-animated" style={{ width: "60px" }} />
-              <p className="mt-8 text-[hsl(210,15%,55%)] leading-relaxed font-light text-sm md:text-base">
+              <div className="my-8 gold-line-animated" style={{ width: "60px" }} />
+              <p className="text-[hsl(210,15%,55%)] leading-relaxed font-light text-sm md:text-base">
                 Я знаю, почему вы здесь. Вы устали от лжи и сладких сказок психологов.
                 <br className="hidden md:block" />
                 Вам нужен тонкий хирург — не утешитель.
