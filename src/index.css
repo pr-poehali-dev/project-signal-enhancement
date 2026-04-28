@@ -294,10 +294,6 @@
     text-decoration: none;
   }
 
-  .btn-gold-pulse {
-    animation: pulse-gold 2.8s ease-in-out infinite;
-  }
-
   .btn-gold:hover {
     background: linear-gradient(
       135deg,
@@ -305,7 +301,8 @@
       hsl(38, 72%, 62%) 100%
     );
     box-shadow:
-      0 4px 36px rgba(200, 160, 80, 0.4),
+      0 4px 42px rgba(200, 160, 80, 0.55),
+      0 0 18px rgba(200, 160, 80, 0.25),
       inset 0 1px 0 rgba(255, 255, 255, 0.18);
     color: hsl(220, 10%, 5%);
     transform: translateY(-1px);

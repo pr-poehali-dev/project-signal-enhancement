@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/components/ui/use-toast"
 import { cn } from "@/lib/utils"
+import SparkleButton from "@/components/SparkleButton"
 
 type FieldErrors = {
   name?: string
@@ -164,14 +165,14 @@ export function ContactForm() {
             />
           </div>
 
-          <button
+          <SparkleButton
             type="submit"
             disabled={isSubmitting}
             className="btn-gold w-full justify-center py-4"
             style={{ opacity: isSubmitting ? 0.6 : 1, cursor: isSubmitting ? "not-allowed" : "pointer" }}
           >
             {isSubmitting ? "Отправка..." : "Записаться на диагностику"}
-          </button>
+          </SparkleButton>
         </form>
       </div>
     </div>

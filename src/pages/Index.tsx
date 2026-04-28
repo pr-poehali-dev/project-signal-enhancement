@@ -6,6 +6,7 @@ import { useState, useEffect, useRef, useMemo } from "react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import Icon from "@/components/ui/icon"
+import SparkleButton from "@/components/SparkleButton"
 
 const ARCANA = [
   {
@@ -301,15 +302,9 @@ export default function Index() {
             <Icon name="ExternalLink" size={13} />
             MAX
           </a>
-          <a
-            href="https://dikidi.net/926132"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-gold"
-            style={{ padding: "8px 18px" }}
-          >
+          <SparkleButton href="https://dikidi.net/926132" target="_blank" rel="noopener noreferrer" className="btn-gold" style={{ padding: "8px 18px" }}>
             Записаться
-          </a>
+          </SparkleButton>
         </div>
 
         <div className="absolute inset-0" style={warpSpeedStyle}>
@@ -367,14 +362,9 @@ export default function Index() {
                 Жёсткая оккультная диагностика отношений. Я не вытираю слёзы — я срываю маски,
                 разоблачаю ложь и показываю истинные мотивы партнёра.
               </p>
-              <a
-                href="https://dikidi.net/926132"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-gold btn-gold-pulse"
-              >
+              <SparkleButton href="https://dikidi.net/926132" target="_blank" rel="noopener noreferrer" className="btn-gold">
                 Записаться на диагностику
-              </a>
+              </SparkleButton>
             </div>
           </div>
 
@@ -480,34 +470,18 @@ export default function Index() {
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 mt-2 justify-center md:justify-start">
-                  <a
-                    href="https://dikidi.net/926132"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-gold"
-                    style={{ padding: "10px 22px" }}
-                  >
+                  <SparkleButton href="https://dikidi.net/926132" target="_blank" rel="noopener noreferrer" className="btn-gold" style={{ padding: "10px 22px" }}>
                     <Icon name="CalendarCheck" size={13} />
                     Записаться
-                  </a>
-                  <a
-                    href="https://max.ru/u/f9LHodD0cOJ6ZZlQj0UscdLQ-24d096fz401XbP1kL4IvDZwlSnhba3Xum4"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-ghost"
-                  >
+                  </SparkleButton>
+                  <SparkleButton href="https://max.ru/u/f9LHodD0cOJ6ZZlQj0UscdLQ-24d096fz401XbP1kL4IvDZwlSnhba3Xum4" target="_blank" rel="noopener noreferrer" className="btn-ghost">
                     <Icon name="ExternalLink" size={13} />
                     MAX
-                  </a>
-                  <a
-                    href="https://t.me/tarolog666"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-ghost"
-                  >
+                  </SparkleButton>
+                  <SparkleButton href="https://t.me/tarolog666" target="_blank" rel="noopener noreferrer" className="btn-ghost">
                     <Icon name="Send" size={13} />
                     TG
-                  </a>
+                  </SparkleButton>
                 </div>
               </div>
             </div>
@@ -783,15 +757,10 @@ export default function Index() {
               </div>
 
               {/* Центр — кнопка записи */}
-              <a
-                href="https://dikidi.net/926132"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-gold"
-              >
+              <SparkleButton href="https://dikidi.net/926132" target="_blank" rel="noopener noreferrer" className="btn-gold">
                 <Icon name="CalendarCheck" size={14} />
                 Записаться онлайн
-              </a>
+              </SparkleButton>
 
               {/* Правая часть — контакты */}
               <div className="flex flex-col gap-3 items-center md:items-end">
