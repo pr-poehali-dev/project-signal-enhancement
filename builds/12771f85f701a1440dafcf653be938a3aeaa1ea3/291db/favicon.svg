@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <radialGradient id="nebula" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#6366f1;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#1e1b4b;stop-opacity:0" />
+    </radialGradient>
+    <radialGradient id="core" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#c4b5fd;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="#0f0f23"/>
+
+  <!-- Nebula glow -->
+  <ellipse cx="50" cy="50" rx="40" ry="35" fill="url(#nebula)" opacity="0.7"/>
+  <ellipse cx="50" cy="50" rx="35" ry="40" fill="url(#nebula)" opacity="0.5"/>
+
+  <!-- Central star -->
+  <circle cx="50" cy="50" r="12" fill="url(#core)"/>
+
+  <!-- Star rays -->
+  <g fill="#c4b5fd" opacity="0.8">
+    <polygon points="50,15 52,40 50,38 48,40"/>
+    <polygon points="50,85 52,60 50,62 48,60"/>
+    <polygon points="15,50 40,52 38,50 40,48"/>
+    <polygon points="85,50 60,52 62,50 60,48"/>
+  </g>
+
+  <!-- Small stars -->
+  <circle cx="25" cy="30" r="1.5" fill="#fff" opacity="0.8"/>
+  <circle cx="75" cy="25" r="1" fill="#fff" opacity="0.6"/>
+  <circle cx="70" cy="75" r="1.2" fill="#fff" opacity="0.7"/>
+  <circle cx="30" cy="70" r="0.8" fill="#fff" opacity="0.5"/>
+  <circle cx="20" cy="55" r="1" fill="#fff" opacity="0.6"/>
+  <circle cx="80" cy="45" r="0.8" fill="#fff" opacity="0.5"/>
+</svg>
