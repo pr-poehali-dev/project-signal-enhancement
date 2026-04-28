@@ -1,0 +1,10 @@
+{
+  "tests": [
+    {
+      "name": "Get UTM stats",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200
+    }
+  ]
+}
