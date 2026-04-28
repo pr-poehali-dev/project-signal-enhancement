@@ -1,0 +1,29 @@
+{
+  "tests": [
+    {
+      "name": "Track visit with UTM params",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "utm_source": "google",
+        "utm_medium": "cpc",
+        "utm_campaign": "test",
+        "utm_term": "магия",
+        "utm_content": "banner",
+        "referrer": "https://google.com",
+        "page_url": "https://maya-okkultniy.ru/?utm_source=google",
+        "user_agent": "Mozilla/5.0"
+      },
+      "expectedStatus": 200
+    },
+    {
+      "name": "Track visit without UTM params",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "page_url": "https://maya-okkultniy.ru/"
+      },
+      "expectedStatus": 200
+    }
+  ]
+}
