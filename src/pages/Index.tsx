@@ -610,7 +610,7 @@ export default function Index() {
                   title: "Программные свечи",
                   text: "Индивидуальное создание восковых программ для выжигания негатива, разрушения чужих привязанностей и очищения пространства.",
                   img: "https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/e5579b48-368d-42fd-bc46-77e78062a796.jpg",
-                  imgStyle: { objectPosition: "center 20%" },
+                  imgStyle: { objectPosition: "center 60%" },
                 },
               ].map((s) => (
                 <div key={s.title} className="glass-panel rounded-sm overflow-hidden group transition-all duration-300 hover:border-[rgba(200,160,80,0.25)] hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(200,160,80,0.1)]" style={{ borderColor: "rgba(160,170,185,0.08)" }}>
