@@ -674,26 +674,37 @@ export default function Index() {
 
       {/* БЛОК 5 — КАК РАБОТАЮ */}
       <section className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,6%)" }}>
-        {/* Кукла-стражница — правая половина, в полный рост */}
+        {/* Кукла-стражница — по центру, крупно, эффектно */}
         <div style={{
           position: "absolute",
-          right: 0,
-          top: 0,
-          bottom: 0,
-          width: "48%",
+          inset: 0,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
           zIndex: 1,
+          pointerEvents: "none",
         }}>
           <img
             src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/80678793-f404-4ad1-8285-764c2ce780c0.png"
             alt=""
             style={{
-              width: "100%",
-              height: "100%",
+              height: "110%",
+              width: "auto",
+              maxWidth: "none",
               objectFit: "contain",
-              objectPosition: "center bottom",
+              filter: "contrast(1.18) brightness(1.15) saturate(1.2) drop-shadow(0 0 40px rgba(180,100,80,0.25)) drop-shadow(0 0 80px rgba(100,80,60,0.15))",
+              opacity: 0.92,
             }}
           />
         </div>
+        {/* Виньетка по краям чтоб плашки читались */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "radial-gradient(ellipse 70% 80% at 50% 50%, transparent 30%, hsl(220,10%,6%) 100%)",
+          zIndex: 1,
+          pointerEvents: "none",
+        }} />
         <div className="container mx-auto px-4 relative" style={{ zIndex: 2 }}>
           <div
             ref={processSectionRef}
