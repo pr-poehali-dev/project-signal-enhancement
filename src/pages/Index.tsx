@@ -684,15 +684,13 @@ export default function Index() {
           zIndex: 1,
         }}>
           <img
-            src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/5114cacc-06c7-4d5c-bc2a-3b502c835fa3.jpg"
+            src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/80678793-f404-4ad1-8285-764c2ce780c0.png"
             alt=""
             style={{
               width: "100%",
               height: "100%",
-              objectFit: "cover",
-              objectPosition: "center 20%",
-              mixBlendMode: "screen",
-              filter: "contrast(1.25) brightness(1.4) saturate(0.8)",
+              objectFit: "contain",
+              objectPosition: "center bottom",
             }}
           />
         </div>
