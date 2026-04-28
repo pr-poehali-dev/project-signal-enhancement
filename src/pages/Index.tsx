@@ -673,42 +673,48 @@ export default function Index() {
 
       {/* БЛОК 5 — КАК РАБОТАЮ */}
       <section className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,6%)" }}>
-        {/* Кукла-стражница фоном */}
-        <div
-          style={{
-            position: "absolute",
-            right: 0,
-            top: 0,
-            bottom: 0,
-            width: "45%",
-            backgroundImage: "url('https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/5114cacc-06c7-4d5c-bc2a-3b502c835fa3.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center 20%",
-            mixBlendMode: "screen",
-            filter: "contrast(1.2) brightness(1.3) saturate(0.85)",
-            opacity: 0.85,
-          }}
-        />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, hsl(220,10%,6%) 35%, transparent 65%, hsl(220,10%,6%) 100%)" }} />
+        {/* Кукла-стражница — правая половина, в полный рост */}
+        <div style={{
+          position: "absolute",
+          right: 0,
+          top: 0,
+          bottom: 0,
+          width: "48%",
+          zIndex: 1,
+        }}>
+          <img
+            src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/5114cacc-06c7-4d5c-bc2a-3b502c835fa3.jpg"
+            alt=""
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center 20%",
+              mixBlendMode: "screen",
+              filter: "contrast(1.25) brightness(1.4) saturate(0.8)",
+            }}
+          />
+        </div>
         <div className="container mx-auto px-4 relative" style={{ zIndex: 2 }}>
           <div
             ref={processSectionRef}
             className={cn(
-              "max-w-3xl mx-auto transition-all duration-1000 ease-out",
+              "transition-all duration-1000 ease-out",
               isProcessVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10",
             )}
           >
             <h2
-              className="text-3xl md:text-4xl font-light text-white text-center mb-4"
+              className="text-3xl md:text-4xl font-light text-white mb-4"
               style={{ fontFamily: "var(--font-cormorant)" }}
             >
               Формат работы
             </h2>
-            <p className="text-center text-xs tracking-[0.4em] text-[hsl(210,15%,40%)] uppercase font-light mb-14">
+            <p className="text-xs tracking-[0.4em] text-[hsl(210,15%,40%)] uppercase font-light mb-14">
               Алгоритм расследования
             </p>
 
-            <div className="space-y-5">
+            {/* Плашки — только левая половина, уходят в прозрачность вправо */}
+            <div className="space-y-5" style={{ maxWidth: "52%" }}>
               {[
                 {
                   step: "01",
@@ -728,8 +734,11 @@ export default function Index() {
               ].map((item) => (
                 <div
                   key={item.step}
-                  className="glass-panel rounded-sm p-7 flex gap-6 items-start transition-all duration-300 hover:border-[rgba(200,160,80,0.2)] hover:shadow-[0_4px_24px_rgba(200,160,80,0.07)]"
-                  style={{ borderColor: "rgba(160,170,185,0.08)" }}
+                  className="flex gap-6 items-start rounded-sm p-7 transition-all duration-300"
+                  style={{
+                    background: "linear-gradient(to right, rgba(18,20,26,0.92) 0%, rgba(18,20,26,0.85) 55%, rgba(18,20,26,0.0) 100%)",
+                    border: "none",
+                  }}
                 >
                   <span
                     className="text-3xl font-light flex-shrink-0 leading-none mt-1"
