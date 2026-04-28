@@ -43,8 +43,11 @@
     --graphite: 220 8% 12%;
     --asphalt: 220 10% 8%;
     --glass-bg: rgba(15, 17, 21, 0.72);
-    --glass-border: rgba(160, 170, 185, 0.12);
+    --glass-border: rgba(160, 170, 185, 0.18);
     --silver-accent: rgba(160, 170, 185, 0.6);
+    --gold: 42 70% 68%;
+    --gold-glow: rgba(220, 185, 120, 0.18);
+    --moon: 210 40% 88%;
 
     --sidebar-background: 220 10% 6%;
     --sidebar-foreground: 210 15% 85%;
@@ -108,6 +111,37 @@
     border: 1px solid var(--glass-border);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    box-shadow:
+      0 0 40px rgba(160, 170, 185, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .gold-text {
+    color: hsl(var(--gold));
+    text-shadow: 0 0 24px rgba(220, 185, 120, 0.35);
+  }
+
+  .moon-text {
+    color: hsl(var(--moon));
+  }
+
+  .gold-line {
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--gold)),
+      transparent
+    );
+    margin: 0 auto;
+  }
+
+  .accent-glow {
+    box-shadow:
+      0 0 60px var(--gold-glow),
+      0 0 120px rgba(160, 170, 185, 0.05);
   }
 
   .silver-text {

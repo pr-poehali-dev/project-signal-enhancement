@@ -115,8 +115,8 @@ function RandomArcanSection() {
         >
           {/* Карточка аркана */}
           <div
-            className="flex-shrink-0 glass-panel rounded-sm flex flex-col items-center justify-center gap-3 px-8 py-10 relative overflow-hidden"
-            style={{ borderColor: "rgba(160,170,185,0.1)", minWidth: "140px" }}
+            className="flex-shrink-0 glass-panel rounded-sm flex flex-col items-center justify-center gap-3 px-8 py-10 relative overflow-hidden accent-glow"
+            style={{ borderColor: "rgba(220,185,120,0.15)", minWidth: "140px" }}
           >
             {/* Вспышка при появлении символа */}
             <div
@@ -360,7 +360,7 @@ export default function Index() {
               >
                 Тайное
                 <br />
-                <span className="text-[hsl(210,15%,65%)]">становится явным.</span>
+                <span className="gold-text">становится явным.</span>
               </h1>
               <p className="text-sm md:text-base text-[hsl(210,15%,60%)] font-light max-w-xl mx-auto leading-relaxed mb-8 tracking-wide">
                 Жёсткая оккультная диагностика отношений. Я не вытираю слёзы — я срываю маски,
@@ -410,13 +410,13 @@ export default function Index() {
                 className="text-3xl md:text-4xl font-light text-white mb-8 leading-tight"
                 style={{ fontFamily: "var(--font-cormorant)" }}
               >
-                Ваша интуиция не врёт.
+                Ваша интуиция <span className="gold-text">не врёт.</span>
               </h2>
               <p className="text-[hsl(210,15%,60%)] leading-relaxed font-light text-sm md:text-base">
                 Когда отношения рушатся без видимых причин. Когда вместо любви — ледяной холод, агрессия или паранойя,
                 а доказательств нет. Когда вы чувствуете: что-то не так, но никто вам не верит.
               </p>
-              <div className="mt-8 h-px w-16 mx-auto" style={{ background: "rgba(160,170,185,0.2)" }} />
+              <div className="mt-8 mx-auto" style={{ width: "60px", height: "1px", background: "linear-gradient(90deg, transparent, hsl(42,70%,68%), transparent)" }} />
               <p className="mt-8 text-[hsl(210,15%,55%)] leading-relaxed font-light text-sm md:text-base">
                 Я знаю, почему вы здесь. Вы устали от лжи и сладких сказок психологов.
                 <br className="hidden md:block" />
@@ -464,9 +464,9 @@ export default function Index() {
                   className="text-3xl md:text-4xl font-light text-white leading-tight"
                   style={{ fontFamily: "var(--font-cormorant)" }}
                 >
-                  Я — Майя.
+                  Я — <span className="gold-text">Майя.</span>
                   <br />
-                  <span className="text-[hsl(210,15%,60%)]">Одиннадцать лет практики.</span>
+                  <span className="moon-text" style={{ opacity: 0.75 }}>Одиннадцать лет практики.</span>
                 </h2>
                 <div className="space-y-4 max-w-xl">
                   <p className="text-[hsl(210,15%,58%)] font-light text-sm leading-relaxed">
@@ -525,7 +525,7 @@ export default function Index() {
             )}
             style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(2rem, 5vw, 3rem)" }}
           >
-            Инструменты и услуги
+            Инструменты <span className="gold-text">и услуги</span>
           </h2>
           <p
             className={cn(
@@ -663,8 +663,8 @@ export default function Index() {
                   style={{ borderColor: "rgba(160,170,185,0.08)" }}
                 >
                   <span
-                    className="text-3xl font-light text-[hsl(210,15%,25%)] flex-shrink-0 leading-none mt-1"
-                    style={{ fontFamily: "var(--font-cormorant)" }}
+                    className="text-3xl font-light flex-shrink-0 leading-none mt-1"
+                    style={{ fontFamily: "var(--font-cormorant)", color: "hsl(42,70%,55%)", opacity: 0.6 }}
                   >
                     {item.step}
                   </span>
@@ -698,7 +698,7 @@ export default function Index() {
               className="text-3xl md:text-4xl font-light text-white text-center mb-4"
               style={{ fontFamily: "var(--font-cormorant)" }}
             >
-              Свидетельства
+              <span className="gold-text">Свидетельства</span>
             </h2>
             <p className="text-center text-xs tracking-[0.4em] text-[hsl(210,15%,40%)] uppercase font-light mb-14">
               Реальные истории
@@ -723,7 +723,7 @@ export default function Index() {
                   style={{ borderColor: "rgba(160,170,185,0.08)" }}
                 >
                   <div>
-                    <Icon name="Quote" size={20} className="text-[hsl(210,15%,30%)] mb-5" />
+                    <Icon name="Quote" size={20} className="mb-5" style={{ color: "hsl(42,70%,58%)", opacity: 0.6 }} />
                     <p className="text-[hsl(210,15%,60%)] text-sm leading-relaxed font-light italic">{review.text}</p>
                   </div>
                   <div className="mt-7 pt-5" style={{ borderTop: "1px solid rgba(160,170,185,0.08)" }}>
@@ -750,7 +750,7 @@ export default function Index() {
             )}
             style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(2rem, 5vw, 3rem)" }}
           >
-            Я работаю не со всеми.
+            Я работаю <span className="gold-text">не со всеми.</span>
           </h2>
           <p
             className={cn(
@@ -772,7 +772,7 @@ export default function Index() {
             <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-8">
               {/* Левая часть — имя и подпись */}
               <div className="text-center md:text-left">
-                <p className="text-white font-light text-lg mb-1" style={{ fontFamily: "var(--font-cormorant)" }}>
+                <p className="font-light text-lg mb-1 gold-text" style={{ fontFamily: "var(--font-cormorant)" }}>
                   Майя
                 </p>
                 <p className="text-xs tracking-[0.35em] text-[hsl(210,15%,38%)] uppercase font-light">
