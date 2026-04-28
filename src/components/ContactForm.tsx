@@ -164,13 +164,14 @@ export function ContactForm() {
             />
           </div>
 
-          <Button
+          <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-transparent border border-[rgba(160,170,185,0.3)] text-[hsl(210,15%,70%)] hover:bg-[rgba(160,170,185,0.07)] hover:border-[rgba(160,170,185,0.5)] hover:text-white transition-all tracking-[0.2em] text-xs uppercase font-light py-5 rounded-sm"
+            className="btn-gold w-full justify-center py-4"
+            style={{ opacity: isSubmitting ? 0.6 : 1, cursor: isSubmitting ? "not-allowed" : "pointer" }}
           >
             {isSubmitting ? "Отправка..." : "Записаться на диагностику"}
-          </Button>
+          </button>
         </form>
       </div>
     </div>

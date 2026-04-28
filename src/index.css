@@ -144,6 +144,66 @@
       0 0 120px rgba(160, 170, 185, 0.05);
   }
 
+  .btn-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 32px;
+    font-size: 0.7rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: hsl(220, 10%, 8%);
+    background: linear-gradient(
+      135deg,
+      hsl(42, 65%, 62%) 0%,
+      hsl(38, 70%, 55%) 100%
+    );
+    border: 1px solid hsl(42, 70%, 70%);
+    border-radius: 2px;
+    box-shadow:
+      0 2px 24px rgba(200, 160, 80, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .btn-gold:hover {
+    background: linear-gradient(
+      135deg,
+      hsl(42, 70%, 70%) 0%,
+      hsl(38, 72%, 62%) 100%
+    );
+    box-shadow:
+      0 4px 36px rgba(200, 160, 80, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    color: hsl(220, 10%, 5%);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: 0.7rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: hsl(42, 55%, 65%);
+    background: transparent;
+    border: 1px solid rgba(200, 160, 80, 0.28);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .btn-ghost:hover {
+    color: hsl(42, 65%, 75%);
+    border-color: rgba(200, 160, 80, 0.5);
+    background: rgba(200, 160, 80, 0.06);
+  }
+
   .silver-text {
     color: hsl(var(--silver));
   }

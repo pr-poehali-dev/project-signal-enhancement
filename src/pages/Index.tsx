@@ -305,7 +305,8 @@ export default function Index() {
             href="https://dikidi.net/926132"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-transparent text-[hsl(210,15%,75%)] border border-[rgba(160,170,185,0.3)] hover:bg-[rgba(160,170,185,0.08)] hover:text-white hover:border-[rgba(160,170,185,0.5)] transition-all tracking-widest text-xs uppercase font-light rounded-sm"
+            className="btn-gold"
+            style={{ padding: "8px 18px" }}
           >
             Записаться
           </a>
@@ -370,7 +371,7 @@ export default function Index() {
                 href="https://dikidi.net/926132"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-transparent text-[hsl(210,15%,75%)] border border-[rgba(160,170,185,0.4)] hover:bg-[rgba(160,170,185,0.08)] hover:text-white hover:border-[rgba(160,170,185,0.7)] transition-all tracking-[0.2em] text-xs uppercase font-light px-8 py-4 rounded-sm"
+                className="btn-gold"
               >
                 Записаться на диагностику
               </a>
@@ -483,7 +484,8 @@ export default function Index() {
                     href="https://dikidi.net/926132"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-transparent text-[hsl(210,15%,65%)] border border-[rgba(160,170,185,0.3)] hover:bg-[rgba(160,170,185,0.06)] hover:text-white hover:border-[rgba(160,170,185,0.5)] transition-all tracking-[0.2em] text-xs uppercase font-light rounded-sm"
+                    className="btn-gold"
+                    style={{ padding: "10px 22px" }}
                   >
                     <Icon name="CalendarCheck" size={13} />
                     Записаться
@@ -492,7 +494,7 @@ export default function Index() {
                     href="https://max.ru/u/f9LHodD0cOJ6ZZlQj0UscdLQ-24d096fz401XbP1kL4IvDZwlSnhba3Xum4"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-transparent text-[hsl(210,15%,65%)] border border-[rgba(160,170,185,0.3)] hover:bg-[rgba(160,170,185,0.06)] hover:text-white hover:border-[rgba(160,170,185,0.5)] transition-all tracking-[0.2em] text-xs uppercase font-light rounded-sm"
+                    className="btn-ghost"
                   >
                     <Icon name="ExternalLink" size={13} />
                     MAX
@@ -501,7 +503,7 @@ export default function Index() {
                     href="https://t.me/tarolog666"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-transparent text-[hsl(210,15%,55%)] border border-[rgba(160,170,185,0.2)] hover:bg-[rgba(160,170,185,0.06)] hover:text-white hover:border-[rgba(160,170,185,0.4)] transition-all tracking-[0.2em] text-xs uppercase font-light rounded-sm"
+                    className="btn-ghost"
                   >
                     <Icon name="Send" size={13} />
                     TG
@@ -785,7 +787,7 @@ export default function Index() {
                 href="https://dikidi.net/926132"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-3 bg-transparent text-[hsl(210,15%,65%)] border border-[rgba(160,170,185,0.25)] hover:bg-[rgba(160,170,185,0.07)] hover:text-white hover:border-[rgba(160,170,185,0.45)] transition-all tracking-[0.2em] text-xs uppercase font-light rounded-sm"
+                className="btn-gold"
               >
                 <Icon name="CalendarCheck" size={14} />
                 Записаться онлайн
