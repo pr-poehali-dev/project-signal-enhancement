@@ -504,25 +504,8 @@ export default function Index() {
             )}
           >
             <div className="flex flex-col md:flex-row items-start gap-10 md:gap-16">
-              {/* Левая колонка — фото Майи + кукла */}
-              <div className="flex flex-col gap-4 flex-shrink-0 items-center md:items-start">
-                <div className="w-48 h-56 md:w-56 md:h-64 rounded-sm overflow-hidden" style={{ border: "1px solid rgba(160,170,185,0.12)" }}>
-                  <img
-                    src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/935e2cbe-511f-44e5-ae79-46e0d2853120.jpg"
-                    alt="Майя"
-                    className="w-full h-full object-cover object-top"
-                  />
-                </div>
-                <div className="w-48 md:w-56 rounded-sm overflow-hidden" style={{ border: "1px solid rgba(160,170,185,0.08)", height: "140px" }}>
-                  <img
-                    src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/5114cacc-06c7-4d5c-bc2a-3b502c835fa3.jpg"
-                    alt="Кукла-стражница"
-                    className="w-full h-full object-cover"
-                    style={{ objectPosition: "center 20%" }}
-                  />
-                </div>
-              </div>
-              <div className="space-y-5 text-center md:text-left md:pt-2">
+              {/* Левая колонка — текст */}
+              <div className="space-y-5 text-center md:text-left md:pt-2 flex-1">
                 <p className="text-xs tracking-[0.4em] text-[hsl(210,15%,45%)] uppercase font-light">
                   Следователь по оккультным делам
                 </p>
@@ -557,6 +540,31 @@ export default function Index() {
                     <Icon name="Send" size={13} />
                     TG
                   </SparkleButton>
+                </div>
+              </div>
+
+              {/* Правая колонка — фото Майи + кукла */}
+              <div className="flex flex-col gap-5 flex-shrink-0 items-center w-full md:w-72">
+                {/* Фото Майи */}
+                <div className="w-full rounded-sm overflow-hidden" style={{ height: "320px", border: "1px solid rgba(160,170,185,0.12)" }}>
+                  <img
+                    src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/935e2cbe-511f-44e5-ae79-46e0d2853120.jpg"
+                    alt="Майя"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+                {/* Кукла стражница — без фона */}
+                <div className="w-full overflow-hidden" style={{ height: "320px" }}>
+                  <img
+                    src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/5114cacc-06c7-4d5c-bc2a-3b502c835fa3.jpg"
+                    alt="Кукла-стражница"
+                    className="w-full h-full object-cover"
+                    style={{
+                      objectPosition: "center 20%",
+                      mixBlendMode: "screen",
+                      filter: "contrast(1.1) brightness(1.05)",
+                    }}
+                  />
                 </div>
               </div>
             </div>
