@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import Icon from "@/components/ui/icon"
 import SparkleButton from "@/components/SparkleButton"
+import ReviewsCarousel from "@/components/ReviewsCarousel"
 
 const ARCANA = [
   {
