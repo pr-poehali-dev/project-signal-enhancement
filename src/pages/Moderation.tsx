@@ -25,7 +25,7 @@ export default function Moderation() {
     setError("")
     try {
       const res = await fetch(`${MODERATE_URL}?status=${status}`, {
-        headers: { Authorization: `Bearer ${t}` },
+        headers: { "X-Admin-Token": t },
       })
       if (res.status === 401) {
         setError("Неверный пароль")
@@ -61,7 +61,7 @@ export default function Moderation() {
   const act = async (id: number, action: "approve" | "reject") => {
     const res = await fetch(MODERATE_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      headers: { "Content-Type": "application/json", "X-Admin-Token": token },
       body: JSON.stringify({ id, action }),
     })
     if (res.ok) {

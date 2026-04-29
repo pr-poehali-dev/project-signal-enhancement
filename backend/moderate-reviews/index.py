@@ -142,16 +142,16 @@ def handler(event: dict, context) -> dict:
     cors = {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, X-Authorization",
+        "Access-Control-Allow-Headers": "Content-Type, X-Admin-Token",
     }
 
     if event.get("httpMethod") == "OPTIONS":
         return {"statusCode": 200, "headers": cors, "body": ""}
 
     headers = event.get("headers") or {}
-    token = headers.get("x-authorization", headers.get("authorization", "")).replace("Bearer ", "").replace("bearer ", "").strip()
+    token = headers.get("x-admin-token", "").strip()
     if not ADMIN_TOKEN or token != ADMIN_TOKEN:
-        return {"statusCode": 401, "headers": cors, "body": json.dumps({"error": "Unauthorized", "debug_token_len": len(token), "debug_admin_len": len(ADMIN_TOKEN)})}
+        return {"statusCode": 401, "headers": cors, "body": json.dumps({"error": "Unauthorized"})}
 
     schema = os.environ["MAIN_DB_SCHEMA"]
     dsn = os.environ["DATABASE_URL"]
@@ -164,6 +164,7 @@ def handler(event: dict, context) -> dict:
             f"WHERE status = {esc(status_filter)} ORDER BY created_at DESC"
         )
         rows = pg_query(dsn, sql)
+        print(f"DEBUG rows count: {len(rows)}, first: {rows[0] if rows else 'empty'}")
         reviews = [
             {
                 "id": int(r[0]),
