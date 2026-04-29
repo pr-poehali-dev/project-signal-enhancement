@@ -92,10 +92,10 @@
     --font-inter: "Inter", sans-serif;
 
     --background: 220 10% 6%;
-    --foreground: 210 15% 85%;
+    --foreground: 210 20% 92%;
 
     --card: 220 10% 9%;
-    --card-foreground: 210 15% 85%;
+    --card-foreground: 210 20% 92%;
 
     --popover: 220 10% 9%;
     --popover-foreground: 210 15% 85%;
@@ -150,6 +150,7 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-inter);
+    font-weight: 400;
     background-color: hsl(220, 10%, 6%);
     &::-webkit-scrollbar {
       display: none;
