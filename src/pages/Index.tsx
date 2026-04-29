@@ -427,7 +427,7 @@ export default function Index() {
                 Оккультный следователь · 11 лет практики
               </p>
               <h1
-                className="text-4xl md:text-6xl lg:text-7xl font-light text-white leading-tight mb-6"
+                className="text-5xl md:text-7xl lg:text-8xl font-light text-white leading-tight mb-6"
                 style={{ fontFamily: "var(--font-cormorant)", letterSpacing: "0.04em" }}
               >
                 Тайное
@@ -474,7 +474,7 @@ export default function Index() {
                 Вы не сошли с ума
               </p>
               <h2
-                className="text-3xl md:text-4xl font-light text-white mb-8 leading-tight"
+                className="text-4xl md:text-5xl font-light text-white mb-8 leading-tight"
                 style={{ fontFamily: "var(--font-cormorant)" }}
               >
                 Ваша интуиция <span className="gold-text">не врёт.</span>
@@ -522,7 +522,7 @@ export default function Index() {
                   Следователь по оккультным делам
                 </p>
                 <h2
-                  className="text-3xl md:text-4xl font-light text-white leading-tight"
+                  className="text-4xl md:text-5xl font-light text-white leading-tight"
                   style={{ fontFamily: "var(--font-cormorant)" }}
                 >
                   Я — <span className="gold-text">Майя.</span>
@@ -576,7 +576,7 @@ export default function Index() {
               "mb-4 text-center font-light text-white transition-all duration-1000 ease-out",
               isServicesTitleVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10",
             )}
-            style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(2rem, 5vw, 3rem)" }}
+            style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(2.4rem, 6vw, 3.8rem)" }}
           >
             Инструменты <span className="gold-text">и услуги</span>
           </h2>

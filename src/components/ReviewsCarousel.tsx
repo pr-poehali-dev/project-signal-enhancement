@@ -119,7 +119,7 @@ export function ReviewsCarousel({ reviewsSectionRef, isReviewsVisible }: Props) 
           )}
         >
           <h2
-            className="text-3xl md:text-4xl font-light text-white text-center mb-4"
+            className="text-4xl md:text-5xl font-light text-white text-center mb-4"
             style={{ fontFamily: "var(--font-cormorant)" }}
           >
             <span className="text-shimmer">Свидетельства</span>
