@@ -148,9 +148,10 @@ def handler(event: dict, context) -> dict:
     if event.get("httpMethod") == "OPTIONS":
         return {"statusCode": 200, "headers": cors, "body": ""}
 
-    token = (event.get("headers") or {}).get("x-authorization", "").replace("Bearer ", "").strip()
+    headers = event.get("headers") or {}
+    token = headers.get("x-authorization", headers.get("authorization", "")).replace("Bearer ", "").replace("bearer ", "").strip()
     if not ADMIN_TOKEN or token != ADMIN_TOKEN:
-        return {"statusCode": 401, "headers": cors, "body": json.dumps({"error": "Unauthorized"})}
+        return {"statusCode": 401, "headers": cors, "body": json.dumps({"error": "Unauthorized", "debug_token_len": len(token), "debug_admin_len": len(ADMIN_TOKEN)})}
 
     schema = os.environ["MAIN_DB_SCHEMA"]
     dsn = os.environ["DATABASE_URL"]
