@@ -92,25 +92,25 @@
     --font-inter: "Inter", sans-serif;
 
     --background: 220 10% 6%;
-    --foreground: 210 20% 92%;
+    --foreground: 210 25% 96%;
 
     --card: 220 10% 9%;
-    --card-foreground: 210 20% 92%;
+    --card-foreground: 210 25% 96%;
 
     --popover: 220 10% 9%;
-    --popover-foreground: 210 15% 85%;
+    --popover-foreground: 210 25% 96%;
 
-    --primary: 210 15% 75%;
+    --primary: 210 20% 88%;
     --primary-foreground: 220 10% 6%;
 
     --secondary: 220 8% 14%;
-    --secondary-foreground: 210 15% 75%;
+    --secondary-foreground: 210 20% 88%;
 
     --muted: 220 8% 14%;
-    --muted-foreground: 215 10% 50%;
+    --muted-foreground: 215 12% 62%;
 
     --accent: 210 8% 20%;
-    --accent-foreground: 210 15% 85%;
+    --accent-foreground: 210 25% 96%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
@@ -121,7 +121,7 @@
 
     --radius: 0.25rem;
 
-    --silver: 210 15% 65%;
+    --silver: 210 20% 80%;
     --graphite: 220 8% 12%;
     --asphalt: 220 10% 8%;
     --glass-bg: rgba(15, 17, 21, 0.72);
@@ -129,10 +129,10 @@
     --silver-accent: rgba(160, 170, 185, 0.6);
     --gold: 42 70% 68%;
     --gold-glow: rgba(220, 185, 120, 0.18);
-    --moon: 210 40% 88%;
+    --moon: 210 50% 95%;
 
     --sidebar-background: 220 10% 6%;
-    --sidebar-foreground: 210 15% 85%;
+    --sidebar-foreground: 210 25% 96%;
     --sidebar-primary: 210 15% 65%;
     --sidebar-primary-foreground: 220 10% 6%;
     --sidebar-accent: 220 8% 14%;
@@ -150,7 +150,8 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-inter);
-    font-weight: 400;
+    font-weight: 500;
+    text-shadow: 0 0 18px rgba(200, 215, 240, 0.12);
     background-color: hsl(220, 10%, 6%);
     &::-webkit-scrollbar {
       display: none;
@@ -166,7 +167,11 @@
   h5,
   h6 {
     font-family: var(--font-cormorant);
+    font-weight: 600;
     letter-spacing: 0.02em;
+    text-shadow:
+      0 0 28px rgba(200, 215, 240, 0.18),
+      0 0 60px rgba(200, 215, 240, 0.07);
   }
 }
 
@@ -201,7 +206,9 @@
 
   .gold-text {
     color: hsl(var(--gold));
-    text-shadow: 0 0 24px rgba(220, 185, 120, 0.35);
+    text-shadow:
+      0 0 24px rgba(220, 185, 120, 0.55),
+      0 0 60px rgba(220, 185, 120, 0.2);
   }
 
   .moon-text {
