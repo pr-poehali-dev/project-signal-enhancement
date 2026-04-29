@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button"
 import Icon from "@/components/ui/icon"
 import SparkleButton from "@/components/SparkleButton"
 import { ReviewsCarousel } from "@/components/ReviewsCarousel"
-import { NavMenu } from "@/components/NavMenu"
 
 const ARCANA = [
   {
@@ -379,7 +378,6 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-[hsl(220,10%,6%)] scratch-overlay">
-      <NavMenu onScrollTo={handleNavScrollTo} />
       {/* БЛОК 1 — HERO */}
       <section className="relative w-full overflow-hidden noise-texture" style={heroStyle}>
 
@@ -416,6 +414,61 @@ export default function Index() {
               "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%)",
           }}
         />
+
+        {/* Навигация внутри hero — не фиксированная */}
+        <div
+          className="absolute top-0 left-0 right-0 z-20 flex items-center justify-center px-6 py-4"
+          style={{ borderBottom: "1px solid rgba(200,160,80,0.1)" }}
+        >
+          {/* Языческий узор слева */}
+          <span
+            className="hidden sm:block select-none flex-shrink-0 mr-6"
+            style={{ color: "hsl(42,55%,40%)", fontSize: "20px", opacity: 0.7, letterSpacing: "4px", textShadow: "0 0 10px rgba(200,160,80,0.4)" }}
+          >
+            ᚠ᛫ᚢ᛫ᚦ᛫ᚨ
+          </span>
+          {/* Кнопки навигации */}
+          <div className="flex items-center gap-5 md:gap-8 flex-wrap justify-center">
+            {(["about", "services", "arcana", "reviews", "contact"] as const).map((section) => {
+              const labels: Record<string, string> = {
+                about: "Обо мне",
+                services: "Инструменты",
+                arcana: "Знак для тебя",
+                reviews: "Отзывы",
+                contact: "Запись",
+              }
+              return (
+                <button
+                  key={section}
+                  onClick={() => handleNavScrollTo(section)}
+                  className="text-xs font-light tracking-[0.22em] uppercase relative group transition-all duration-200"
+                  style={{ color: "hsl(210,20%,72%)" }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = "hsl(42,75%,72%)"
+                    e.currentTarget.style.textShadow = "0 0 12px rgba(220,185,120,0.7)"
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = "hsl(210,20%,72%)"
+                    e.currentTarget.style.textShadow = "none"
+                  }}
+                >
+                  {labels[section]}
+                  <span
+                    className="absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-300"
+                    style={{ background: "hsl(42,65%,58%)", boxShadow: "0 0 6px rgba(220,185,120,0.6)" }}
+                  />
+                </button>
+              )
+            })}
+          </div>
+          {/* Языческий узор справа */}
+          <span
+            className="hidden sm:block select-none flex-shrink-0 ml-6"
+            style={{ color: "hsl(42,55%,40%)", fontSize: "20px", opacity: 0.7, letterSpacing: "4px", textShadow: "0 0 10px rgba(200,160,80,0.4)" }}
+          >
+            ᚱ᛫ᚲ᛫ᚷ᛫ᚹ
+          </span>
+        </div>
 
         <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
           <div className="text-center max-w-3xl mx-auto">
