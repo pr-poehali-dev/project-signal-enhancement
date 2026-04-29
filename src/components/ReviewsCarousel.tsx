@@ -1,8 +1,11 @@
 import { useRef, useState, useEffect, useCallback } from "react"
 import { cn } from "@/lib/utils"
 import Icon from "@/components/ui/icon"
+import { ReviewForm } from "@/components/ReviewForm"
 
-const REVIEWS = [
+const GET_REVIEWS_URL = "https://functions.poehali.dev/ea0e375b-db17-4aaf-8e21-9a7cea28c72e"
+
+const STATIC_REVIEWS = [
   {
     author: "Анастасия",
     date: "24 февр.",
@@ -71,17 +74,43 @@ const REVIEWS = [
   },
 ]
 
+interface ReviewItem {
+  author: string
+  date: string
+  text: string
+  stars: number
+}
+
 interface Props {
   reviewsSectionRef: React.RefObject<HTMLElement>
   isReviewsVisible: boolean
 }
 
 export function ReviewsCarousel({ reviewsSectionRef, isReviewsVisible }: Props) {
+  const [reviews, setReviews] = useState<ReviewItem[]>(STATIC_REVIEWS)
   const [current, setCurrent] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
   const [direction, setDirection] = useState<"left" | "right">("right")
   const autoRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const total = REVIEWS.length
+  const total = reviews.length
+
+  useEffect(() => {
+    fetch(GET_REVIEWS_URL)
+      .then((r) => r.json())
+      .then((data) => {
+        const parsed = typeof data === "string" ? JSON.parse(data) : data
+        if (parsed.reviews && parsed.reviews.length > 0) {
+          setReviews(parsed.reviews.map((r: { author: string; text: string; stars: number; date: string }) => ({
+            author: r.author,
+            text: r.text,
+            stars: r.stars,
+            date: r.date || "",
+          })))
+          setCurrent(0)
+        }
+      })
+      .catch(() => {})
+  }, [])
 
   const go = useCallback((idx: number, dir: "left" | "right") => {
     if (isAnimating) return
@@ -101,7 +130,7 @@ export function ReviewsCarousel({ reviewsSectionRef, isReviewsVisible }: Props) 
     return () => { if (autoRef.current) clearTimeout(autoRef.current) }
   }, [current, go])
 
-  const review = REVIEWS[current]
+  const review = reviews[current]
   const prevIdx = (current - 1 + total) % total
   const nextIdx = (current + 1) % total
 
@@ -153,9 +182,9 @@ export function ReviewsCarousel({ reviewsSectionRef, isReviewsVisible }: Props) 
                     <span key={i} style={{ color: "hsl(38,80%,55%)", fontSize: "10px" }}>★</span>
                   ))}
                 </div>
-                <p className="text-[hsl(210,15%,55%)] text-xs leading-relaxed font-light line-clamp-4">{REVIEWS[prevIdx].text}</p>
+                <p className="text-[hsl(210,15%,55%)] text-xs leading-relaxed font-light line-clamp-4">{reviews[prevIdx].text}</p>
               </div>
-              <p className="text-[hsl(210,15%,40%)] text-xs mt-3 font-light">— {REVIEWS[prevIdx].author}</p>
+              <p className="text-[hsl(210,15%,40%)] text-xs mt-3 font-light">— {reviews[prevIdx].author}</p>
             </div>
 
             {/* Главная карточка */}
@@ -211,9 +240,9 @@ export function ReviewsCarousel({ reviewsSectionRef, isReviewsVisible }: Props) 
                     <span key={i} style={{ color: "hsl(38,80%,55%)", fontSize: "10px" }}>★</span>
                   ))}
                 </div>
-                <p className="text-[hsl(210,15%,55%)] text-xs leading-relaxed font-light line-clamp-4">{REVIEWS[nextIdx].text}</p>
+                <p className="text-[hsl(210,15%,55%)] text-xs leading-relaxed font-light line-clamp-4">{reviews[nextIdx].text}</p>
               </div>
-              <p className="text-[hsl(210,15%,40%)] text-xs mt-3 font-light">— {REVIEWS[nextIdx].author}</p>
+              <p className="text-[hsl(210,15%,40%)] text-xs mt-3 font-light">— {reviews[nextIdx].author}</p>
             </div>
 
             {/* Кнопка вперёд */}
@@ -229,7 +258,7 @@ export function ReviewsCarousel({ reviewsSectionRef, isReviewsVisible }: Props) 
 
           {/* Точки-навигация */}
           <div className="flex justify-center gap-2 mt-8">
-            {REVIEWS.map((_, i) => (
+            {reviews.map((_, i) => (
               <button
                 key={i}
                 onClick={() => go(i, i > current ? "right" : "left")}
@@ -250,6 +279,11 @@ export function ReviewsCarousel({ reviewsSectionRef, isReviewsVisible }: Props) 
           <p className="text-center text-[hsl(210,15%,30%)] text-xs font-light mt-4 tracking-widest">
             {String(current + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
           </p>
+
+          {/* Форма отзыва */}
+          <div className="mt-16 pt-12" style={{ borderTop: "1px solid rgba(160,170,185,0.08)" }}>
+            <ReviewForm />
+          </div>
         </div>
       </div>
 

@@ -1,0 +1,13 @@
+{
+  "tests": [
+    {
+      "name": "Submit review",
+      "method": "POST",
+      "path": "/",
+      "body": {"author": "Тест", "text": "Отличный специалист!", "stars": 5},
+      "expectedStatus": 201,
+      "expectedBody": {"ok": true},
+      "bodyMatcher": "partial"
+    }
+  ]
+}

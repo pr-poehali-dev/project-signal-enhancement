@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import Index from "./pages/Index";
 import Analytics from "./pages/Analytics";
+import Moderation from "./pages/Moderation";
 import NotFound from "./pages/NotFound";
 
 const TRACK_URL = "https://functions.poehali.dev/b5b8fd0f-6828-4a24-af5a-84209c002c95";
@@ -36,6 +37,7 @@ function AppContent() {
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/analytics" element={<Analytics />} />
+      <Route path="/moderation" element={<Moderation />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
     </Routes>

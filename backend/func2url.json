@@ -1,4 +1,7 @@
 {
+  "moderate-reviews": "https://functions.poehali.dev/f9041334-aa44-475f-9cf6-e5f6f20092ac",
+  "get-reviews": "https://functions.poehali.dev/ea0e375b-db17-4aaf-8e21-9a7cea28c72e",
+  "submit-review": "https://functions.poehali.dev/9662e45a-0005-4327-abc9-e95636dd6e19",
   "get-utm-stats": "https://functions.poehali.dev/88bebd8c-af0d-40d6-b881-156036402393",
   "track-visit": "https://functions.poehali.dev/b5b8fd0f-6828-4a24-af5a-84209c002c95"
 }
