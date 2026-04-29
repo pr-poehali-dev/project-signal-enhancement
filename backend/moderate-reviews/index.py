@@ -134,7 +134,7 @@ def esc(v):
     return "'" + str(v).replace("'", "''") + "'"
 
 
-ADMIN_TOKEN = os.environ.get("ADMIN_TOKEN", "")
+ADMIN_TOKEN = os.environ.get("ADMIN_TOKEN", "")  # из секретов
 
 
 def handler(event: dict, context) -> dict:
