@@ -275,13 +275,66 @@ const NAV_LINKS = [
   { section: "contact" as const, label: "Запись" },
 ]
 
-function HeroNav({ onScrollTo }: { onScrollTo: (s: "about" | "services" | "arcana" | "reviews" | "contact") => void }) {
+type NavSection = "about" | "services" | "arcana" | "reviews" | "contact"
+
+function HeroNav({
+  onScrollTo,
+  onHome,
+  activeSection,
+}: {
+  onScrollTo: (s: NavSection) => void
+  onHome: () => void
+  activeSection: NavSection | null
+}) {
   const [open, setOpen] = useState(false)
 
-  const handle = (s: typeof NAV_LINKS[number]["section"]) => {
+  const handle = (s: NavSection) => {
     setOpen(false)
     onScrollTo(s)
   }
+
+  const handleHome = () => {
+    setOpen(false)
+    onHome()
+  }
+
+  const btnStyle = (s: NavSection | "home") => {
+    const isActive = s === "home" ? activeSection === null : activeSection === s
+    return {
+      color: isActive ? "hsl(42,80%,68%)" : "hsl(210,20%,68%)",
+      textShadow: isActive ? "0 0 14px rgba(220,185,120,0.8)" : "none",
+    }
+  }
+
+  const NavBtn = ({ s, label }: { s: NavSection; label: string }) => (
+    <button
+      onClick={() => handle(s)}
+      className="text-xs font-light tracking-[0.22em] uppercase relative group transition-all duration-200"
+      style={btnStyle(s)}
+      onMouseEnter={(e) => {
+        if (activeSection !== s) {
+          e.currentTarget.style.color = "hsl(42,75%,72%)"
+          e.currentTarget.style.textShadow = "0 0 12px rgba(220,185,120,0.7)"
+        }
+      }}
+      onMouseLeave={(e) => {
+        const st = btnStyle(s)
+        e.currentTarget.style.color = st.color
+        e.currentTarget.style.textShadow = st.textShadow
+      }}
+    >
+      {label}
+      {activeSection === s && (
+        <span className="absolute -bottom-1 left-0 w-full h-px" style={{ background: "hsl(42,65%,58%)", boxShadow: "0 0 6px rgba(220,185,120,0.6)" }} />
+      )}
+      {activeSection !== s && (
+        <span className="absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-300" style={{ background: "hsl(42,65%,58%)", boxShadow: "0 0 6px rgba(220,185,120,0.6)" }} />
+      )}
+    </button>
+  )
+
+  const runeLeft = <span className="select-none flex-shrink-0 mr-6" style={{ color: "hsl(42,50%,38%)", fontSize: "16px", opacity: 0.6, letterSpacing: "5px", textShadow: "0 0 10px rgba(200,160,80,0.35)" }}>ᚠ᛫ᚢ᛫ᚦ᛫ᚨ</span>
+  const runeRight = <span className="select-none flex-shrink-0 ml-6" style={{ color: "hsl(42,50%,38%)", fontSize: "16px", opacity: 0.6, letterSpacing: "5px", textShadow: "0 0 10px rgba(200,160,80,0.35)" }}>ᚱ᛫ᚲ᛫ᚷ᛫ᚹ</span>
 
   return (
     <>
@@ -290,42 +343,72 @@ function HeroNav({ onScrollTo }: { onScrollTo: (s: "about" | "services" | "arcan
         className="absolute top-0 left-0 right-0 z-20 hidden md:flex items-center justify-center px-6 py-4"
         style={{ borderBottom: "1px solid rgba(200,160,80,0.1)" }}
       >
-        <span
-          className="select-none flex-shrink-0 mr-8"
-          style={{ color: "hsl(42,50%,38%)", fontSize: "18px", opacity: 0.65, letterSpacing: "6px", textShadow: "0 0 10px rgba(200,160,80,0.35)" }}
-        >
-          ᚠ᛫ᚢ᛫ᚦ᛫ᚨ
-        </span>
-        <div className="flex items-center gap-7">
-          {NAV_LINKS.map(({ section, label }) => (
-            <button
-              key={section}
-              onClick={() => handle(section)}
-              className="text-xs font-light tracking-[0.22em] uppercase relative group transition-all duration-200"
-              style={{ color: "hsl(210,20%,72%)" }}
-              onMouseEnter={(e) => {
+        {runeLeft}
+        <div className="flex items-center gap-6">
+          {/* Главная */}
+          <button
+            onClick={handleHome}
+            className="text-xs font-light tracking-[0.22em] uppercase relative group transition-all duration-200"
+            style={btnStyle("home")}
+            onMouseEnter={(e) => {
+              if (activeSection !== null) {
                 e.currentTarget.style.color = "hsl(42,75%,72%)"
                 e.currentTarget.style.textShadow = "0 0 12px rgba(220,185,120,0.7)"
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = "hsl(210,20%,72%)"
-                e.currentTarget.style.textShadow = "none"
-              }}
-            >
-              {label}
-              <span
-                className="absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-300"
-                style={{ background: "hsl(42,65%,58%)", boxShadow: "0 0 6px rgba(220,185,120,0.6)" }}
-              />
-            </button>
+              }
+            }}
+            onMouseLeave={(e) => {
+              const st = btnStyle("home")
+              e.currentTarget.style.color = st.color
+              e.currentTarget.style.textShadow = st.textShadow
+            }}
+          >
+            Главная
+            {activeSection === null && (
+              <span className="absolute -bottom-1 left-0 w-full h-px" style={{ background: "hsl(42,65%,58%)", boxShadow: "0 0 6px rgba(220,185,120,0.6)" }} />
+            )}
+            {activeSection !== null && (
+              <span className="absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-300" style={{ background: "hsl(42,65%,58%)", boxShadow: "0 0 6px rgba(220,185,120,0.6)" }} />
+            )}
+          </button>
+
+          <span style={{ color: "rgba(200,160,80,0.2)", fontSize: "10px" }}>✦</span>
+
+          {NAV_LINKS.map(({ section, label }, i) => (
+            <span key={section} className="flex items-center gap-6">
+              <NavBtn s={section} label={label} />
+              {i < NAV_LINKS.length - 1 && <span style={{ color: "rgba(200,160,80,0.2)", fontSize: "10px" }}>✦</span>}
+            </span>
           ))}
+
+          <span style={{ color: "rgba(200,160,80,0.2)", fontSize: "10px" }}>✦</span>
+
+          {/* Записаться */}
+          <a
+            href="https://dikidi.net/926132"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-light tracking-[0.22em] uppercase px-4 py-1.5 rounded-sm transition-all duration-200"
+            style={{
+              color: "hsl(42,75%,68%)",
+              border: "1px solid rgba(200,160,80,0.35)",
+              background: "rgba(200,160,80,0.08)",
+              textShadow: "0 0 10px rgba(220,185,120,0.4)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(200,160,80,0.18)"
+              e.currentTarget.style.borderColor = "rgba(200,160,80,0.6)"
+              e.currentTarget.style.textShadow = "0 0 14px rgba(220,185,120,0.8)"
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(200,160,80,0.08)"
+              e.currentTarget.style.borderColor = "rgba(200,160,80,0.35)"
+              e.currentTarget.style.textShadow = "0 0 10px rgba(220,185,120,0.4)"
+            }}
+          >
+            Записаться
+          </a>
         </div>
-        <span
-          className="select-none flex-shrink-0 ml-8"
-          style={{ color: "hsl(42,50%,38%)", fontSize: "18px", opacity: 0.65, letterSpacing: "6px", textShadow: "0 0 10px rgba(200,160,80,0.35)" }}
-        >
-          ᚱ᛫ᚲ᛫ᚷ᛫ᚹ
-        </span>
+        {runeRight}
       </div>
 
       {/* Мобильный бургер */}
@@ -333,10 +416,7 @@ function HeroNav({ onScrollTo }: { onScrollTo: (s: "about" | "services" | "arcan
         className="absolute top-0 left-0 right-0 z-20 md:hidden flex items-center justify-between px-5 py-3"
         style={{ borderBottom: "1px solid rgba(200,160,80,0.1)" }}
       >
-        <span
-          className="select-none text-base"
-          style={{ color: "hsl(42,50%,38%)", opacity: 0.6, letterSpacing: "3px", textShadow: "0 0 8px rgba(200,160,80,0.3)" }}
-        >
+        <span className="select-none text-sm" style={{ color: "hsl(42,50%,38%)", opacity: 0.6, letterSpacing: "3px", textShadow: "0 0 8px rgba(200,160,80,0.3)" }}>
           ᚠ᛫ᚢ
         </span>
         <button
@@ -352,21 +432,48 @@ function HeroNav({ onScrollTo }: { onScrollTo: (s: "about" | "services" | "arcan
       {/* Мобильное выпадающее меню */}
       {open && (
         <div
-          className="absolute top-[48px] left-0 right-0 z-30 md:hidden flex flex-col py-3"
-          style={{ background: "rgba(6,8,12,0.96)", borderBottom: "1px solid rgba(200,160,80,0.15)", backdropFilter: "blur(16px)" }}
+          className="absolute top-[48px] left-0 right-0 z-30 md:hidden flex flex-col py-2"
+          style={{ background: "rgba(6,8,12,0.97)", borderBottom: "1px solid rgba(200,160,80,0.15)", backdropFilter: "blur(20px)" }}
         >
+          <button
+            onClick={handleHome}
+            className="text-left px-6 py-3 text-sm font-light tracking-[0.2em] uppercase transition-colors"
+            style={{
+              color: activeSection === null ? "hsl(42,80%,68%)" : "hsl(210,20%,65%)",
+              borderBottom: "1px solid rgba(160,170,185,0.05)",
+              textShadow: activeSection === null ? "0 0 12px rgba(220,185,120,0.6)" : "none",
+            }}
+          >
+            Главная
+          </button>
           {NAV_LINKS.map(({ section, label }) => (
             <button
               key={section}
               onClick={() => handle(section)}
               className="text-left px-6 py-3 text-sm font-light tracking-[0.2em] uppercase transition-colors"
-              style={{ color: "hsl(210,20%,65%)", borderBottom: "1px solid rgba(160,170,185,0.05)" }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = "hsl(42,70%,65%)" }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = "hsl(210,20%,65%)" }}
+              style={{
+                color: activeSection === section ? "hsl(42,80%,68%)" : "hsl(210,20%,65%)",
+                borderBottom: "1px solid rgba(160,170,185,0.05)",
+                textShadow: activeSection === section ? "0 0 12px rgba(220,185,120,0.6)" : "none",
+              }}
             >
               {label}
             </button>
           ))}
+          <a
+            href="https://dikidi.net/926132"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
+            className="mx-6 my-3 py-3 text-center text-sm font-light tracking-[0.2em] uppercase rounded-sm"
+            style={{
+              color: "hsl(42,75%,68%)",
+              border: "1px solid rgba(200,160,80,0.35)",
+              background: "rgba(200,160,80,0.1)",
+            }}
+          >
+            Записаться
+          </a>
         </div>
       )}
     </>
@@ -383,6 +490,7 @@ export default function Index() {
   const [isReviewsVisible, setIsReviewsVisible] = useState(false)
   const [blurAmount, setBlurAmount] = useState(0)
   const [initialHeight, setInitialHeight] = useState(0)
+  const [activeSection, setActiveSection] = useState<"about" | "services" | "arcana" | "reviews" | "contact" | null>(null)
 
   const headingRef = useRef<HTMLHeadingElement>(null)
   const aboutSectionRef = useRef<HTMLElement>(null)
@@ -467,14 +575,13 @@ export default function Index() {
   }
 
   const handleNavScrollTo = (section: "about" | "reviews" | "services" | "arcana" | "contact") => {
-    const map = {
-      about: aboutSectionRef,
-      reviews: reviewsSectionRef,
-      services: servicesSectionRef,
-      arcana: arcanaSectionRef,
-      contact: contactSectionRef,
-    }
-    map[section].current?.scrollIntoView({ behavior: "smooth", block: "start" })
+    setActiveSection(section)
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
+  const handleNavHome = () => {
+    setActiveSection(null)
+    window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   const heroStyle = {
@@ -521,7 +628,7 @@ export default function Index() {
         />
 
         {/* Навигация внутри hero — не фиксированная */}
-        <HeroNav onScrollTo={handleNavScrollTo} />
+        <HeroNav onScrollTo={handleNavScrollTo} onHome={handleNavHome} activeSection={activeSection} />
 
         <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
           <div className="text-center max-w-3xl mx-auto">
@@ -564,7 +671,8 @@ export default function Index() {
         <OccultOverlay density={22} />
       </section>
 
-      {/* БЛОК 2 — БОЛЬ */}
+      {/* БЛОК 2 — БОЛЬ (только на главной) */}
+      {activeSection === null && (
       <section className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,7%)" }}>
         <OccultOverlay density={12} />
         <div className="container mx-auto px-4">
@@ -599,9 +707,11 @@ export default function Index() {
           </div>
         </div>
       </section>
+      )}
 
       {/* БЛОК 3 — ОБО МНЕ */}
-      <section ref={aboutSectionRef} id="about" className="py-24 noise-texture" style={{ background: "hsl(220,10%,6%)", scrollMarginTop: "56px" }}>
+      {(activeSection === null || activeSection === "about") && (
+      <section ref={aboutSectionRef} id="about" className="py-24 noise-texture" style={{ background: "hsl(220,10%,6%)" }}>
         <div className="container mx-auto px-4">
           <div
             ref={aboutContentRef}
@@ -671,9 +781,11 @@ export default function Index() {
           </div>
         </div>
       </section>
+      )}
 
       {/* БЛОК 4 — УСЛУГИ */}
-      <section ref={servicesSectionRef} id="services" className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,8%)", scrollMarginTop: "56px" }}>
+      {(activeSection === null || activeSection === "services") && (
+      <section ref={servicesSectionRef} id="services" className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,8%)" }}>
         <OccultOverlay density={16} />
         <div className="container mx-auto px-4 relative" style={{ zIndex: 2 }}>
           <h2
@@ -774,13 +886,17 @@ export default function Index() {
           </div>
         </div>
       </section>
+      )}
 
       {/* АРКАН — случайный при каждом заходе */}
-      <section ref={arcanaSectionRef} style={{ scrollMarginTop: "56px" }}>
+      {(activeSection === null || activeSection === "arcana") && (
+      <section ref={arcanaSectionRef}>
         <RandomArcanSection />
       </section>
+      )}
 
-      {/* БЛОК 5 — КАК РАБОТАЮ */}
+      {/* БЛОК 5 — КАК РАБОТАЮ (только на главной) */}
+      {activeSection === null && (
       <section className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,6%)" }}>
         {/* Кукла-стражница — по центру, крупно, эффектно */}
         <div style={{
@@ -891,12 +1007,16 @@ export default function Index() {
           </div>
         </div>
       </section>
+      )}
 
       {/* БЛОК 6 — ОТЗЫВЫ */}
-      <ReviewsCarousel reviewsSectionRef={reviewsSectionRef} isReviewsVisible={isReviewsVisible} />
+      {(activeSection === null || activeSection === "reviews") && (
+        <ReviewsCarousel reviewsSectionRef={reviewsSectionRef} isReviewsVisible={isReviewsVisible} />
+      )}
 
       {/* БЛОК 7 — ЗАПИСЬ */}
-      <section ref={contactSectionRef} id="contact" className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,6%)", scrollMarginTop: "56px" }}>
+      {(activeSection === null || activeSection === "contact") && (
+      <section ref={contactSectionRef} id="contact" className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,6%)" }}>
         {/* Фоновое изображение */}
         <div
           style={{
@@ -934,6 +1054,7 @@ export default function Index() {
           <ContactForm />
         </div>
       </section>
+      )}
 
       {/* ФУТЕР */}
       <footer className="py-12 noise-texture" style={{ background: "hsl(220,10%,5%)", borderTop: "1px solid rgba(160,170,185,0.07)" }}>
