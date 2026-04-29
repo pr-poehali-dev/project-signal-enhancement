@@ -761,6 +761,14 @@ export default function Index() {
 
   const handleNavHome = () => {
     setActiveSection(null)
+    // Сразу показываем все блоки — анимации уже отработали
+    setIsHeadingVisible(true)
+    setIsAboutVisible(true)
+    setIsPainVisible(true)
+    setIsServicesVisible(true)
+    setIsServicesTitleVisible(true)
+    setIsProcessVisible(true)
+    setIsReviewsVisible(true)
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
