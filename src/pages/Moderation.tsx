@@ -33,11 +33,17 @@ export default function Moderation() {
         setLoading(false)
         return
       }
-      const data = await res.json()
-      const parsed = typeof data === "string" ? JSON.parse(data) : data
+      const raw = await res.text()
+      let parsed: { reviews?: Review[] }
+      try {
+        const first = JSON.parse(raw)
+        parsed = typeof first === "string" ? JSON.parse(first) : first
+      } catch {
+        parsed = {}
+      }
       setReviews(parsed.reviews || [])
-    } catch {
-      setError("Ошибка загрузки")
+    } catch (e) {
+      setError("Ошибка загрузки: " + String(e))
     }
     setLoading(false)
   }
