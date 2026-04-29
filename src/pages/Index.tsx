@@ -4,7 +4,6 @@ import { ContactForm } from "@/components/ContactForm"
 import { OccultOverlay } from "@/components/OccultOverlay"
 import { useState, useEffect, useRef, useMemo } from "react"
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
 import Icon from "@/components/ui/icon"
 import SparkleButton from "@/components/SparkleButton"
 import { ReviewsCarousel } from "@/components/ReviewsCarousel"
@@ -268,6 +267,112 @@ function RandomArcanSection() {
   )
 }
 
+const NAV_LINKS = [
+  { section: "about" as const, label: "Обо мне" },
+  { section: "services" as const, label: "Инструменты" },
+  { section: "arcana" as const, label: "Знак для тебя" },
+  { section: "reviews" as const, label: "Отзывы" },
+  { section: "contact" as const, label: "Запись" },
+]
+
+function HeroNav({ onScrollTo }: { onScrollTo: (s: "about" | "services" | "arcana" | "reviews" | "contact") => void }) {
+  const [open, setOpen] = useState(false)
+
+  const handle = (s: typeof NAV_LINKS[number]["section"]) => {
+    setOpen(false)
+    onScrollTo(s)
+  }
+
+  return (
+    <>
+      {/* Десктоп */}
+      <div
+        className="absolute top-0 left-0 right-0 z-20 hidden md:flex items-center justify-center px-6 py-4"
+        style={{ borderBottom: "1px solid rgba(200,160,80,0.1)" }}
+      >
+        <span
+          className="select-none flex-shrink-0 mr-8"
+          style={{ color: "hsl(42,50%,38%)", fontSize: "18px", opacity: 0.65, letterSpacing: "6px", textShadow: "0 0 10px rgba(200,160,80,0.35)" }}
+        >
+          ᚠ᛫ᚢ᛫ᚦ᛫ᚨ
+        </span>
+        <div className="flex items-center gap-7">
+          {NAV_LINKS.map(({ section, label }) => (
+            <button
+              key={section}
+              onClick={() => handle(section)}
+              className="text-xs font-light tracking-[0.22em] uppercase relative group transition-all duration-200"
+              style={{ color: "hsl(210,20%,72%)" }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = "hsl(42,75%,72%)"
+                e.currentTarget.style.textShadow = "0 0 12px rgba(220,185,120,0.7)"
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = "hsl(210,20%,72%)"
+                e.currentTarget.style.textShadow = "none"
+              }}
+            >
+              {label}
+              <span
+                className="absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-300"
+                style={{ background: "hsl(42,65%,58%)", boxShadow: "0 0 6px rgba(220,185,120,0.6)" }}
+              />
+            </button>
+          ))}
+        </div>
+        <span
+          className="select-none flex-shrink-0 ml-8"
+          style={{ color: "hsl(42,50%,38%)", fontSize: "18px", opacity: 0.65, letterSpacing: "6px", textShadow: "0 0 10px rgba(200,160,80,0.35)" }}
+        >
+          ᚱ᛫ᚲ᛫ᚷ᛫ᚹ
+        </span>
+      </div>
+
+      {/* Мобильный бургер */}
+      <div
+        className="absolute top-0 left-0 right-0 z-20 md:hidden flex items-center justify-between px-5 py-3"
+        style={{ borderBottom: "1px solid rgba(200,160,80,0.1)" }}
+      >
+        <span
+          className="select-none text-base"
+          style={{ color: "hsl(42,50%,38%)", opacity: 0.6, letterSpacing: "3px", textShadow: "0 0 8px rgba(200,160,80,0.3)" }}
+        >
+          ᚠ᛫ᚢ
+        </span>
+        <button
+          onClick={() => setOpen((v) => !v)}
+          className="flex items-center justify-center w-9 h-9 rounded-sm transition-all"
+          style={{ color: "hsl(42,65%,60%)", border: "1px solid rgba(200,160,80,0.2)", background: "rgba(8,10,14,0.5)" }}
+          aria-label="Меню"
+        >
+          <Icon name={open ? "X" : "Menu"} size={18} />
+        </button>
+      </div>
+
+      {/* Мобильное выпадающее меню */}
+      {open && (
+        <div
+          className="absolute top-[48px] left-0 right-0 z-30 md:hidden flex flex-col py-3"
+          style={{ background: "rgba(6,8,12,0.96)", borderBottom: "1px solid rgba(200,160,80,0.15)", backdropFilter: "blur(16px)" }}
+        >
+          {NAV_LINKS.map(({ section, label }) => (
+            <button
+              key={section}
+              onClick={() => handle(section)}
+              className="text-left px-6 py-3 text-sm font-light tracking-[0.2em] uppercase transition-colors"
+              style={{ color: "hsl(210,20%,65%)", borderBottom: "1px solid rgba(160,170,185,0.05)" }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = "hsl(42,70%,65%)" }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = "hsl(210,20%,65%)" }}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      )}
+    </>
+  )
+}
+
 export default function Index() {
   const [isHeadingVisible, setIsHeadingVisible] = useState(false)
   const [isAboutVisible, setIsAboutVisible] = useState(false)
@@ -416,59 +521,7 @@ export default function Index() {
         />
 
         {/* Навигация внутри hero — не фиксированная */}
-        <div
-          className="absolute top-0 left-0 right-0 z-20 flex items-center justify-center px-6 py-4"
-          style={{ borderBottom: "1px solid rgba(200,160,80,0.1)" }}
-        >
-          {/* Языческий узор слева */}
-          <span
-            className="hidden sm:block select-none flex-shrink-0 mr-6"
-            style={{ color: "hsl(42,55%,40%)", fontSize: "20px", opacity: 0.7, letterSpacing: "4px", textShadow: "0 0 10px rgba(200,160,80,0.4)" }}
-          >
-            ᚠ᛫ᚢ᛫ᚦ᛫ᚨ
-          </span>
-          {/* Кнопки навигации */}
-          <div className="flex items-center gap-5 md:gap-8 flex-wrap justify-center">
-            {(["about", "services", "arcana", "reviews", "contact"] as const).map((section) => {
-              const labels: Record<string, string> = {
-                about: "Обо мне",
-                services: "Инструменты",
-                arcana: "Знак для тебя",
-                reviews: "Отзывы",
-                contact: "Запись",
-              }
-              return (
-                <button
-                  key={section}
-                  onClick={() => handleNavScrollTo(section)}
-                  className="text-xs font-light tracking-[0.22em] uppercase relative group transition-all duration-200"
-                  style={{ color: "hsl(210,20%,72%)" }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = "hsl(42,75%,72%)"
-                    e.currentTarget.style.textShadow = "0 0 12px rgba(220,185,120,0.7)"
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = "hsl(210,20%,72%)"
-                    e.currentTarget.style.textShadow = "none"
-                  }}
-                >
-                  {labels[section]}
-                  <span
-                    className="absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-300"
-                    style={{ background: "hsl(42,65%,58%)", boxShadow: "0 0 6px rgba(220,185,120,0.6)" }}
-                  />
-                </button>
-              )
-            })}
-          </div>
-          {/* Языческий узор справа */}
-          <span
-            className="hidden sm:block select-none flex-shrink-0 ml-6"
-            style={{ color: "hsl(42,55%,40%)", fontSize: "20px", opacity: 0.7, letterSpacing: "4px", textShadow: "0 0 10px rgba(200,160,80,0.4)" }}
-          >
-            ᚱ᛫ᚲ᛫ᚷ᛫ᚹ
-          </span>
-        </div>
+        <HeroNav onScrollTo={handleNavScrollTo} />
 
         <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
           <div className="text-center max-w-3xl mx-auto">
