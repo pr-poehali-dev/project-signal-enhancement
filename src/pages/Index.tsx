@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import Icon from "@/components/ui/icon"
 import SparkleButton from "@/components/SparkleButton"
 import { ReviewsCarousel } from "@/components/ReviewsCarousel"
+import { NavMenu } from "@/components/NavMenu"
 
 const ARCANA = [
   {
@@ -289,6 +290,7 @@ export default function Index() {
   const processSectionRef = useRef<HTMLDivElement>(null)
   const reviewsSectionRef = useRef<HTMLDivElement>(null)
   const contactSectionRef = useRef<HTMLElement>(null)
+  const arcanaSectionRef = useRef<HTMLElement>(null)
   const scrollRef = useRef(0)
   const ticking = useRef(false)
 
@@ -360,28 +362,26 @@ export default function Index() {
     contactSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
   }
 
+  const handleNavScrollTo = (section: "about" | "reviews" | "services" | "arcana" | "contact") => {
+    const map = {
+      about: aboutSectionRef,
+      reviews: reviewsSectionRef,
+      services: servicesSectionRef,
+      arcana: arcanaSectionRef,
+      contact: contactSectionRef,
+    }
+    map[section].current?.scrollIntoView({ behavior: "smooth", block: "start" })
+  }
+
   const heroStyle = {
     height: initialHeight ? `${initialHeight}px` : "100vh",
   }
 
   return (
     <div className="min-h-screen bg-[hsl(220,10%,6%)] scratch-overlay">
+      <NavMenu onScrollTo={handleNavScrollTo} />
       {/* БЛОК 1 — HERO */}
       <section className="relative w-full overflow-hidden noise-texture" style={heroStyle}>
-        <div className="absolute top-6 right-6 z-10 flex items-center gap-3">
-          <a
-            href="https://max.ru/u/f9LHodD0cOJ6ZZlQj0UscdLQ-24d096fz401XbP1kL4IvDZwlSnhba3Xum4"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:flex items-center gap-1.5 text-[hsl(210,15%,55%)] hover:text-white transition-colors text-xs font-light tracking-widest uppercase"
-          >
-            <Icon name="ExternalLink" size={13} />
-            MAX
-          </a>
-          <SparkleButton href="https://dikidi.net/926132" target="_blank" rel="noopener noreferrer" className="btn-gold" style={{ padding: "8px 18px" }}>
-            Записаться
-          </SparkleButton>
-        </div>
 
         <div className="absolute inset-0" style={warpSpeedStyle}>
           <StarField blurAmount={blurAmount} />
@@ -495,7 +495,7 @@ export default function Index() {
       </section>
 
       {/* БЛОК 3 — ОБО МНЕ */}
-      <section ref={aboutSectionRef} id="about" className="py-24 noise-texture" style={{ background: "hsl(220,10%,6%)" }}>
+      <section ref={aboutSectionRef} id="about" className="py-24 noise-texture" style={{ background: "hsl(220,10%,6%)", scrollMarginTop: "56px" }}>
         <div className="container mx-auto px-4">
           <div
             ref={aboutContentRef}
@@ -567,7 +567,7 @@ export default function Index() {
       </section>
 
       {/* БЛОК 4 — УСЛУГИ */}
-      <section ref={servicesSectionRef} id="services" className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,8%)" }}>
+      <section ref={servicesSectionRef} id="services" className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,8%)", scrollMarginTop: "56px" }}>
         <OccultOverlay density={16} />
         <div className="container mx-auto px-4 relative" style={{ zIndex: 2 }}>
           <h2
@@ -670,7 +670,9 @@ export default function Index() {
       </section>
 
       {/* АРКАН — случайный при каждом заходе */}
-      <RandomArcanSection />
+      <section ref={arcanaSectionRef} style={{ scrollMarginTop: "56px" }}>
+        <RandomArcanSection />
+      </section>
 
       {/* БЛОК 5 — КАК РАБОТАЮ */}
       <section className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,6%)" }}>
@@ -788,7 +790,7 @@ export default function Index() {
       <ReviewsCarousel reviewsSectionRef={reviewsSectionRef} isReviewsVisible={isReviewsVisible} />
 
       {/* БЛОК 7 — ЗАПИСЬ */}
-      <section ref={contactSectionRef} id="contact" className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,6%)" }}>
+      <section ref={contactSectionRef} id="contact" className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,6%)", scrollMarginTop: "56px" }}>
         {/* Фоновое изображение */}
         <div
           style={{
