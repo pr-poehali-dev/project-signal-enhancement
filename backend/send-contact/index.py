@@ -8,7 +8,7 @@ from email.mime.multipart import MIMEMultipart
 TO_EMAIL = "maiya.tarolog@yandex.ru"
 FROM_EMAIL = "maiya.tarolog@yandex.ru"
 SMTP_HOST = "smtp.yandex.ru"
-SMTP_PORT = 465
+SMTP_PORT = 465  # Яндекс SSL
 
 
 def send_email(subject: str, html: str):
