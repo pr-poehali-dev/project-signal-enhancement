@@ -471,7 +471,7 @@ function SectionContent({
   if (section === "reviews") {
     return (
       <div className="py-8 px-4">
-        <ReviewsCarousel reviewsSectionRef={reviewsSectionRef} isReviewsVisible={isReviewsVisible} />
+        <ReviewsCarousel reviewsSectionRef={reviewsSectionRef} isReviewsVisible={true} />
       </div>
     )
   }
@@ -518,40 +518,9 @@ function HeroNav({
     onHome()
   }
 
-  const btnStyle = (s: NavSection | "home") => {
-    const isActive = s === "home" ? activeSection === null : activeSection === s
-    return {
-      color: isActive ? "hsl(42,80%,68%)" : "hsl(210,20%,68%)",
-      textShadow: isActive ? "0 0 14px rgba(220,185,120,0.8)" : "none",
-    }
-  }
-
-  const NavBtn = ({ s, label }: { s: NavSection; label: string }) => (
-    <button
-      onClick={() => handle(s)}
-      className="text-xs font-light tracking-[0.22em] uppercase relative group transition-all duration-200"
-      style={btnStyle(s)}
-      onMouseEnter={(e) => {
-        if (activeSection !== s) {
-          e.currentTarget.style.color = "hsl(42,75%,72%)"
-          e.currentTarget.style.textShadow = "0 0 12px rgba(220,185,120,0.7)"
-        }
-      }}
-      onMouseLeave={(e) => {
-        const st = btnStyle(s)
-        e.currentTarget.style.color = st.color
-        e.currentTarget.style.textShadow = st.textShadow
-      }}
-    >
-      {label}
-      {activeSection === s && (
-        <span className="absolute -bottom-1 left-0 w-full h-px" style={{ background: "hsl(42,65%,58%)", boxShadow: "0 0 6px rgba(220,185,120,0.6)" }} />
-      )}
-      {activeSection !== s && (
-        <span className="absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-300" style={{ background: "hsl(42,65%,58%)", boxShadow: "0 0 6px rgba(220,185,120,0.6)" }} />
-      )}
-    </button>
-  )
+  const isActive = (s: NavSection | "home") => s === "home" ? activeSection === null : activeSection === s
+  const activeColor = "hsl(42,80%,68%)"
+  const inactiveColor = "hsl(210,20%,68%)"
 
   const runeLeft = <span className="select-none flex-shrink-0 mr-6" style={{ color: "hsl(42,50%,38%)", fontSize: "16px", opacity: 0.6, letterSpacing: "5px", textShadow: "0 0 10px rgba(200,160,80,0.35)" }}>ᚠ᛫ᚢ᛫ᚦ᛫ᚨ</span>
   const runeRight = <span className="select-none flex-shrink-0 ml-6" style={{ color: "hsl(42,50%,38%)", fontSize: "16px", opacity: 0.6, letterSpacing: "5px", textShadow: "0 0 10px rgba(200,160,80,0.35)" }}>ᚱ᛫ᚲ᛫ᚷ᛫ᚹ</span>
@@ -569,33 +538,24 @@ function HeroNav({
           <button
             onClick={handleHome}
             className="text-xs font-light tracking-[0.22em] uppercase relative group transition-all duration-200"
-            style={btnStyle("home")}
-            onMouseEnter={(e) => {
-              if (activeSection !== null) {
-                e.currentTarget.style.color = "hsl(42,75%,72%)"
-                e.currentTarget.style.textShadow = "0 0 12px rgba(220,185,120,0.7)"
-              }
-            }}
-            onMouseLeave={(e) => {
-              const st = btnStyle("home")
-              e.currentTarget.style.color = st.color
-              e.currentTarget.style.textShadow = st.textShadow
-            }}
+            style={{ color: isActive("home") ? activeColor : inactiveColor, textShadow: isActive("home") ? "0 0 14px rgba(220,185,120,0.8)" : "none" }}
           >
             Главная
-            {activeSection === null && (
-              <span className="absolute -bottom-1 left-0 w-full h-px" style={{ background: "hsl(42,65%,58%)", boxShadow: "0 0 6px rgba(220,185,120,0.6)" }} />
-            )}
-            {activeSection !== null && (
-              <span className="absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-300" style={{ background: "hsl(42,65%,58%)", boxShadow: "0 0 6px rgba(220,185,120,0.6)" }} />
-            )}
+            <span className={`absolute -bottom-1 left-0 h-px transition-all duration-300 ${isActive("home") ? "w-full" : "w-0 group-hover:w-full"}`} style={{ background: "hsl(42,65%,58%)", boxShadow: "0 0 6px rgba(220,185,120,0.6)" }} />
           </button>
 
           <span style={{ color: "rgba(200,160,80,0.2)", fontSize: "10px" }}>✦</span>
 
           {NAV_LINKS.map(({ section, label }, i) => (
             <span key={section} className="flex items-center gap-6">
-              <NavBtn s={section} label={label} />
+              <button
+                onClick={() => handle(section)}
+                className="text-xs font-light tracking-[0.22em] uppercase relative group transition-all duration-200"
+                style={{ color: isActive(section) ? activeColor : inactiveColor, textShadow: isActive(section) ? "0 0 14px rgba(220,185,120,0.8)" : "none" }}
+              >
+                {label}
+                <span className={`absolute -bottom-1 left-0 h-px transition-all duration-300 ${isActive(section) ? "w-full" : "w-0 group-hover:w-full"}`} style={{ background: "hsl(42,65%,58%)", boxShadow: "0 0 6px rgba(220,185,120,0.6)" }} />
+              </button>
               {i < NAV_LINKS.length - 1 && <span style={{ color: "rgba(200,160,80,0.2)", fontSize: "10px" }}>✦</span>}
             </span>
           ))}
