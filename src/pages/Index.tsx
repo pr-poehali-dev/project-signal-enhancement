@@ -277,6 +277,226 @@ const NAV_LINKS = [
 
 type NavSection = "about" | "services" | "arcana" | "reviews" | "contact"
 
+interface SectionContentProps {
+  section: NavSection
+  scrollToContact: () => void
+  isServicesVisible: boolean
+  isServicesTitleVisible: boolean
+  isAboutVisible: boolean
+  isHeadingVisible: boolean
+  isReviewsVisible: boolean
+  aboutContentRef: React.RefObject<HTMLDivElement>
+  servicesContentRef: React.RefObject<HTMLDivElement>
+  servicesTitleRef: React.RefObject<HTMLHeadingElement>
+  headingRef: React.RefObject<HTMLHeadingElement>
+  reviewsSectionRef: React.RefObject<HTMLDivElement>
+}
+
+function SectionContent({
+  section,
+  scrollToContact,
+  isServicesVisible,
+  isServicesTitleVisible,
+  isAboutVisible,
+  isHeadingVisible,
+  isReviewsVisible,
+  aboutContentRef,
+  servicesContentRef,
+  servicesTitleRef,
+  headingRef,
+  reviewsSectionRef,
+}: SectionContentProps) {
+  if (section === "about") {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div
+          ref={aboutContentRef}
+          className="max-w-4xl mx-auto"
+        >
+          <div className="flex flex-col md:flex-row items-stretch gap-8 md:gap-12">
+            {/* Фото Майи — слева */}
+            <div className="flex-shrink-0 w-full md:w-72 rounded-sm overflow-hidden self-stretch" style={{ minHeight: "460px", border: "1px solid rgba(160,170,185,0.12)" }}>
+              <img
+                src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/935e2cbe-511f-44e5-ae79-46e0d2853120.jpg"
+                alt="Майя"
+                className="w-full h-full object-cover object-top"
+                style={{ minHeight: "460px" }}
+              />
+            </div>
+            {/* Текст */}
+            <div className="space-y-5 text-center md:text-left md:pt-2 flex-1">
+              <p className="text-xs tracking-[0.4em] text-[hsl(210,15%,45%)] uppercase font-light">
+                Следователь по оккультным делам
+              </p>
+              <h2
+                className="text-4xl md:text-5xl font-light text-white leading-tight"
+                style={{ fontFamily: "var(--font-cormorant)" }}
+              >
+                Я — <span className="gold-text">Майя.</span>
+                <br />
+                <span className="moon-text" style={{ opacity: 0.75 }}>Одиннадцать лет практики.</span>
+              </h2>
+              <div className="space-y-4">
+                <p className="text-[hsl(210,15%,58%)] font-light text-sm leading-relaxed">
+                  Я работаю на стыке глубинной магии, ясновидения и психоанализа. Там, где другие видят «просто кризис»,
+                  я вижу механику тонкого плана.
+                </p>
+                <p className="text-[hsl(210,15%,58%)] font-light text-sm leading-relaxed">
+                  Я сканирую пространство и вытаскиваю на свет то, что от вас скрывают: двойное дно, тайные связи,
+                  чужое вмешательство в вашу жизнь. Для меня не существует тайн.
+                </p>
+                <p className="text-[hsl(210,15%,58%)] font-light text-sm leading-relaxed">
+                  Я не раздаю пустых утешений, а использую проявленную мне информацию как скальпель — чтобы хирургически точно устранить корень проблемы.
+                </p>
+                <p className="text-[hsl(210,15%,65%)] font-light text-sm leading-relaxed" style={{ borderLeft: "2px solid hsl(42,65%,55%)", paddingLeft: "12px" }}>
+                  Со мной вы возвращаете себе абсолютный контроль над своей судьбой, отношениями и бизнесом.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3 mt-2 justify-center md:justify-start">
+                <SparkleButton href="https://dikidi.net/926132" target="_blank" rel="noopener noreferrer" className="btn-gold" style={{ padding: "10px 22px" }}>
+                  <Icon name="CalendarCheck" size={13} />
+                  Записаться
+                </SparkleButton>
+                <SparkleButton href="https://max.ru/u/f9LHodD0cOJ6ZZlQj0UscdLQ-24d096fz401XbP1kL4IvDZwlSnhba3Xum4" target="_blank" rel="noopener noreferrer" className="btn-ghost">
+                  <Icon name="ExternalLink" size={13} />
+                  MAX
+                </SparkleButton>
+                <SparkleButton href="https://t.me/tarolog666" target="_blank" rel="noopener noreferrer" className="btn-ghost">
+                  <Icon name="Send" size={13} />
+                  TG
+                </SparkleButton>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (section === "services") {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <h2
+          className="mb-4 text-center font-light text-white"
+          style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(2.4rem, 6vw, 3.8rem)" }}
+        >
+          Инструменты <span className="gold-text">и услуги</span>
+        </h2>
+        <p className="text-center text-xs tracking-[0.4em] text-[hsl(210,15%,40%)] uppercase font-light mb-16">
+          Арсенал тонкого плана
+        </p>
+        <div className="max-w-5xl mx-auto">
+          {/* Верхний ряд — 2 широкие карточки */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            {[
+              {
+                label: "Диагностика",
+                title: "Глубинные оккультные расклады",
+                text: "Детальный рентген вашей реальности. Бескомпромиссные предсказания, выявление лжи, измен и скрытых мотивов партнёра.",
+                img: "https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/0845f2fa-213b-43c5-b9ff-c1d077c2b72d.png",
+                imgStyle: { objectPosition: "center 30%" },
+              },
+              {
+                label: "Очищение",
+                title: "Программные свечи",
+                text: "Индивидуальное создание восковых программ для выжигания негатива, разрушения чужих привязанностей и очищения пространства.",
+                img: "https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/e5579b48-368d-42fd-bc46-77e78062a796.jpg",
+                imgStyle: { objectPosition: "center 60%" },
+              },
+            ].map((s) => (
+              <div key={s.title} className="glass-panel rounded-sm overflow-hidden group transition-all duration-300 hover:border-[rgba(200,160,80,0.25)] hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(200,160,80,0.1)]" style={{ borderColor: "rgba(160,170,185,0.08)" }}>
+                <div className="relative h-56 overflow-hidden">
+                  <img src={s.img} alt={s.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" style={s.imgStyle} />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(8,10,14,0.05) 0%, rgba(8,10,14,0.72) 100%)" }} />
+                  <p className="absolute bottom-4 left-5 text-xs tracking-[0.35em] text-[hsl(210,15%,55%)] uppercase font-light">{s.label}</p>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-light text-white mb-3 leading-tight" style={{ fontFamily: "var(--font-cormorant)" }}>{s.title}</h3>
+                  <p className="text-[hsl(210,15%,52%)] text-sm leading-relaxed font-light">{s.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* Нижний ряд — 3 равные карточки */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {[
+              {
+                label: "Защита",
+                title: "Рунические ставы",
+                text: "Жёсткая северная магия для взлома ситуаций, постановки глухой защиты и изменения вероятностей под вашу задачу.",
+                img: "https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/b4616f2b-746d-466a-8225-00f8e52dcfe2.png",
+                imgStyle: { objectPosition: "center 40%" },
+              },
+              {
+                label: "Эксклюзив",
+                title: "Артефакты с подселением",
+                text: "Создание проводников и защитников с подселением сущностей. Работа по индивидуальным заказам.",
+                img: "https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/54c7f87e-9f90-4050-a24c-5437d4e58a59.jpg",
+                imgStyle: { objectPosition: "center 60%" },
+              },
+              {
+                label: "Свечные программы",
+                title: "Ритуал на природе",
+                text: "Живые обряды вне стен — у воды, огня, под открытым небом. Усиление в несколько раз против кабинетной работы.",
+                img: "https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/a685067d-1621-4b41-9a59-832bedf1ea0a.jpg",
+                imgStyle: { objectPosition: "center 35%" },
+              },
+            ].map((s) => (
+              <div key={s.title} className="glass-panel rounded-sm overflow-hidden group transition-all duration-300 hover:border-[rgba(200,160,80,0.25)] hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(200,160,80,0.1)]" style={{ borderColor: "rgba(160,170,185,0.08)" }}>
+                <div className="relative h-48 overflow-hidden">
+                  <img src={s.img} alt={s.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" style={s.imgStyle} />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(8,10,14,0.05) 0%, rgba(8,10,14,0.72) 100%)" }} />
+                  <p className="absolute bottom-4 left-5 text-xs tracking-[0.35em] text-[hsl(210,15%,55%)] uppercase font-light">{s.label}</p>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-light text-white mb-3 leading-tight" style={{ fontFamily: "var(--font-cormorant)" }}>{s.title}</h3>
+                  <p className="text-[hsl(210,15%,52%)] text-sm leading-relaxed font-light">{s.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (section === "arcana") {
+    return (
+      <div className="py-8 px-4">
+        <RandomArcanSection />
+      </div>
+    )
+  }
+
+  if (section === "reviews") {
+    return (
+      <div className="py-8 px-4">
+        <ReviewsCarousel reviewsSectionRef={reviewsSectionRef} isReviewsVisible={isReviewsVisible} />
+      </div>
+    )
+  }
+
+  if (section === "contact") {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <h2
+          className="mb-4 text-center font-light text-white"
+          style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(2rem, 5vw, 3rem)" }}
+        >
+          Я работаю <span className="gold-text">не со всеми.</span>
+        </h2>
+        <p className="text-center text-[hsl(210,15%,50%)] font-light text-sm max-w-lg mx-auto mb-14 leading-relaxed">
+          Мне не нужны те, кто ищет волшебную таблетку или хочет, чтобы его погладили по головке.
+          Если вы готовы принять правду — оставляйте заявку.
+        </p>
+        <ContactForm />
+      </div>
+    )
+  }
+
+  return null
+}
+
 function HeroNav({
   onScrollTo,
   onHome,
@@ -586,6 +806,7 @@ export default function Index() {
 
   const heroStyle = {
     height: initialHeight ? `${initialHeight}px` : "100vh",
+    // При активном разделе — растягиваем на весь экран, контент прокручивается внутри
   }
 
   return (
@@ -630,44 +851,57 @@ export default function Index() {
         {/* Навигация внутри hero — не фиксированная */}
         <HeroNav onScrollTo={handleNavScrollTo} onHome={handleNavHome} activeSection={activeSection} />
 
-        <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
-          <div className="text-center max-w-3xl mx-auto">
-            <div
-              className="glass-panel px-8 py-10 rounded-sm inline-block w-full"
-              style={{ borderColor: "rgba(160,170,185,0.1)" }}
-            >
-              <p className="text-xs tracking-[0.4em] text-[hsl(210,15%,50%)] uppercase mb-6 font-light animate-flicker">
-                Оккультный следователь · 11 лет практики
-              </p>
-              <h1
-                className="text-5xl md:text-7xl lg:text-8xl font-light text-white leading-tight mb-6"
-                style={{ fontFamily: "var(--font-cormorant)", letterSpacing: "0.04em" }}
+        {/* Главная страница */}
+        {activeSection === null && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
+            <div className="text-center max-w-3xl mx-auto">
+              <div
+                className="glass-panel px-8 py-10 rounded-sm inline-block w-full"
+                style={{ borderColor: "rgba(160,170,185,0.1)" }}
               >
-                Тайное
-                <br />
-                <span className="text-shimmer">становится явным.</span>
-              </h1>
-              <p className="text-sm md:text-base text-[hsl(210,15%,60%)] font-light max-w-xl mx-auto leading-relaxed mb-8 tracking-wide">
-                Жёсткая оккультная диагностика отношений. Я не вытираю слёзы — я срываю маски,
-                разоблачаю ложь и показываю истинные мотивы партнёра.
-              </p>
-              <SparkleButton href="https://dikidi.net/926132" target="_blank" rel="noopener noreferrer" className="btn-gold">
-                Записаться на диагностику
-              </SparkleButton>
+                <p className="text-xs tracking-[0.4em] text-[hsl(210,15%,50%)] uppercase mb-6 font-light animate-flicker">
+                  Оккультный следователь · 11 лет практики
+                </p>
+                <h1
+                  className="text-5xl md:text-7xl lg:text-8xl font-light text-white leading-tight mb-6"
+                  style={{ fontFamily: "var(--font-cormorant)", letterSpacing: "0.04em" }}
+                >
+                  Тайное
+                  <br />
+                  <span className="text-shimmer">становится явным.</span>
+                </h1>
+                <p className="text-sm md:text-base text-[hsl(210,15%,60%)] font-light max-w-xl mx-auto leading-relaxed mb-8 tracking-wide">
+                  Жёсткая оккультная диагностика отношений. Я не вытираю слёзы — я срываю маски,
+                  разоблачаю ложь и показываю истинные мотивы партнёра.
+                </p>
+                <SparkleButton href="https://dikidi.net/926132" target="_blank" rel="noopener noreferrer" className="btn-gold">
+                  Записаться на диагностику
+                </SparkleButton>
+              </div>
+            </div>
+            <div
+              className="absolute bottom-10 animate-bounce cursor-pointer opacity-40 hover:opacity-70 transition-opacity"
+              onClick={scrollToAbout}
+              role="button"
+              aria-label="Листать вниз"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") scrollToAbout() }}
+            >
+              <ChevronDown className="h-6 w-6 text-[hsl(210,15%,65%)]" />
             </div>
           </div>
+        )}
 
+        {/* Активный раздел — показывается вместо hero-контента */}
+        {activeSection !== null && (
           <div
-            className="absolute bottom-10 animate-bounce cursor-pointer opacity-40 hover:opacity-70 transition-opacity"
-            onClick={scrollToAbout}
-            role="button"
-            aria-label="Листать вниз"
-            tabIndex={0}
-            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") scrollToAbout() }}
+            className="absolute left-0 right-0 bottom-0 overflow-y-auto"
+            style={{ top: "56px" }}
           >
-            <ChevronDown className="h-6 w-6 text-[hsl(210,15%,65%)]" />
+            <SectionContent section={activeSection} scrollToContact={scrollToContact} isServicesVisible={isServicesVisible} isServicesTitleVisible={isServicesTitleVisible} isAboutVisible={isAboutVisible} isHeadingVisible={isHeadingVisible} isReviewsVisible={isReviewsVisible} aboutContentRef={aboutContentRef} servicesContentRef={servicesContentRef} servicesTitleRef={servicesTitleRef} headingRef={headingRef} reviewsSectionRef={reviewsSectionRef} />
           </div>
-        </div>
+        )}
+
         <OccultOverlay density={22} />
       </section>
 
@@ -710,7 +944,7 @@ export default function Index() {
       )}
 
       {/* БЛОК 3 — ОБО МНЕ */}
-      {(activeSection === null || activeSection === "about") && (
+      {activeSection === null && (
       <section ref={aboutSectionRef} id="about" className="py-24 noise-texture" style={{ background: "hsl(220,10%,6%)" }}>
         <div className="container mx-auto px-4">
           <div
@@ -784,7 +1018,7 @@ export default function Index() {
       )}
 
       {/* БЛОК 4 — УСЛУГИ */}
-      {(activeSection === null || activeSection === "services") && (
+      {activeSection === null && (
       <section ref={servicesSectionRef} id="services" className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,8%)" }}>
         <OccultOverlay density={16} />
         <div className="container mx-auto px-4 relative" style={{ zIndex: 2 }}>
@@ -889,7 +1123,7 @@ export default function Index() {
       )}
 
       {/* АРКАН — случайный при каждом заходе */}
-      {(activeSection === null || activeSection === "arcana") && (
+      {activeSection === null && (
       <section ref={arcanaSectionRef}>
         <RandomArcanSection />
       </section>
@@ -1010,12 +1244,12 @@ export default function Index() {
       )}
 
       {/* БЛОК 6 — ОТЗЫВЫ */}
-      {(activeSection === null || activeSection === "reviews") && (
+      {activeSection === null && (
         <ReviewsCarousel reviewsSectionRef={reviewsSectionRef} isReviewsVisible={isReviewsVisible} />
       )}
 
       {/* БЛОК 7 — ЗАПИСЬ */}
-      {(activeSection === null || activeSection === "contact") && (
+      {activeSection === null && (
       <section ref={contactSectionRef} id="contact" className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,6%)" }}>
         {/* Фоновое изображение */}
         <div
