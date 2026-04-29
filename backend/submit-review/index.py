@@ -5,6 +5,27 @@ import struct
 import hashlib
 import hmac
 import urllib.parse
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+TO_EMAIL = "maiya.tarolog@yandex.ru"
+SMTP_HOST = "smtp.yandex.ru"
+SMTP_PORT = 465
+
+
+def send_email(subject: str, html: str):
+    password = os.environ.get("YANDEX_SMTP_PASSWORD", "")
+    if not password:
+        return
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = subject
+    msg["From"] = TO_EMAIL
+    msg["To"] = TO_EMAIL
+    msg.attach(MIMEText(html, "html", "utf-8"))
+    with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT) as server:
+        server.login(TO_EMAIL, password)
+        server.sendmail(TO_EMAIL, TO_EMAIL, msg.as_string())
 
 
 def pg_query(dsn, sql):
@@ -168,6 +189,34 @@ def handler(event: dict, context) -> dict:
     )
     rows = pg_query(dsn, sql)
     review_id = int(rows[0][0]) if rows else None
+
+    stars_str = "★" * stars + "☆" * (5 - stars)
+    moderation_url = "https://preview--project-signal-enhancement.poehali.dev/moderation"
+    html = f"""
+    <div style="font-family: Georgia, serif; max-width: 560px; margin: 0 auto; background: #0c0e14; color: #c8d0d8; padding: 32px; border-radius: 4px; border: 1px solid #2a2e3a;">
+      <h2 style="color: #c8a050; font-weight: 300; font-size: 22px; margin: 0 0 24px;">Новый отзыв ждёт модерации</h2>
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <td style="padding: 10px 0; color: #6b7280; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; width: 120px;">Автор</td>
+          <td style="padding: 10px 0; color: #e2e8f0;">{author}</td>
+        </tr>
+        <tr style="border-top: 1px solid #1e2130;">
+          <td style="padding: 10px 0; color: #6b7280; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;">Оценка</td>
+          <td style="padding: 10px 0; color: #c8a050;">{stars_str}</td>
+        </tr>
+        <tr style="border-top: 1px solid #1e2130;">
+          <td style="padding: 10px 0; color: #6b7280; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; vertical-align: top;">Текст</td>
+          <td style="padding: 10px 0; color: #e2e8f0; line-height: 1.6;">{text}</td>
+        </tr>
+      </table>
+      <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #1e2130;">
+        <a href="{moderation_url}" style="display: inline-block; padding: 10px 24px; background: rgba(200,160,80,0.15); color: #c8a050; border: 1px solid rgba(200,160,80,0.4); border-radius: 3px; text-decoration: none; font-size: 13px; letter-spacing: 0.1em;">
+          Открыть модерацию →
+        </a>
+      </div>
+    </div>
+    """
+    send_email("⭐ Новый отзыв на сайте", html)
 
     return {
         "statusCode": 201,

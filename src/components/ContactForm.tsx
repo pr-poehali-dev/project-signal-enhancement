@@ -9,6 +9,8 @@ import { useToast } from "@/components/ui/use-toast"
 import { cn } from "@/lib/utils"
 import SparkleButton from "@/components/SparkleButton"
 
+const SEND_CONTACT_URL = "https://functions.poehali.dev/26883314-30e3-4660-b967-8b6af22e11ab"
+
 type FieldErrors = {
   name?: string
   messenger?: string
@@ -65,15 +67,35 @@ export function ContactForm() {
     if (!validateForm()) return
     setIsSubmitting(true)
 
-    setTimeout(() => {
-      toast({
-        title: "Заявка принята.",
-        description: "Я свяжусь с вами в течение суток.",
-        duration: 3000,
+    try {
+      const res = await fetch(SEND_CONTACT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       })
-      setFormData({ name: "", messenger: "", message: "" })
+      if (res.ok) {
+        toast({
+          title: "Заявка принята.",
+          description: "Я свяжусь с вами в течение суток.",
+          duration: 3000,
+        })
+        setFormData({ name: "", messenger: "", message: "" })
+      } else {
+        toast({
+          title: "Ошибка отправки.",
+          description: "Попробуйте позже или напишите напрямую в Telegram.",
+          duration: 4000,
+        })
+      }
+    } catch {
+      toast({
+        title: "Ошибка отправки.",
+        description: "Попробуйте позже или напишите напрямую в Telegram.",
+        duration: 4000,
+      })
+    } finally {
       setIsSubmitting(false)
-    }, 1000)
+    }
   }
 
   const inputClass =
