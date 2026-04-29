@@ -13,26 +13,16 @@ interface Review {
 }
 
 export default function Moderation() {
-  const [token, setToken] = useState("")
-  const [inputToken, setInputToken] = useState("")
   const [reviews, setReviews] = useState<Review[]>([])
   const [tab, setTab] = useState<"pending" | "approved" | "rejected">("pending")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
 
-  const load = async (t: string, status: string) => {
+  const load = async (status: string) => {
     setLoading(true)
     setError("")
     try {
-      const res = await fetch(`${MODERATE_URL}?status=${status}`, {
-        headers: { "X-Admin-Token": t },
-      })
-      if (res.status === 401) {
-        setError("Неверный пароль")
-        setToken("")
-        setLoading(false)
-        return
-      }
+      const res = await fetch(`${MODERATE_URL}?status=${status}`)
       const raw = await res.text()
       let parsed: { reviews?: Review[] }
       try {
@@ -48,20 +38,14 @@ export default function Moderation() {
     setLoading(false)
   }
 
-  const login = () => {
-    if (!inputToken.trim()) return
-    setToken(inputToken.trim())
-    load(inputToken.trim(), tab)
-  }
-
   useEffect(() => {
-    if (token) load(token, tab)
+    load(tab)
   }, [tab])
 
   const act = async (id: number, action: "approve" | "reject") => {
     const res = await fetch(MODERATE_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json", "X-Admin-Token": token },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, action }),
     })
     if (res.ok) {
@@ -83,54 +67,6 @@ export default function Moderation() {
     color: tab === t ? "hsl(42,65%,62%)" : "hsl(210,15%,45%)",
   })
 
-  if (!token) {
-    return (
-      <div
-        className="min-h-screen flex items-center justify-center"
-        style={{ background: "hsl(220,12%,6%)" }}
-      >
-        <div
-          className="rounded-sm p-10 w-full max-w-sm"
-          style={{
-            background: "rgba(18,20,26,0.9)",
-            border: "1px solid rgba(200,160,80,0.15)",
-            boxShadow: "0 8px 60px rgba(0,0,0,0.5)",
-          }}
-        >
-          <h1
-            className="text-3xl font-light text-white text-center mb-8"
-            style={{ fontFamily: "var(--font-cormorant)" }}
-          >
-            Модерация <span className="gold-text">отзывов</span>
-          </h1>
-          {error && (
-            <p className="text-red-400 text-sm text-center mb-4">{error}</p>
-          )}
-          <input
-            type="password"
-            value={inputToken}
-            onChange={(e) => setInputToken(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && login()}
-            placeholder="Введите пароль"
-            className="w-full bg-transparent text-white text-sm font-light outline-none placeholder:text-[hsl(210,15%,30%)] py-2 px-3 rounded-sm mb-4"
-            style={{ border: "1px solid rgba(160,170,185,0.15)" }}
-          />
-          <button
-            onClick={login}
-            className="w-full py-3 text-sm font-light tracking-[0.2em] uppercase rounded-sm transition-all"
-            style={{
-              background: "rgba(200,160,80,0.12)",
-              border: "1px solid rgba(200,160,80,0.3)",
-              color: "hsl(42,65%,62%)",
-            }}
-          >
-            Войти
-          </button>
-        </div>
-      </div>
-    )
-  }
-
   return (
     <div className="min-h-screen py-12 px-4" style={{ background: "hsl(220,12%,6%)" }}>
       <div className="max-w-3xl mx-auto">
@@ -141,12 +77,6 @@ export default function Moderation() {
           >
             Модерация <span className="gold-text">отзывов</span>
           </h1>
-          <button
-            onClick={() => { setToken(""); setReviews([]) }}
-            className="text-xs text-[hsl(210,15%,40%)] hover:text-white transition-colors tracking-widest uppercase"
-          >
-            Выйти
-          </button>
         </div>
 
         <div className="flex gap-3 mb-8">
@@ -156,6 +86,8 @@ export default function Moderation() {
             </button>
           ))}
         </div>
+
+        {error && <p className="text-red-400 text-sm mb-4">{error}</p>}
 
         {loading && (
           <p className="text-center text-[hsl(210,15%,40%)] text-sm py-12">Загрузка...</p>
