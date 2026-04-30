@@ -834,13 +834,13 @@ export default function Index() {
                   className="text-5xl md:text-7xl lg:text-8xl font-light text-white leading-tight mb-6"
                   style={{ fontFamily: "var(--font-cormorant)", letterSpacing: "0.04em" }}
                 >
-                  Тайное
+                  Я нахожу правду.
                   <br />
-                  <span className="text-shimmer">становится явным.</span>
+                  <span className="text-shimmer">Даже ту, о которой ты боишься спросить.</span>
                 </h1>
                 <p className="text-sm md:text-base text-[hsl(210,15%,60%)] font-light max-w-xl mx-auto leading-relaxed mb-8 tracking-wide">
-                  Жёсткая оккультная диагностика отношений. Я не вытираю слёзы — я срываю маски,
-                  разоблачаю ложь и показываю истинные мотивы партнёра.
+                  Глубинная оккультная диагностика — отношения, бизнес, скрытые блоки, чужие программы. Разбираю каждую ситуацию индивидуально, называю вещи своими именами.<br /><br />
+                  Лучше знать — чем догадываться.
                 </p>
                 <SparkleButton href="https://dikidi.net/926132" target="_blank" rel="noopener noreferrer" className="btn-gold">
                   Записаться на диагностику
