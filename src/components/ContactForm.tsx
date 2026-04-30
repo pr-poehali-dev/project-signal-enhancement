@@ -110,7 +110,7 @@ export function ContactForm() {
       )}
     >
       <div
-        className="glass-panel rounded-sm p-8"
+        className="glass-panel rounded-sm p-6 sm:p-8"
         style={{ borderColor: "rgba(160,170,185,0.1)" }}
       >
         <form onSubmit={handleSubmit} className="space-y-6" noValidate>

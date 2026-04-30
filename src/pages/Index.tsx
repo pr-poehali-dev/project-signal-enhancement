@@ -287,7 +287,7 @@ function RandomArcanSection() {
         >
           {/* Карточка аркана */}
           <div
-            className="flex-shrink-0 glass-panel rounded-sm flex flex-col items-center justify-center gap-3 px-8 py-10 relative overflow-hidden accent-glow animate-glow-border"
+            className="flex-shrink-0 glass-panel rounded-sm flex flex-col items-center justify-center gap-3 px-7 py-8 sm:px-8 sm:py-10 relative overflow-hidden accent-glow animate-glow-border"
             style={{ minWidth: "140px" }}
           >
             {/* Вспышка при появлении символа */}
@@ -353,23 +353,24 @@ function RandomArcanSection() {
 
           {/* Текст */}
           <div
+            className="text-center md:text-left"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? "translateX(0)" : "translateX(16px)",
               transition: "opacity 1s ease 0.25s, transform 1s ease 0.25s",
             }}
           >
-            <p className="text-xs tracking-[0.4em] text-[hsl(210,15%,40%)] uppercase font-light mb-4">
+            <p className="text-[10px] sm:text-xs tracking-[0.35em] sm:tracking-[0.4em] text-[hsl(210,15%,40%)] uppercase font-light mb-4">
               {arcana.subtitle}
             </p>
             <blockquote
-              className="text-xl md:text-2xl font-light text-white leading-relaxed mb-5"
+              className="text-lg sm:text-xl md:text-2xl font-light text-white leading-relaxed mb-5"
               style={{ fontFamily: "var(--font-cormorant)" }}
             >
               {arcana.quote[0]}
               <span className="text-[hsl(210,15%,60%)]">{arcana.quote[1]}</span>
             </blockquote>
-            <p className="text-[hsl(210,15%,50%)] font-light text-sm leading-relaxed">
+            <p className="text-[hsl(210,15%,55%)] font-light text-sm leading-relaxed">
               {arcana.text}
             </p>
           </div>
@@ -705,16 +706,16 @@ function HeroNav({
 
       {/* Мобильный бургер */}
       <div
-        className="absolute top-0 left-0 right-0 z-20 md:hidden flex items-center justify-between px-5 py-3"
-        style={{ borderBottom: "1px solid rgba(200,160,80,0.1)" }}
+        className="absolute top-0 left-0 right-0 z-20 md:hidden flex items-center justify-between px-4 py-3"
+        style={{ borderBottom: "1px solid rgba(200,160,80,0.12)", background: "linear-gradient(to bottom, rgba(6,8,12,0.7) 0%, rgba(6,8,12,0.0) 100%)", backdropFilter: "blur(8px)" }}
       >
-        <span className="select-none text-sm" style={{ color: "hsl(42,50%,38%)", opacity: 0.6, letterSpacing: "3px", textShadow: "0 0 8px rgba(200,160,80,0.3)" }}>
-          ᚠ᛫ᚢ
+        <span className="select-none font-light" style={{ color: "hsl(42,55%,55%)", fontSize: "16px", letterSpacing: "0.12em", fontFamily: "var(--font-cormorant)", textShadow: "0 0 14px rgba(220,185,120,0.45)" }}>
+          Майя
         </span>
         <button
           onClick={() => setOpen((v) => !v)}
-          className="flex items-center justify-center w-9 h-9 rounded-sm transition-all"
-          style={{ color: "hsl(42,65%,60%)", border: "1px solid rgba(200,160,80,0.2)", background: "rgba(8,10,14,0.5)" }}
+          className="flex items-center justify-center w-10 h-10 rounded-sm transition-all"
+          style={{ color: "hsl(42,65%,62%)", border: "1px solid rgba(200,160,80,0.25)", background: "rgba(8,10,14,0.6)" }}
           aria-label="Меню"
         >
           <Icon name={open ? "X" : "Menu"} size={18} />
@@ -724,7 +725,7 @@ function HeroNav({
       {/* Мобильное выпадающее меню */}
       {open && (
         <div
-          className="absolute top-[48px] left-0 right-0 z-30 md:hidden flex flex-col py-2"
+          className="absolute top-[60px] left-0 right-0 z-30 md:hidden flex flex-col py-2"
           style={{ background: "rgba(6,8,12,0.97)", borderBottom: "1px solid rgba(200,160,80,0.15)", backdropFilter: "blur(20px)" }}
         >
           <button
@@ -933,25 +934,26 @@ export default function Index() {
 
         {/* Главная страница */}
         {activeSection === null && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
-            <div className="text-center max-w-3xl mx-auto">
+          <div className="absolute inset-0 flex flex-col items-center justify-center px-4 pt-24 md:pt-20 pb-16">
+            <div className="text-center max-w-3xl mx-auto w-full">
               <div
-                className="glass-panel px-8 py-10 rounded-sm inline-block w-full"
+                className="glass-panel px-5 py-7 sm:px-8 sm:py-10 rounded-sm inline-block w-full"
                 style={{ borderColor: "rgba(160,170,185,0.1)" }}
               >
-                <p className="text-xs tracking-[0.4em] text-[hsl(210,15%,50%)] uppercase mb-6 font-light animate-flicker">
+                <p className="text-[10px] sm:text-xs tracking-[0.35em] sm:tracking-[0.4em] text-[hsl(210,15%,50%)] uppercase mb-5 sm:mb-6 font-light animate-flicker">
                   Оккультный следователь · 11 лет практики
                 </p>
                 <h1
-                  className="text-5xl md:text-7xl lg:text-8xl font-light text-white leading-tight mb-6"
-                  style={{ fontFamily: "var(--font-cormorant)", letterSpacing: "0.04em" }}
+                  className="text-[2rem] leading-[1.1] sm:text-5xl md:text-6xl lg:text-7xl font-light text-white mb-5 sm:mb-6"
+                  style={{ fontFamily: "var(--font-cormorant)", letterSpacing: "0.02em" }}
                 >
-                  Я нахожу правду.
-                  <br />
+                  Я нахожу правду.{" "}
                   <span className="text-shimmer">Даже ту, о которой ты боишься спросить.</span>
                 </h1>
-                <p className="text-sm md:text-base text-[hsl(210,15%,60%)] font-light max-w-xl mx-auto leading-relaxed mb-8 tracking-wide">
-                  Глубинная оккультная диагностика — отношения, бизнес, скрытые блоки, чужие программы. Разбираю каждую ситуацию индивидуально, называю вещи своими именами.<br /><br />
+                <p className="text-[13px] sm:text-base text-[hsl(210,15%,62%)] font-light max-w-xl mx-auto leading-relaxed mb-7 sm:mb-8 tracking-wide">
+                  Глубинная оккультная диагностика — отношения, бизнес, скрытые блоки, чужие программы. Разбираю каждую ситуацию индивидуально, называю вещи своими именами.
+                </p>
+                <p className="text-xs sm:text-sm text-[hsl(42,40%,60%)] italic font-light mb-7 sm:mb-8 tracking-wide" style={{ fontFamily: "var(--font-cormorant)" }}>
                   Лучше знать — чем догадываться.
                 </p>
                 <SparkleButton href="https://dikidi.net/926132" target="_blank" rel="noopener noreferrer" className="btn-gold">
@@ -960,7 +962,7 @@ export default function Index() {
               </div>
             </div>
             <div
-              className="absolute bottom-10 animate-bounce cursor-pointer opacity-40 hover:opacity-70 transition-opacity"
+              className="absolute bottom-6 sm:bottom-10 animate-bounce cursor-pointer opacity-40 hover:opacity-70 transition-opacity"
               onClick={scrollToAbout}
               role="button"
               aria-label="Листать вниз"
@@ -975,8 +977,7 @@ export default function Index() {
         {/* Активный раздел — показывается вместо hero-контента */}
         {activeSection !== null && (
           <div
-            className="absolute left-0 right-0 bottom-0 overflow-y-auto"
-            style={{ top: "56px" }}
+            className="absolute left-0 right-0 bottom-0 overflow-y-auto top-[60px] md:top-[64px]"
           >
             <SectionContent section={activeSection} scrollToContact={scrollToContact} isServicesVisible={isServicesVisible} isServicesTitleVisible={isServicesTitleVisible} isAboutVisible={isAboutVisible} isHeadingVisible={isHeadingVisible} isReviewsVisible={isReviewsVisible} aboutContentRef={aboutContentRef} servicesContentRef={servicesContentRef} servicesTitleRef={servicesTitleRef} headingRef={headingRef} reviewsSectionRef={reviewsSectionRef} />
           </div>
@@ -987,7 +988,7 @@ export default function Index() {
 
       {/* БЛОК 2 — БОЛЬ (только на главной) */}
       {activeSection === null && (
-      <section className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,7%)" }}>
+      <section className="py-16 md:py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,7%)" }}>
         <OccultOverlay density={12} />
         <div className="container mx-auto px-4">
           <div
@@ -997,12 +998,12 @@ export default function Index() {
               isPainVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10",
             )}
           >
-            <div className="glass-panel rounded-sm p-10 md:p-14" style={{ borderColor: "rgba(160,170,185,0.08)" }}>
-              <p className="text-xs tracking-[0.4em] text-[hsl(210,15%,45%)] uppercase mb-6 font-light">
+            <div className="glass-panel rounded-sm p-6 sm:p-10 md:p-14" style={{ borderColor: "rgba(160,170,185,0.08)" }}>
+              <p className="text-[10px] sm:text-xs tracking-[0.35em] sm:tracking-[0.4em] text-[hsl(210,15%,45%)] uppercase mb-5 sm:mb-6 font-light">
                 Вы не сошли с ума
               </p>
               <h2
-                className="text-4xl md:text-5xl font-light text-white mb-8 leading-tight"
+                className="text-3xl sm:text-4xl md:text-5xl font-light text-white mb-6 sm:mb-8 leading-tight"
                 style={{ fontFamily: "var(--font-cormorant)" }}
               >
                 Ваша интуиция <span className="gold-text">не врёт.</span>
@@ -1025,7 +1026,7 @@ export default function Index() {
 
       {/* БЛОК 3 — ОБО МНЕ */}
       {activeSection === null && (
-      <section ref={aboutSectionRef} id="about" className="py-24 noise-texture" style={{ background: "hsl(220,10%,6%)" }}>
+      <section ref={aboutSectionRef} id="about" className="py-16 md:py-24 noise-texture" style={{ background: "hsl(220,10%,6%)" }}>
         <div className="container mx-auto px-4">
           <div
             ref={aboutContentRef}
@@ -1037,22 +1038,21 @@ export default function Index() {
             <div className="flex flex-col md:flex-row items-stretch gap-8 md:gap-12">
 
               {/* Фото Майи — слева */}
-              <div className="flex-shrink-0 w-full md:w-72 rounded-sm overflow-hidden self-stretch" style={{ minHeight: "460px", border: "1px solid rgba(160,170,185,0.12)" }}>
+              <div className="flex-shrink-0 w-full md:w-72 rounded-sm overflow-hidden self-stretch" style={{ border: "1px solid rgba(160,170,185,0.12)" }}>
                 <img
                   src="https://cdn.poehali.dev/projects/44014c99-af9e-42e1-a582-41ff8ba05223/bucket/935e2cbe-511f-44e5-ae79-46e0d2853120.jpg"
                   alt="Майя"
-                  className="w-full h-full object-cover object-top"
-                  style={{ minHeight: "460px" }}
+                  className="w-full h-[360px] md:h-full md:min-h-[460px] object-cover object-top"
                 />
               </div>
 
               {/* Текст */}
-              <div className="space-y-5 text-center md:text-left md:pt-2 flex-1">
-                <p className="text-xs tracking-[0.4em] text-[hsl(210,15%,45%)] uppercase font-light">
+              <div className="space-y-4 sm:space-y-5 text-center md:text-left md:pt-2 flex-1">
+                <p className="text-[10px] sm:text-xs tracking-[0.35em] sm:tracking-[0.4em] text-[hsl(210,15%,45%)] uppercase font-light">
                   Следователь по оккультным делам
                 </p>
                 <h2
-                  className="text-4xl md:text-5xl font-light text-white leading-tight"
+                  className="text-3xl sm:text-4xl md:text-5xl font-light text-white leading-tight"
                   style={{ fontFamily: "var(--font-cormorant)" }}
                 >
                   Я — <span className="gold-text">Майя.</span>
@@ -1099,7 +1099,7 @@ export default function Index() {
 
       {/* БЛОК 4 — УСЛУГИ */}
       {activeSection === null && (
-      <section ref={servicesSectionRef} id="services" className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,8%)" }}>
+      <section ref={servicesSectionRef} id="services" className="py-16 md:py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,8%)" }}>
         <OccultOverlay density={16} />
         <div className="container mx-auto px-4 relative" style={{ zIndex: 2 }}>
           <h2
@@ -1108,13 +1108,13 @@ export default function Index() {
               "mb-4 text-center font-light text-white transition-all duration-1000 ease-out",
               isServicesTitleVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10",
             )}
-            style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(2.4rem, 6vw, 3.8rem)" }}
+            style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(1.85rem, 6vw, 3.8rem)", lineHeight: 1.15 }}
           >
             Инструменты <span className="gold-text">и услуги</span>
           </h2>
           <p
             className={cn(
-              "text-center text-xs tracking-[0.4em] text-[hsl(210,15%,40%)] uppercase font-light mb-16 transition-all duration-1000 ease-out",
+              "text-center text-[10px] sm:text-xs tracking-[0.35em] sm:tracking-[0.4em] text-[hsl(210,15%,40%)] uppercase font-light mb-10 sm:mb-16 transition-all duration-1000 ease-out",
               isServicesTitleVisible ? "opacity-100" : "opacity-0",
             )}
           >
@@ -1211,7 +1211,7 @@ export default function Index() {
 
       {/* БЛОК 5 — КАК РАБОТАЮ (только на главной) */}
       {activeSection === null && (
-      <section className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,6%)" }}>
+      <section className="py-16 md:py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,6%)" }}>
         {/* Кукла-стражница — по центру, крупно, эффектно */}
         <div style={{
           position: "absolute",
@@ -1253,16 +1253,16 @@ export default function Index() {
             )}
           >
             <h2
-              className="text-3xl md:text-4xl font-light text-white text-center mb-4"
+              className="text-2xl sm:text-3xl md:text-4xl font-light text-white text-center mb-3 sm:mb-4"
               style={{ fontFamily: "var(--font-cormorant)" }}
             >
               Формат работы
             </h2>
-            <p className="text-center text-xs tracking-[0.4em] text-[hsl(210,15%,40%)] uppercase font-light mb-14">
+            <p className="text-center text-[10px] sm:text-xs tracking-[0.35em] sm:tracking-[0.4em] text-[hsl(210,15%,40%)] uppercase font-light mb-10 sm:mb-14">
               Алгоритм расследования
             </p>
 
-            <div className="space-y-5">
+            <div className="space-y-4 sm:space-y-5">
               {[
                 {
                   step: "01",
@@ -1282,7 +1282,7 @@ export default function Index() {
               ].map((item) => (
                 <div
                   key={item.step}
-                  className="group flex gap-6 items-start rounded-sm p-7 transition-all duration-400"
+                  className="group flex gap-4 sm:gap-6 items-start rounded-sm p-5 sm:p-7 transition-all duration-400"
                   style={{
                     background: "linear-gradient(to right, rgba(18,20,26,0.92) 0%, rgba(18,20,26,0.85) 55%, rgba(18,20,26,0.0) 100%)",
                     border: "none",
@@ -1330,7 +1330,7 @@ export default function Index() {
 
       {/* БЛОК 7 — ЗАПИСЬ */}
       {activeSection === null && (
-      <section ref={contactSectionRef} id="contact" className="py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,6%)" }}>
+      <section ref={contactSectionRef} id="contact" className="py-16 md:py-24 noise-texture relative overflow-hidden" style={{ background: "hsl(220,10%,6%)" }}>
         {/* Фоновое изображение */}
         <div
           style={{
@@ -1352,13 +1352,13 @@ export default function Index() {
               "mb-4 text-center font-light text-white transition-all duration-1000 ease-out",
               isHeadingVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10",
             )}
-            style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(2rem, 5vw, 3rem)" }}
+            style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(1.75rem, 5vw, 3rem)", lineHeight: 1.2 }}
           >
             Я работаю <span className="gold-text">не со всеми.</span>
           </h2>
           <p
             className={cn(
-              "text-center text-[hsl(210,15%,50%)] font-light text-sm max-w-lg mx-auto mb-14 leading-relaxed transition-all duration-1000 ease-out",
+              "text-center text-[hsl(210,15%,55%)] font-light text-sm max-w-lg mx-auto mb-10 sm:mb-14 leading-relaxed transition-all duration-1000 ease-out px-2",
               isHeadingVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10",
             )}
           >
